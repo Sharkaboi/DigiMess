@@ -1,7 +1,7 @@
-import 'package:DigiMess/common/theme_data/colors.dart';
+import 'package:DigiMess/common/styles/colors.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,7 @@ class SplashScreen extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "Hello User",
+                "Hello",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
