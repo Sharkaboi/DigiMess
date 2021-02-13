@@ -1,54 +1,49 @@
-import 'package:DigiMess/common/errors/error_wrapper.dart';
 import 'package:DigiMess/common/router/routes.dart';
+import 'package:DigiMess/common/styles/colors.dart';
 import 'package:DigiMess/common/util/user_types.dart';
+import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_bloc.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_events.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ModalProgressHUD(
-        inAsyncCall: true,
-        dismissible: false,
-        child: BlocConsumer<SplashBloc,SplashState>(
-          listener: (context, state) {
-            if (state is SplashError) {
-              showError(context, state.error);
-            } else if (state is UserLoginStatus) {
-              switch (state.userType) {
-                case UserType.STUDENT:
-                  Navigator.pushNamed(context, Routes.MAIN_SCREEN);
-                  break;
-                case UserType.GUEST:
-                  Navigator.pushNamed(context, Routes.AUTH_SCREEN);
-                  break;
-                default:
-                  Navigator.pushNamed(context, Routes.MAIN_SCREEN_COORDINATOR);
-              }
+      body: BlocConsumer<SplashBloc, SplashState>(
+        listener: (context, state) {
+          if (state is SplashError) {
+            DMSnackBar.show(context, state.error.message);
+          } else if (state is UserLoginStatus) {
+            switch (state.userType) {
+              case UserType.STUDENT:
+                Navigator.popAndPushNamed(context, Routes.MAIN_SCREEN);
+                break;
+              case UserType.GUEST:
+                Navigator.popAndPushNamed(context, Routes.AUTH_SCREEN);
+                break;
+              default:
+                Navigator.popAndPushNamed(
+                    context, Routes.MAIN_SCREEN_COORDINATOR);
             }
-          },
-          builder: (context, state) {
-            final SplashBloc _splashBloc = BlocProvider.of<SplashBloc>(context);
-            if (state is SplashIdle) {
-              _splashBloc.add(InitApp());
-              return Container();
-            } else {
-              //todo: show better splash screen
-              return Container();
-            }
-          },
-        ),
+          }
+        },
+        builder: (context, state) {
+          BlocProvider.of<SplashBloc>(context).add(InitApp());
+          return Container(
+            height: double.infinity,
+            width: double.infinity,
+            color: DMColors.darkBlue,
+            child: Center(
+              child: SvgPicture.asset("assets/logo/ic_foreground.svg",
+                  width: 64, height: 64),
+            ),
+          );
+        },
       ),
     );
-  }
-
-  void showError(BuildContext context, DMError error) {
-    //todo: show better error screen
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text(error.message)));
   }
 }

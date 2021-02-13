@@ -3,7 +3,6 @@ import 'package:DigiMess/common/util/user_types.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefRepository {
-
   static Future<UserType> getUserType() async {
     final sharedPrefs = await SharedPreferences.getInstance();
     final String userType = sharedPrefs.getString(SharedPrefKeys.USER_TYPE);
@@ -18,7 +17,6 @@ class SharedPrefRepository {
 
   static setUserType(UserType userType) async {
     final sharedPrefs = await SharedPreferences.getInstance();
-    return sharedPrefs.setString(
-        SharedPrefKeys.USER_TYPE, userType.toStringValue());
+    sharedPrefs.setString(SharedPrefKeys.USER_TYPE, userType.toStringValue());
   }
 }
