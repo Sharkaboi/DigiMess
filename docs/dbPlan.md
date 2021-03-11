@@ -4,48 +4,56 @@
   - UUID document name : *(String)*
     - username : *(String)*
     - hashedPassword : *(String)*
-    - accountType : *(ENUM)*
+    - accountType : *(String ENUM)*
     - isEnrolled : *(Boolean)*
-    - cautionDepositAmount : *(Integer)*
-    - details
+    - cautionDepositAmount : *(Number)*
+    - details : *Map*
       - name : *(String)*
-      - yearOfAdmission : *(Date)*
-      - yearOfCompletion : *(Date)*
-      - branch : *(ENUM)*
-      - dateOfBirth : *(Date)*
+      - yearOfAdmission : *(Timestamp)*
+      - yearOfCompletion : *(Timestamp)*
+      - branch : *(String ENUM)*
+      - dob : *(Timestamp)*
       - admissionNumber : *(String)*
-      - phoneNumber : *(Integer)*
+      - phoneNumber : *(Number)*
       - email : *(String)*
       - isVeg : *(Boolean)*
 
 ### **Menu**
-- itemId
+- itemId document name : *(String)*
   - isVeg : *(Boolean)*
   - name : *(String)*
   - imageUrl : *(String)*
-  - mealsAvailable : *(Array[Boolean])*
-  - daysAvailable : *(Array[Boolean])*
+  - isAvailable : *Map*
+    - breakfast : *(Boolean)*
+    - lunch : *(Boolean)*
+    - snacks : *(Boolean)*
+    - dinner : *(Boolean)*
+  - daysAvailable : *Map*
+    - sunday : *(Boolean)*
+    - monday : *(Boolean)*
+    - tuesday : *(Boolean)*
+    - wednesday : *(Boolean)*
+    - thursday : *(Boolean)*
+    - friday : *(Boolean)*
+    - saturday : *(Boolean)*
   - isEnabled : *(Boolean)*
-  - macros
-    - calories : *(Float)*
-    - protein : *(Float)*
-    - fats : *(Float)*
-    - carbohydrates : *(Float)*
-
-### **Today's Menu**
-- itemId : *(String)*
-- mealPeriods : *(List<Boolean>)*
+  - macros : *Map*
+    - calories : *(Number)*
+    - protein : *(Number)*
+    - fats : *(Number)*
+    - carbohydrates : *(Number)*
   
-### **Payments**
-- paymentId
+### **Payments** document name : *(String)*
+- paymentId : *(String)*
   - userId : *(String)*
-  - amount : *(Integer)*
-  - date : *(DateTime)*
-  - accountType : *(ENUM)*
+  - amount : *(Number)*
+  - date : *(Timestamp)*
+  - accountType : *(String ENUM)*
+  - description : *(String)*
 
 ### **Feedback**
 - feedbackId
   - comment : *(String)*
   - userId : *(String)*
-  - date : *(DateTime)*
-  - rating : *(Integer)*
+  - date : *(Timestamp)*
+  - rating : *(Number)*
