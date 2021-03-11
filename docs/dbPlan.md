@@ -43,7 +43,7 @@
     - fats : *(Number)*
     - carbohydrates : *(Number)*
   
-### **Payments** document name : *(String)*
+### **Payments**
 - paymentId : *(String)*
   - userId : *(String)*
   - amount : *(Number)*
@@ -52,7 +52,7 @@
   - description : *(String)*
 
 ### **Feedback**
-- feedbackId
+- feedbackId : *(String)*
   - comment : *(String)*
   - userId : *(String)*
   - date : *(Timestamp)*
