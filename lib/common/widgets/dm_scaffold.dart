@@ -3,7 +3,7 @@ import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/bloc/dm_states.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
-import 'package:DigiMess/common/widgets/no_network_widget.dart';
+import 'package:DigiMess/common/widgets/no_network_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

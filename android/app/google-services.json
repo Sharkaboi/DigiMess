@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "58876778357",
+    "project_id": "digi-mess",
+    "storage_bucket": "digi-mess.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58876778357:android:1d837952af3bb974a1e53c",
+        "android_client_info": {
+          "package_name": "com.sharkaboi.DigiMess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58876778357-qav6p25r0sou38p6voeltng9h55cnoi5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACBHbvL-OFq6SJ1CuCehEmVdC2NqCEbtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58876778357-qav6p25r0sou38p6voeltng9h55cnoi5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
