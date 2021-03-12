@@ -7,13 +7,12 @@
     - accountType : *(String ENUM)*
     - isEnrolled : *(Boolean)*
     - cautionDepositAmount : *(Number)*
-    - details : *Map*
+    - details : *(Map)*
       - name : *(String)*
       - yearOfAdmission : *(Timestamp)*
       - yearOfCompletion : *(Timestamp)*
       - branch : *(String ENUM)*
       - dob : *(Timestamp)*
-      - admissionNumber : *(String)*
       - phoneNumber : *(Number)*
       - email : *(String)*
       - isVeg : *(Boolean)*
@@ -23,12 +22,12 @@
   - isVeg : *(Boolean)*
   - name : *(String)*
   - imageUrl : *(String)*
-  - isAvailable : *Map*
+  - isAvailable : *(Map)*
     - breakfast : *(Boolean)*
     - lunch : *(Boolean)*
     - snacks : *(Boolean)*
     - dinner : *(Boolean)*
-  - daysAvailable : *Map*
+  - daysAvailable : *(Map)*
     - sunday : *(Boolean)*
     - monday : *(Boolean)*
     - tuesday : *(Boolean)*
@@ -37,11 +36,7 @@
     - friday : *(Boolean)*
     - saturday : *(Boolean)*
   - isEnabled : *(Boolean)*
-  - macros : *Map*
-    - calories : *(Number)*
-    - protein : *(Number)*
-    - fats : *(Number)*
-    - carbohydrates : *(Number)*
+  - count : *(Number)*
   
 ### **Payments**
 - paymentId : *(String)*
@@ -51,9 +46,20 @@
   - accountType : *(String ENUM)*
   - description : *(String)*
 
-### **Feedback**
-- feedbackId : *(String)*
-  - comment : *(String)*
+### **Complaints**
+- complaintId : *(String)*
+  - complaint : *(String)*
   - userId : *(String)*
   - date : *(Timestamp)*
-  - rating : *(Number)*
+
+### **Notices**
+- noticeId : *(String)*
+  - title : *(String)*
+  - date : *(Timestamp)*
+
+### **Absentees**
+- leaveEntryId : *(String)*
+  - startDate : *(Timestamp)*
+  - endDate : *(Timestamp)*
+  - userId : *(String)*
+  - applyDate : *(Timestamp)*
