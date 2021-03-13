@@ -20,7 +20,6 @@ class DMScaffold extends StatelessWidget {
   final bottomNavigationBar;
   final bottomSheet;
   final backgroundColor;
-  final resizeToAvoidBottomPadding;
   final resizeToAvoidBottomInset;
   final primary;
   final drawerDragStartBehavior;
@@ -39,6 +38,10 @@ class DMScaffold extends StatelessWidget {
   final TextStyle appBarTitleTextStyle;
   DMBloc _dmBloc;
 
+  final void Function(bool) onDrawerChanged;
+  final void Function(bool) onEndDrawerChanged;
+  final String restorationId;
+
   DMScaffold({
     Key key,
     @required this.body,
@@ -51,7 +54,6 @@ class DMScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.bottomSheet,
     this.backgroundColor,
-    this.resizeToAvoidBottomPadding,
     this.resizeToAvoidBottomInset,
     this.primary = true,
     this.drawerDragStartBehavior = DragStartBehavior.start,
@@ -67,6 +69,9 @@ class DMScaffold extends StatelessWidget {
     this.appBarBackCallback,
     this.actionMenu = const [],
     this.appBarTitleTextStyle,
+    this.onDrawerChanged,
+    this.onEndDrawerChanged,
+    this.restorationId,
   });
 
   @override
@@ -83,7 +88,9 @@ class DMScaffold extends StatelessWidget {
         bottomNavigationBar: bottomNavigationBar,
         bottomSheet: bottomSheet,
         backgroundColor: backgroundColor,
-        resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
+        onDrawerChanged: onDrawerChanged,
+        onEndDrawerChanged: onEndDrawerChanged,
+        restorationId: restorationId,
         resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         primary: primary,
         drawerDragStartBehavior: drawerDragStartBehavior,
@@ -114,26 +121,30 @@ class DMScaffold extends StatelessWidget {
               )
             : null,
         body: SafeArea(
+            left: true,
+            top: true,
+            bottom: false,
+            right: true,
             child: BlocConsumer<DMBloc, DMStates>(listener: (context, state) {
-          if (state is UserLoggedOut) {
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil(Routes.AUTH_SCREEN, (route) => false);
-          } else if (state is DMErrorState) {
-            DMSnackBar.show(context, state.errorMessage);
-          }
-        }, builder: (context, state) {
-          if (state is DMIdleState) {
-            _dmBloc.add(InitNetworkStateListener());
-            return KeyboardAvoider(child: Container());
-          } else if (state is NoNetworkState) {
-            return KeyboardAvoider(child: NoNetworkScreen());
-          } else if (state is NetworkConnectedState) {
-            _dmBloc.add(CheckDMStatus());
-            return KeyboardAvoider(child: Container());
-          } else {
-            // for UserLoggedOut, UserLoggedIn, DMErrorState.
-            return KeyboardAvoider(child: body);
-          }
-        })));
+              if (state is UserLoggedOut) {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    Routes.AUTH_SCREEN, (route) => false);
+              } else if (state is DMErrorState) {
+                DMSnackBar.show(context, state.errorMessage);
+              }
+            }, builder: (context, state) {
+              if (state is DMIdleState) {
+                _dmBloc.add(InitNetworkStateListener());
+                return KeyboardAvoider(child: Container());
+              } else if (state is NoNetworkState) {
+                return KeyboardAvoider(child: NoNetworkScreen());
+              } else if (state is NetworkConnectedState) {
+                _dmBloc.add(CheckDMStatus());
+                return KeyboardAvoider(child: Container());
+              } else {
+                // for UserLoggedOut, UserLoggedIn, DMErrorState.
+                return KeyboardAvoider(child: body);
+              }
+            })));
   }
 }

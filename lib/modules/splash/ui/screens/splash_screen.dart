@@ -1,6 +1,6 @@
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/styles/colors.dart';
-import 'package:DigiMess/common/util/user_types.dart';
+import 'package:DigiMess/common/constants/user_types.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_bloc.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_events.dart';

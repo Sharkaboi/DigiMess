@@ -1,5 +1,5 @@
 import 'package:DigiMess/common/errors/error_wrapper.dart';
-import 'package:DigiMess/common/util/user_types.dart';
+import 'package:DigiMess/common/constants/user_types.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SplashState extends Equatable {

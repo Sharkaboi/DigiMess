@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/bloc/dm_states.dart';
 import 'package:DigiMess/common/shared_prefs/shared_pref_repository.dart';
-import 'package:DigiMess/common/util/user_types.dart';
+import 'package:DigiMess/common/constants/user_types.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
