@@ -25,7 +25,6 @@
   - isAvailable : *(Map)*
     - breakfast : *(Boolean)*
     - lunch : *(Boolean)*
-    - snacks : *(Boolean)*
     - dinner : *(Boolean)*
   - daysAvailable : *(Map)*
     - sunday : *(Boolean)*
