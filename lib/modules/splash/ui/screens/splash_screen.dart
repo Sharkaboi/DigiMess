@@ -20,14 +20,14 @@ class SplashScreen extends StatelessWidget {
           } else if (state is UserLoginStatus) {
             switch (state.userType) {
               case UserType.STUDENT:
-                Navigator.popAndPushNamed(context, Routes.MAIN_SCREEN);
+                Navigator.popAndPushNamed(context, Routes.MAIN_SCREEN_STUDENT);
                 break;
               case UserType.GUEST:
                 Navigator.popAndPushNamed(context, Routes.AUTH_SCREEN);
                 break;
               default:
                 Navigator.popAndPushNamed(
-                    context, Routes.MAIN_SCREEN_COORDINATOR);
+                    context, Routes.MAIN_SCREEN_STAFF);
             }
           }
         },

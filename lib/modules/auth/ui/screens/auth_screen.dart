@@ -16,7 +16,7 @@ class AuthScreen extends StatelessWidget {
           onPressed: () {
             SharedPrefRepository.setUserType(UserType.STUDENT);
             Navigator.of(context)
-                .pushNamedAndRemoveUntil(Routes.MAIN_SCREEN, (route) => false);
+                .pushNamedAndRemoveUntil(Routes.MAIN_SCREEN_STUDENT, (route) => false);
           },
           text: "Log In",
         ),
