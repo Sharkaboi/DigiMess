@@ -49,11 +49,11 @@ dependencies:
   # crypto functions
   crypto: ^3.0.0
   # charts library
-  fl_chart: ^0.12.2
+  fl_chart: ^0.12.3
   # work manager for notification services
-  workmanager: ^0.2.0
+  workmanager: ^0.2.3
   # notification library
-  flutter_local_notifications: ^0.1.5
+  flutter_local_notifications: ^4.0.1+2
   # share intent library
   share: ^2.0.1
 
@@ -74,6 +74,10 @@ flutter_icons:
   adaptive_icon_background: "assets/logo/ic_background.png"
   adaptive_icon_foreground: "assets/logo/ic_foreground.png"
 
+dependency_overrides:
+  # Override for `flutter_local_notifications`:
+  plugin_platform_interface: ^2.0.0
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -93,6 +97,7 @@ flutter:
     - assets/logo/ic_launcher_playstore.png
     - assets/logo/ic_foreground.png
     - assets/logo/ic_background.png
+    - assets/icons/no_internet_icon.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

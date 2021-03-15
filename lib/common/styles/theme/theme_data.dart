@@ -12,6 +12,10 @@ class Styles {
         primaryColor: DMColors.primaryBlue,
         accentColor: DMColors.accentBlue,
         cursorColor: DMColors.primaryBlue,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: DMColors.primaryBlue,
+          selectionColor: DMColors.primaryBlue.withOpacity(0.3)
+        ),
         backgroundColor: isDarkTheme ? Colors.black : Color(0xffF1F5FB),
         indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
         buttonColor: isDarkTheme ? Color(0xff3B3B3B) : Color(0xffF1F5FB),

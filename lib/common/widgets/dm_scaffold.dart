@@ -103,6 +103,7 @@ class DMScaffold extends StatelessWidget {
         appBar: isAppBarRequired
             ? AppBar(
                 centerTitle: isCenterAppBarTitle,
+                brightness: Brightness.dark,
                 title: Text(
                   appBarTitleText,
                   style: appBarTitleTextStyle ?? TextStyle(color: Colors.white),
