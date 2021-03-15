@@ -36,7 +36,7 @@ class AppRouter {
       case Routes.MAIN_SCREEN_STUDENT:
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  MainScreen());
+            child:  StudentMainScreen());
       default:
         return null;
     }

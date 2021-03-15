@@ -1,5 +1,9 @@
 class DMStrings {
   static const appName = "DigiMess";
+  static const description =
+      "Welcome to DigiMess.\nAn app to help organizations manage "
+      "their food mess, mainly colleges."
+      "\nUniversity Android mini project.";
 
   static const contributors = [
     "Rahul R S",

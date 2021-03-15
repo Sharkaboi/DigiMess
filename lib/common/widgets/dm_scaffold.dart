@@ -141,7 +141,7 @@ class DMScaffold extends StatelessWidget {
                 return KeyboardAvoider(child: NoNetworkScreen());
               } else if (state is NetworkConnectedState) {
                 _dmBloc.add(CheckDMStatus());
-                return KeyboardAvoider(child: Container());
+                return KeyboardAvoider(child: body);
               } else {
                 // for UserLoggedOut, UserLoggedIn, DMErrorState.
                 return KeyboardAvoider(child: body);

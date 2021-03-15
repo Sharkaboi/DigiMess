@@ -14,8 +14,7 @@ class NoNetworkScreen extends StatelessWidget {
         Container(
             margin: EdgeInsets.all(10),
             child: SvgPicture.asset("assets/icons/no_internet_icon.svg")),
-        Text("Uh-oh!",
-            style: DMStyles.headerStyle),
+        Text("Uh-oh!", style: DMStyles.headerStyle),
         Container(
           margin: EdgeInsets.all(10),
           child: Text("Please check your internet connection",
