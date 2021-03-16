@@ -64,15 +64,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-#  flutter_launcher_icons: ^0.8.0
-
-flutter_icons:
-  ios: true
-  android: true
-  image_path_ios: "assets/logo/ic_launcher_playstore.png"
-  image_path_android: "assets/logo/ic_launcher_playstore.png"
-  adaptive_icon_background: "assets/logo/ic_background.png"
-  adaptive_icon_foreground: "assets/logo/ic_foreground.png"
 
 dependency_overrides:
   # Override for `flutter_local_notifications`:

@@ -1,6 +1,7 @@
+import 'package:DigiMess/common/constants/user_types.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/constants/user_types.dart';
+import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_bloc.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_events.dart';
@@ -26,8 +27,7 @@ class SplashScreen extends StatelessWidget {
                 Navigator.popAndPushNamed(context, Routes.AUTH_SCREEN);
                 break;
               default:
-                Navigator.popAndPushNamed(
-                    context, Routes.MAIN_SCREEN_STAFF);
+                Navigator.popAndPushNamed(context, Routes.MAIN_SCREEN_STAFF);
             }
           }
         },
@@ -38,8 +38,24 @@ class SplashScreen extends StatelessWidget {
             width: double.infinity,
             color: DMColors.darkBlue,
             child: Center(
-              child: SvgPicture.asset("assets/logo/ic_foreground.svg",
-                  width: 64, height: 64),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(50),
+                    child: SvgPicture.asset("assets/logo/ic_foreground.svg",
+                        width: 64, height: 64),
+                  ),
+                  Container(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        "Setting things up....",
+                        style: DMTypo.bold18WhiteTextStyle,
+                      )),
+                  CircularProgressIndicator()
+                ],
+              ),
             ),
           );
         },
