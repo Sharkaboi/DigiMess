@@ -2,12 +2,15 @@ import 'package:DigiMess/common/bloc/dm_bloc.dart';
 import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/bloc/dm_states.dart';
 import 'package:DigiMess/common/router/routes.dart';
+import 'package:DigiMess/common/styles/dm_colors.dart';
+import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/common/widgets/no_network_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:DigiMess/common/extensions/string_extensions.dart';
 
 class DMScaffold extends StatelessWidget {
   final body;
@@ -105,15 +108,15 @@ class DMScaffold extends StatelessWidget {
                 centerTitle: isCenterAppBarTitle,
                 brightness: Brightness.dark,
                 title: Text(
-                  appBarTitleText,
-                  style: appBarTitleTextStyle ?? TextStyle(color: Colors.white),
+                  appBarTitleText.capitalizeFirst(),
+                  style: appBarTitleTextStyle ?? DMTypo.bold16WhiteTextStyle,
                 ),
                 leading: drawer != null
                     ? null
                     : IconButton(
                         icon: Icon(
                           Icons.arrow_back_ios,
-                          color: Colors.white,
+                          color: DMColors.white,
                         ),
                         onPressed: appBarBackCallback ??
                             () => Navigator.of(context).pop(),

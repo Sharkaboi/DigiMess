@@ -28,24 +28,24 @@ class DMTheme {
         textTheme: base.textTheme.copyWith(
           headline1: base.textTheme.headline1.copyWith(
               fontFamily: FONT_NAME,
-              color: isDarkTheme ? Colors.white : Colors.black),
+              color: isDarkTheme ? DMColors.white : DMColors.black),
           subtitle1: base.textTheme.subtitle1.copyWith(
               fontFamily: FONT_NAME,
-              color: isDarkTheme ? Colors.white : Colors.black),
+              color: isDarkTheme ? DMColors.white : DMColors.black),
           caption: base.textTheme.caption.copyWith(
               fontFamily: FONT_NAME,
-              color: isDarkTheme ? Colors.white : Colors.black),
+              color: isDarkTheme ? DMColors.white : DMColors.black),
           bodyText1: base.textTheme.bodyText1.copyWith(
               fontFamily: FONT_NAME,
-              color: isDarkTheme ? Colors.white : Colors.black),
+              color: isDarkTheme ? DMColors.white : DMColors.black),
           bodyText2: base.textTheme.bodyText2.copyWith(
               fontFamily: FONT_NAME,
-              color: isDarkTheme ? Colors.white : Colors.black),
+              color: isDarkTheme ? DMColors.white : DMColors.black),
           button: TextStyle(fontFamily: FONT_NAME),
         ),
-        textSelectionColor: isDarkTheme ? Colors.white : Colors.black,
-        cardColor: isDarkTheme ? Color(0xFF151515) : Colors.white,
-        canvasColor: isDarkTheme ? Colors.black : Colors.grey[50],
+        textSelectionColor: isDarkTheme ? DMColors.white : DMColors.black,
+        cardColor: isDarkTheme ? Color(0xFF151515) : DMColors.white,
+        canvasColor: isDarkTheme ? DMColors.black : DMColors.white,
         brightness: isDarkTheme ? Brightness.dark : Brightness.light,
         appBarTheme: AppBarTheme(
           elevation: 0.0,

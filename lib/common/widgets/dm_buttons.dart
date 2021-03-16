@@ -1,4 +1,5 @@
 import 'package:DigiMess/common/styles/dm_colors.dart';
+import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:flutter/material.dart';
 
 class DarkButton extends StatelessWidget {
@@ -13,10 +14,10 @@ class DarkButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        style: DMTypo.bold24WhiteTextStyle,
       ),
       color: DMColors.primaryBlue,
-      textColor: Colors.white,
+      textColor: DMColors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
     );
   }

@@ -33,7 +33,7 @@ class StudentNavDrawer extends StatelessWidget {
                     Spacer(),
                     IconButton(
                         icon: Icon(Icons.clear),
-                        color: Colors.white,
+                        color: DMColors.white,
                         iconSize: 24,
                         onPressed: () => Navigator.pop(context))
                   ],
@@ -43,7 +43,7 @@ class StudentNavDrawer extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: DMColors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10))),

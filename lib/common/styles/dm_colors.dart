@@ -10,5 +10,5 @@ class DMColors {
 
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
-  static Color grey = Color.fromRGBO(0, 0, 0, 0.6);
+  static const Color grey = Color.fromRGBO(0, 0, 0, 0.6);
 }

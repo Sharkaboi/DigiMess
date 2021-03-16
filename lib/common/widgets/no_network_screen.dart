@@ -1,4 +1,4 @@
-import 'package:DigiMess/common/styles/dm_styles.dart';
+import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,11 +14,11 @@ class NoNetworkScreen extends StatelessWidget {
         Container(
             margin: EdgeInsets.all(10),
             child: SvgPicture.asset("assets/icons/no_internet_icon.svg")),
-        Text("Uh-oh!", style: DMStyles.headerStyle),
+        Text("Uh-oh!", style: DMTypo.bold30BlackTextStyle),
         Container(
           margin: EdgeInsets.all(10),
           child: Text("Please check your internet connection",
-              style: DMStyles.normalTextStyle),
+              style: DMTypo.bold16BlackTextStyle),
         ),
       ],
     ));

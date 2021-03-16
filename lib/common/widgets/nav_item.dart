@@ -1,5 +1,6 @@
 import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/styles/dm_styles.dart';
+import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -30,12 +31,12 @@ class NavItem extends StatelessWidget {
               padding: EdgeInsets.only(right: 15),
               child: SvgPicture.asset(iconAsset,
                   height: 24,
-                  color: isItemSelected ? DMColors.darkBlue : Colors.black),
+                  color: isItemSelected ? DMColors.darkBlue : DMColors.black),
             ),
             Text(text,
                 style: isItemSelected
-                    ? DMStyles.smallerBlueTextStyle
-                    : DMStyles.smallerTextStyle)
+                    ? DMTypo.bold14DarkBlueTextStyle
+                    : DMTypo.bold14BlackTextStyle)
           ],
         ),
       ),
