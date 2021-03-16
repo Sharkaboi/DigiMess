@@ -1,4 +1,4 @@
-import 'package:DigiMess/common/styles/colors.dart';
+import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:flutter/material.dart';
 
 class DarkButton extends StatelessWidget {

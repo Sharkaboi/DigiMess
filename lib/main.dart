@@ -1,8 +1,8 @@
 import 'package:DigiMess/common/bloc/dm_bloc.dart';
 import 'package:DigiMess/common/bloc/dm_states.dart';
 import 'package:DigiMess/common/router/app_router.dart';
-import 'package:DigiMess/common/styles/colors.dart';
-import 'package:DigiMess/common/styles/theme/theme_data.dart';
+import 'package:DigiMess/common/styles/dm_colors.dart';
+import 'package:DigiMess/common/styles/dm_theme.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +26,7 @@ class DigiMess extends StatelessWidget {
       create: (_) => DMBloc(DMIdleState()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: Styles.themeData(false, context),
+        theme: DMTheme.themeData(context: context),
         onGenerateRoute: _appRouter.onGenerateRoute,
       ),
     );

@@ -4,8 +4,8 @@ import 'package:DigiMess/modules/student/complaints/ui/screens/complaints_screen
 import 'package:DigiMess/modules/student/help/ui/screens/help_screen.dart';
 import 'package:DigiMess/modules/student/home/ui/screens/home_screen.dart';
 import 'package:DigiMess/modules/student/leaves/ui/screens/leaves_screen.dart';
-import 'package:DigiMess/modules/student/main/ui/util/nav_destination_enum.dart';
 import 'package:DigiMess/modules/student/main/ui/widgets/student_nav_drawer.dart';
+import 'package:DigiMess/modules/student/main/util/nav_destination_enum.dart';
 import 'package:DigiMess/modules/student/menu/ui/screens/menu_screen.dart';
 import 'package:DigiMess/modules/student/notices/ui/screens/notices_screen.dart';
 import 'package:DigiMess/modules/student/payment_history/ui/screens/payment_history_screen.dart';
@@ -80,7 +80,5 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
     return currentScreen;
   }
 
-  void showShareDialog() {
-
-  }
+  void showShareDialog() {}
 }

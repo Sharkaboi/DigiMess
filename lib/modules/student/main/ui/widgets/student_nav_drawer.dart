@@ -1,6 +1,6 @@
-import 'package:DigiMess/common/styles/colors.dart';
+import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/widgets/nav_item.dart';
-import 'package:DigiMess/modules/student/main/ui/util/nav_destination_enum.dart';
+import 'package:DigiMess/modules/student/main/util/nav_destination_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

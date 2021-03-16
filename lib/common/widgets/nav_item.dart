@@ -1,4 +1,4 @@
-import 'package:DigiMess/common/styles/colors.dart';
+import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/styles/dm_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

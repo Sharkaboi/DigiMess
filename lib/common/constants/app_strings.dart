@@ -1,4 +1,6 @@
 class DMStrings {
+  DMStrings._();
+
   static const appName = "DigiMess";
   static const description =
       "Welcome to DigiMess.\nAn app to help organizations manage "
@@ -15,6 +17,8 @@ class DMStrings {
 }
 
 class DMHints {
+  DMHints._();
+
   static const student = "Student";
   static const staff = "Staff";
 }

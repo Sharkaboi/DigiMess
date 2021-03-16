@@ -1,4 +1,6 @@
 class Routes {
+  Routes._();
+
   static const String HOME = "/";
   static const String AUTH_SCREEN = "/auth";
   static const String LOGIN_SCREEN = "/login";

@@ -1,10 +1,12 @@
-import 'package:DigiMess/common/styles/colors.dart';
+import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:flutter/material.dart';
 
-class Styles {
+class DMTheme {
+  DMTheme._();
+
   static const FONT_NAME = "Comfortaa";
 
-  static ThemeData themeData(bool isDarkTheme, BuildContext context) {
+  static ThemeData themeData({bool isDarkTheme = false, BuildContext context}) {
     final base = isDarkTheme ? ThemeData.dark() : ThemeData.light();
 
     return ThemeData(
@@ -13,9 +15,8 @@ class Styles {
         accentColor: DMColors.accentBlue,
         cursorColor: DMColors.primaryBlue,
         textSelectionTheme: TextSelectionThemeData(
-          cursorColor: DMColors.primaryBlue,
-          selectionColor: DMColors.primaryBlue.withOpacity(0.3)
-        ),
+            cursorColor: DMColors.primaryBlue,
+            selectionColor: DMColors.primaryBlue.withOpacity(0.3)),
         backgroundColor: isDarkTheme ? Colors.black : Color(0xffF1F5FB),
         indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
         buttonColor: isDarkTheme ? Color(0xff3B3B3B) : Color(0xffF1F5FB),
