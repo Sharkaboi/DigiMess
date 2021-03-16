@@ -51,7 +51,7 @@ dependencies:
   # charts library
   fl_chart: ^0.12.3
   # work manager for notification services
-  workmanager: ^0.2.3
+  #workmanager: ^0.2.3
   # notification library
   flutter_local_notifications: ^4.0.1+2
   # share intent library
@@ -98,6 +98,17 @@ flutter:
     - assets/logo/ic_foreground.png
     - assets/logo/ic_background.png
     - assets/icons/no_internet_icon.svg
+    - assets/icons/home.svg
+    - assets/icons/about.svg
+    - assets/icons/complaints.svg
+    - assets/icons/help.svg
+    - assets/icons/leaves.svg
+    - assets/icons/menu.svg
+    - assets/icons/notices.svg
+    - assets/icons/payments.svg
+    - assets/icons/profile.svg
+    - assets/icons/settings.svg
+    - assets/icons/share.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
