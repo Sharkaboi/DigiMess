@@ -89,6 +89,8 @@ flutter:
     - assets/logo/ic_foreground.png
     - assets/logo/ic_background.png
     - assets/icons/no_internet_icon.svg
+    - assets/background/top_left_bg.svg
+    - assets/background/bottom_right_bg.svg
     - assets/icons/home.svg
     - assets/icons/about.svg
     - assets/icons/complaints.svg
