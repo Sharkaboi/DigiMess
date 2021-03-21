@@ -16,7 +16,7 @@ class DarkButton extends StatelessWidget {
         text,
         style: DMTypo.bold24WhiteTextStyle,
       ),
-      color: DMColors.primaryBlue,
+      color: DMColors.darkBlue,
       textColor: DMColors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
     );

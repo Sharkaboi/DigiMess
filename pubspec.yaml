@@ -56,6 +56,8 @@ dependencies:
   flutter_local_notifications: ^4.0.1+2
   # share intent library
   share: ^2.0.1
+  # dots indicator for pageview
+  dots_indicator: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -100,6 +102,12 @@ flutter:
     - assets/icons/profile.svg
     - assets/icons/settings.svg
     - assets/icons/share.svg
+    - assets/icons/home_bg.svg
+    - assets/icons/food_icon.svg
+    - assets/icons/moon_icon.svg
+    - assets/icons/veg_icon.svg
+    - assets/icons/non_veg_icon.svg
+    - assets/icons/mess_card_icon.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

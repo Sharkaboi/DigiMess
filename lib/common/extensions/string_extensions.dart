@@ -15,9 +15,9 @@ extension StringExtensions on String {
     return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
   }
 
-  String getFormattedCurrency() {
-    final format =
-        NumberFormat.currency(locale: 'en_IN', symbol: "₹", decimalDigits: 0);
+  String getFormattedCurrency({bool isSymbol = true}) {
+    final format = NumberFormat.currency(
+        locale: 'en_IN', symbol: isSymbol ? "₹" : "Rs.", decimalDigits: 0);
     return format.format(int.tryParse(this) ?? double.tryParse(this) ?? 0);
   }
 }
