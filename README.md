@@ -38,8 +38,8 @@ University Android mini project.
 ## DB design
 [Check out the DB design here](https://github.com/Sharkaboi/DigiMess/blob/main/docs/dbPlan.md)
 
-## Figma design
-[Designs](https://www.figma.com/file/oEDut40fET1EG0NyzC9YeV/DigiMess?node-id=7%3A6)
+## Figma design 
+[Designs](https://www.figma.com/file/oEDut40fET1EG0NyzC9YeV/DigiMess?node-id=7%3A6)  
 [Prototype](https://www.figma.com/proto/oEDut40fET1EG0NyzC9YeV/DigiMess?node-id=7%3A6&scaling=scale-down)
 
 ## Trello board
