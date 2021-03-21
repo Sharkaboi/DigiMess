@@ -16,28 +16,28 @@ class NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      customBorder:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      onTap: onClick,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.only(right: 15),
-              child: SvgPicture.asset(iconAsset,
-                  height: 24,
-                  color: isItemSelected ? DMColors.darkBlue : DMColors.black),
-            ),
-            Text(text,
-                style: isItemSelected
-                    ? DMTypo.bold14DarkBlueTextStyle
-                    : DMTypo.bold14BlackTextStyle)
-          ],
+    return Material(
+      child: InkWell(
+        onTap: onClick,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.only(right: 15),
+                child: SvgPicture.asset(iconAsset,
+                    height: 24,
+                    color: isItemSelected ? DMColors.darkBlue : DMColors.black),
+              ),
+              Text(text,
+                  style: isItemSelected
+                      ? DMTypo.bold14DarkBlueTextStyle
+                      : DMTypo.bold14BlackTextStyle)
+            ],
+          ),
         ),
       ),
     );

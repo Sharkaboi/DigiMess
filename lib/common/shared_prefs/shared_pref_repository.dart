@@ -15,4 +15,15 @@ class SharedPrefRepository {
     final sharedPrefs = await SharedPreferences.getInstance();
     sharedPrefs.setString(SharedPrefKeys.USER_TYPE, userType.toStringValue());
   }
+
+  static Future<String> getTheUserId() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final String userType = sharedPrefs.getString(SharedPrefKeys.USER_ID);
+    return userType;
+  }
+
+  static setTheUserId(String userId) async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    sharedPrefs.setString(SharedPrefKeys.USER_ID, userId);
+  }
 }

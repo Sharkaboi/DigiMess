@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +33,19 @@ class MenuItem extends Equatable {
         this.count,
         this.daysAvailable
       ];
+
+  factory MenuItem.fromQueryDocumentSnapshot(QueryDocumentSnapshot doc) {
+    final Map<String, dynamic> data = doc.data();
+    return MenuItem(
+        itemId: doc.id,
+        name: data['name'],
+        isVeg: data['isVeg'],
+        isEnabled: data['isEnabled'],
+        imageUrl: data['imageUrl'],
+        itemIsAvailable: _MenuItemIsAvailable.fromMap(data['isAvailable']),
+        count: data['count'],
+        daysAvailable: _DaysAvailable.fromMap(data['daysAvailable']));
+  }
 }
 
 class _MenuItemIsAvailable extends Equatable {

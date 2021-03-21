@@ -1,7 +1,12 @@
+import 'package:DigiMess/common/firebase/firebase_client.dart';
+import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/modules/student/about/ui/screens/about_screen.dart';
 import 'package:DigiMess/modules/student/complaints/ui/screens/complaints_screen.dart';
 import 'package:DigiMess/modules/student/help/ui/screens/help_screen.dart';
+import 'package:DigiMess/modules/student/home/bloc/home_bloc.dart';
+import 'package:DigiMess/modules/student/home/bloc/home_states.dart';
+import 'package:DigiMess/modules/student/home/data/home_repository.dart';
 import 'package:DigiMess/modules/student/home/ui/screens/home_screen.dart';
 import 'package:DigiMess/modules/student/leaves/ui/screens/leaves_screen.dart';
 import 'package:DigiMess/modules/student/main/ui/widgets/student_nav_drawer.dart';
@@ -12,6 +17,8 @@ import 'package:DigiMess/modules/student/payment_history/ui/screens/payment_hist
 import 'package:DigiMess/modules/student/profile/ui/screens/profile_screen.dart';
 import 'package:DigiMess/modules/student/settings/ui/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StudentMainScreen extends StatefulWidget {
   @override
@@ -27,6 +34,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
       isAppBarRequired: true,
       appBarTitleText: getTitleFromCurrentScreen(),
       body: getCurrentScreen(),
+      floatingActionButton: getFab(),
       drawer: StudentNavDrawer(
         currentScreen: currentScreen,
         itemOnClickCallBack: itemOnClick,
@@ -36,7 +44,16 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
 
   Widget getCurrentScreen() {
     if (currentScreen == StudentNavDestinations.HOME.toStringValue()) {
-      return StudentHomeScreen();
+      return BlocProvider(
+          create: (_) => StudentHomeBloc(
+              StudentHomeIdle(),
+              HomeRepository(
+                  FirebaseClient.getMenuCollectionReference(),
+                  FirebaseClient.getNoticesCollectionReference(),
+                  FirebaseClient.getPaymentsCollectionReference())),
+          child: StudentHomeScreen(
+            noticesCallback: noticesCallback,
+          ));
     } else if (currentScreen == StudentNavDestinations.MENU.toStringValue()) {
       return StudentMenuScreen();
     } else if (currentScreen ==
@@ -80,5 +97,30 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
     return currentScreen;
   }
 
-  void showShareDialog() {}
+  void showShareDialog() {
+    //todo: navigate to share dialog screen
+  }
+
+  void noticesCallback() {
+    setState(() {
+      currentScreen = StudentNavDestinations.NOTICES.toStringValue();
+    });
+  }
+
+  FloatingActionButton getFab() {
+    if (currentScreen == StudentNavDestinations.HOME.toStringValue()) {
+      return FloatingActionButton(
+          onPressed: openMessCard,
+          heroTag: "messCard",
+          backgroundColor: DMColors.darkBlue,
+          child: SvgPicture.asset("assets/icons/mess_card_icon.svg",
+              color: DMColors.white));
+    } else {
+      return null;
+    }
+  }
+
+  void openMessCard() {
+    //todo: navigate to mess card screen
+  }
 }
