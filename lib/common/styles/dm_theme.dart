@@ -14,7 +14,6 @@ class DMTheme {
         fontFamily: FONT_NAME,
         primaryColor: DMColors.primaryBlue,
         accentColor: DMColors.accentBlue,
-        cursorColor: DMColors.primaryBlue,
         textSelectionTheme: TextSelectionThemeData(
             cursorColor: DMColors.primaryBlue,
             selectionHandleColor: DMColors.primaryBlue,
@@ -68,13 +67,15 @@ class DMTheme {
         ),
         textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(DMColors.primaryBlue),
+                backgroundColor: MaterialStateProperty.all(DMColors.white),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30))),
                 overlayColor: MaterialStateProperty.all(
                     DMColors.primaryBlue.withOpacity(0.3)),
-                foregroundColor: MaterialStateProperty.all(DMColors.white))),
+                textStyle: MaterialStateProperty.all(
+                    TextStyle(color: DMColors.primaryBlue)),
+                foregroundColor:
+                    MaterialStateProperty.all(DMColors.primaryBlue))),
         dividerColor: DMColors.mutedBlue,
         cardColor: isDarkTheme ? DMColors.black : DMColors.white,
         canvasColor: isDarkTheme ? DMColors.black : DMColors.white,
@@ -87,6 +88,17 @@ class DMTheme {
         inputDecorationTheme: InputDecorationTheme(
           hintStyle: TextStyle(color: DMColors.grey, fontFamily: FONT_NAME),
         ),
+        cardTheme: CardTheme(
+          color: DMColors.white,
+        ),
+        popupMenuTheme: PopupMenuThemeData(
+            color: DMColors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5)),
+            textStyle: TextStyle(fontSize: 14, color: DMColors.black)),
+        tooltipTheme: TooltipThemeData(
+            textStyle: TextStyle(color: DMColors.primaryBlue),
+            decoration: BoxDecoration(color: DMColors.white)),
         buttonTheme: ButtonThemeData(
             buttonColor: DMColors.primaryBlue,
             shape:

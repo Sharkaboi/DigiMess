@@ -4,25 +4,31 @@ import 'package:flutter/material.dart';
 class DMTypo {
   DMTypo._();
 
-  static const TextStyle bold30BlackTextStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const TextStyle bold24BlackTextStyle =
-      TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
-  static const TextStyle bold18BlackTextStyle =
-      TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-  static const TextStyle bold16BlackTextStyle =
-      TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
-  static const TextStyle bold14BlackTextStyle =
-      TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
-  static const TextStyle bold12BlackTextStyle =
-      TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
+  static const TextStyle bold30BlackTextStyle = TextStyle(
+      fontSize: 30, fontWeight: FontWeight.bold, color: DMColors.black);
+  static const TextStyle bold24BlackTextStyle = TextStyle(
+      fontSize: 24, fontWeight: FontWeight.bold, color: DMColors.black);
+  static const TextStyle bold18BlackTextStyle = TextStyle(
+      fontSize: 18, fontWeight: FontWeight.bold, color: DMColors.black);
+  static const TextStyle bold16BlackTextStyle = TextStyle(
+      fontSize: 16, fontWeight: FontWeight.bold, color: DMColors.black);
+  static const TextStyle bold14BlackTextStyle = TextStyle(
+      fontSize: 14, fontWeight: FontWeight.bold, color: DMColors.black);
+  static const TextStyle bold12BlackTextStyle = TextStyle(
+      fontSize: 12, fontWeight: FontWeight.bold, color: DMColors.black);
 
-  static const TextStyle normal30BlackTextStyle = TextStyle(fontSize: 30);
-  static const TextStyle normal24BlackTextStyle = TextStyle(fontSize: 24);
-  static const TextStyle normal18BlackTextStyle = TextStyle(fontSize: 18);
-  static const TextStyle normal16BlackTextStyle = TextStyle(fontSize: 16);
-  static const TextStyle normal14BlackTextStyle = TextStyle(fontSize: 14);
-  static const TextStyle normal12BlackTextStyle = TextStyle(fontSize: 12);
+  static const TextStyle normal30BlackTextStyle =
+      TextStyle(fontSize: 30, color: DMColors.black);
+  static const TextStyle normal24BlackTextStyle =
+      TextStyle(fontSize: 24, color: DMColors.black);
+  static const TextStyle normal18BlackTextStyle =
+      TextStyle(fontSize: 18, color: DMColors.black);
+  static const TextStyle normal16BlackTextStyle =
+      TextStyle(fontSize: 16, color: DMColors.black);
+  static const TextStyle normal14BlackTextStyle =
+      TextStyle(fontSize: 14, color: DMColors.black);
+  static const TextStyle normal12BlackTextStyle =
+      TextStyle(fontSize: 12, color: DMColors.black);
 
   static const TextStyle bold30PrimaryBlueTextStyle = TextStyle(
       fontSize: 30, fontWeight: FontWeight.bold, color: DMColors.primaryBlue);
