@@ -58,6 +58,8 @@ dependencies:
   share: ^2.0.1
   # dots indicator for pageview
   dots_indicator: ^2.0.0
+  # otp screen dependency
+  pin_code_fields: ^7.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
