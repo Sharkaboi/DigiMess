@@ -15,7 +15,7 @@ class PaymentFail extends StatelessWidget {
               children: [
                 Container(
                   margin: EdgeInsets.only(top: 230.0),
-                  child:  SvgPicture.asset('assets/failed.svg'),
+                  child:  SvgPicture.asset('assets/icons/failed.svg'),
                 ),
                 Container(
                   margin: EdgeInsets.only(top:5.0),
