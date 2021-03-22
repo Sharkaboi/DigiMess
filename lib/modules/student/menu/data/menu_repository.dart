@@ -10,21 +10,15 @@ class MenuRepository {
   MenuRepository(this._menuClient);
 
   Future<DMTaskState> getMenuItems(
-      {String searchQuery = "",
-      MenuFilterType menuFilterType = MenuFilterType.BOTH}) async {
+      {MenuFilterType menuFilterType = MenuFilterType.BOTH}) async {
     try {
       Query query;
       if (menuFilterType == MenuFilterType.BOTH) {
-        query = _menuClient
-            .where("isEnabled", isEqualTo: true)
-            .where("name", isGreaterThanOrEqualTo: searchQuery)
-            .where("name", isLessThan: searchQuery + 'z');
+        query = _menuClient.where("isEnabled", isEqualTo: true);
       } else {
         query = _menuClient
             .where("isEnabled", isEqualTo: true)
-            .where("isVeg", isEqualTo: menuFilterType == MenuFilterType.VEG)
-            .where("name", isGreaterThanOrEqualTo: searchQuery)
-            .where("name", isLessThan: searchQuery + 'z');
+            .where("isVeg", isEqualTo: menuFilterType == MenuFilterType.VEG);
       }
       return await query.get().then((value) {
         final data = value.docs;

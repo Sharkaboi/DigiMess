@@ -13,16 +13,8 @@ class StudentMenuBloc extends Bloc<StudentMenuEvents, StudentMenuStates> {
   @override
   Stream<StudentMenuStates> mapEventToState(StudentMenuEvents event) async* {
     yield StudentMenuLoading();
-    if (event is GetAllMenuItems) {
-      final DMTaskState result = await _menuRepository.getMenuItems();
-      if (result.isTaskSuccess) {
-        yield StudentMenuSuccess(result.taskResultData);
-      } else {
-        yield StudentMenuError(result.errors);
-      }
-    } else if (event is FilterMenuItems) {
-      final DMTaskState result = await _menuRepository.getMenuItems(
-          searchQuery: event.searchQuery, menuFilterType: event.menuFilterType);
+    if (event is FilterMenuItems) {
+      final DMTaskState result = await _menuRepository.getMenuItems(menuFilterType: event.menuFilterType);
       if (result.isTaskSuccess) {
         yield StudentMenuSuccess(result.taskResultData);
       } else {

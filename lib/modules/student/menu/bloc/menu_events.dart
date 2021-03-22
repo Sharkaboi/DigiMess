@@ -5,17 +5,11 @@ abstract class StudentMenuEvents extends Equatable {
   const StudentMenuEvents();
 }
 
-class GetAllMenuItems extends StudentMenuEvents {
-  @override
-  List<Object> get props => [];
-}
-
 class FilterMenuItems extends StudentMenuEvents {
-  final String searchQuery;
   final MenuFilterType menuFilterType;
 
-  FilterMenuItems(this.searchQuery, this.menuFilterType);
+  FilterMenuItems({this.menuFilterType = MenuFilterType.BOTH});
 
   @override
-  List<Object> get props => [this.searchQuery, this.menuFilterType];
+  List<Object> get props => [this.menuFilterType];
 }
