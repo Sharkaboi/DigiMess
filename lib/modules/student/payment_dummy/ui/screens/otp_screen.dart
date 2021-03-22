@@ -58,7 +58,7 @@ class _OtpScreenState extends State<OtpScreen> {
               children: [
                 Container(
                   margin: EdgeInsets.only(top: 120.0),
-                  child: SvgPicture.asset('assets/mail_symbol.svg'),
+                  child: SvgPicture.asset('assets/icons/mail.svg'),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 30.0),
