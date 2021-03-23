@@ -11,6 +11,9 @@ import 'package:DigiMess/modules/student/home/ui/screens/home_screen.dart';
 import 'package:DigiMess/modules/student/leaves/ui/screens/leaves_screen.dart';
 import 'package:DigiMess/modules/student/main/ui/widgets/student_nav_drawer.dart';
 import 'package:DigiMess/modules/student/main/util/nav_destination_enum.dart';
+import 'package:DigiMess/modules/student/menu/bloc/menu_bloc.dart';
+import 'package:DigiMess/modules/student/menu/bloc/menu_states.dart';
+import 'package:DigiMess/modules/student/menu/data/menu_repository.dart';
 import 'package:DigiMess/modules/student/menu/ui/screens/menu_screen.dart';
 import 'package:DigiMess/modules/student/notices/ui/screens/notices_screen.dart';
 import 'package:DigiMess/modules/student/payment_history/ui/screens/payment_history_screen.dart';
@@ -55,7 +58,10 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
             noticesCallback: noticesCallback,
           ));
     } else if (currentScreen == StudentNavDestinations.MENU.toStringValue()) {
-      return StudentMenuScreen();
+      return BlocProvider(
+          create: (_) => StudentMenuBloc(StudentMenuIdle(),
+              MenuRepository(FirebaseClient.getMenuCollectionReference())),
+          child: StudentMenuScreen());
     } else if (currentScreen ==
         StudentNavDestinations.COMPLAINTS.toStringValue()) {
       return StudentComplaintsScreen();

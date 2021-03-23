@@ -15,7 +15,7 @@ An app to help organizations manage their food mess, mainly colleges.
 University Android mini project.
 
 ## Libraries used
- - Flutter
+ - [Flutter](https://flutter.dev/)
  - [Firebase Firestore / FlutterFire](https://pub.dev/packages/cloud_firestore)
  - [Flutter bloc](https://pub.dev/packages/flutter_bloc)
  - [Equatable](https://pub.dev/packages/equatable)
