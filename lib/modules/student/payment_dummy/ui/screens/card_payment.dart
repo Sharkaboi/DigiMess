@@ -1,247 +1,282 @@
-import 'package:flutter/cupertino.dart';
+import 'package:DigiMess/common/router/routes.dart';
+import 'package:DigiMess/common/styles/dm_colors.dart';
+import 'package:DigiMess/common/styles/dm_typography.dart';
+import 'package:DigiMess/common/widgets/dm_buttons.dart';
+import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:amount_configuration_screen/otp_screen.dart';
-import 'package:amount_configuration_screen/amount_screen.dart';
-
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:flutter_multi_formatter/formatters/credit_card_expiration_input_formatter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CardPayment extends StatelessWidget {
+  final VoidCallback paymentSuccessCallback;
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
+  CardPayment({Key key, this.paymentSuccessCallback}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DMScaffold(
+      isAppBarRequired: false,
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Container(
-          child: Column(
-            children: [
-              Container(
-                height: 150.0,
-                width: (MediaQuery.of(context).size.width),
-                color: Color(0xff317BE1),
-                child: Container(
-                  margin: EdgeInsets.only(top:40.0),
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Form(
+            key: _key,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  width: double.infinity,
+                  color: DMColors.primaryBlue,
+                  padding: EdgeInsets.all(10),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios_rounded,
-                            color: Colors.white,
-                            size: 30.0,
-                          ),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: ((context) => AmountScreen())));
-                          },
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_back_ios_rounded,
+                          color: DMColors.white,
+                          size: 20,
                         ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(10.0, 50.0, 0.0, 0.0),
+                        margin: EdgeInsets.only(left: 10),
                         child: Text(
-                          "CARD PAYMENT",
-                          style: TextStyle(
-                            fontSize: 23.0,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                            fontFamily: 'Comfortaa',
-                          ),
+                          "Card Payment",
+                          style: DMTypo.bold24WhiteTextStyle,
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 45.0, 0.0, 0.0),
-                        child: Icon(
-                          Icons.credit_card_outlined,
-                          color: Colors.white,
-                          size: 35.0,
+                        margin: EdgeInsets.only(left: 20),
+                        child: SvgPicture.asset(
+                          "assets/icons/card.svg",
+                          height: 20,
+                          color: DMColors.white,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(right: 150.0,top: 30.0),
-                child: Text(
-                  "Card Number :",
-                  style: TextStyle(
-                    fontSize: 23.0,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                    fontFamily: 'Comfortaa',
+                Container(
+                  margin: EdgeInsets.only(top: 30, left: 20, right: 20),
+                  child: Text(
+                    "Card Number :",
+                    style: DMTypo.bold18BlackTextStyle,
                   ),
                 ),
-              ),
-              Container(
-                height: 60.0,
-                width: 290.0,
-                margin: EdgeInsets.only(right:20.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
-                    errorText: null,
-                  ),
-                  keyboardType: TextInputType.number,
-                  maxLength: 16,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                    fontFamily: 'Comfortaa',
-                  ),
+                Container(
+                  margin: EdgeInsets.only(top: 10, left: 20, right: 20),
+                  child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: InputDecoration(
+                        hintText: "0000 0000 0000 0000",
+                        isDense: true,
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: DMColors.primaryBlue, width: 2)),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: DMColors.primaryBlue, width: 2)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: DMColors.primaryBlue, width: 2)),
+                        counterText: "",
+                      ),
+                      keyboardType: TextInputType.number,
+                      maxLines: 1,
+                      maxLength: 19,
+                      inputFormatters: [
+                        MaskedInputFormatter("#### #### #### ####",
+                            anyCharMatcher: RegExp(r'[0-9]+'))
+                      ],
+                      style: DMTypo.bold18BlackTextStyle,
+                      validator: (value) {
+                        final regex = RegExp(r"\d{4} \d{4} \d{4} \d{4}");
+                        final bool match = regex.hasMatch(value);
+                        return match ? null : "Invalid card number";
+                      }),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 0.0),
-                child: Row(
-                  children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 35.0,top: 30.0),
-                            child: Text(
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
                               "Expiration Date :",
-                              style: TextStyle(
-                                fontSize: 23.0,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                                fontFamily: 'Comfortaa',
-                              ),
+                              style: DMTypo.bold18BlackTextStyle,
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(right: 0.0,top: 0.0),
-                            width: 170.0,
-                            child: TextField(
+                            TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
-                                border: UnderlineInputBorder(),
-                                errorText: null,
-                                hintText: "MM-YYYY",
-                                hintStyle: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.grey,
-                                  fontFamily: 'Comfortaa',
-
-                                ),
+                                isDense: true,
+                                border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: DMColors.primaryBlue, width: 2)),
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: DMColors.primaryBlue, width: 2)),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: DMColors.primaryBlue, width: 2)),
+                                counterText: "",
+                                hintText: "MM/YY",
+                                hintStyle: DMTypo.bold18MutedTextStyle,
                               ),
                               keyboardType: TextInputType.number,
-                              maxLength: 7,
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                                fontFamily: 'Comfortaa',
-                              ),
+                              maxLength: 5,
+                              maxLines: 1,
+                              validator: (value) {
+                                final regex = RegExp(r"\d{2}/\d{2}");
+                                final bool match = regex.hasMatch(value);
+                                return match ? null : "Invalid format";
+                              },
+                              inputFormatters: [
+                                CreditCardExpirationDateFormatter()
+                              ],
+                              style: DMTypo.bold18BlackTextStyle,
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 35.0,top: 25.0),
-                            child: Text(
-                              "CVV :",
-                              style: TextStyle(
-                                fontSize: 23.0,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                                fontFamily: 'Comfortaa',
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 50.0,
-                            width: 40.0,
-                            margin: EdgeInsets.only(left: 35.0,top: 15.0),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                border: UnderlineInputBorder(),
-                                errorText: null,
-                              ),
-                              keyboardType: TextInputType.number,
-                              maxLength: 3,
-                              obscureText: true,
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                                fontFamily: 'Comfortaa',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(right: 80.0,top: 30.0),
-                child: Text(
-                  "Card Holder's Name:",
-                  style: TextStyle(
-                    fontSize: 23.0,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                    fontFamily: 'Comfortaa',
-                  ),
-                ),
-              ),
-              Container(
-                height: 50.0,
-                width: 290.0,
-                margin: EdgeInsets.only(right: 30.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
-                    errorText: null,
-                  ),
-                  keyboardType: TextInputType.name,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                    fontFamily: 'Comfortaa',
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 150.0),
-                child: SizedBox(
-                  height: 45.0,
-                  width: 255.0,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 0.0, right: 0.0),
-                    child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Color(0xff0038CF),
-                      child: Text(
-                        "Proceed",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Comfortaa',
+                          ],
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: ((context) => OtpScreen())));
-                      },
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "CVV :",
+                                style: DMTypo.bold18BlackTextStyle,
+                              ),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: DMColors.primaryBlue,
+                                          width: 2)),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: DMColors.primaryBlue,
+                                          width: 2)),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: DMColors.primaryBlue,
+                                          width: 2)),
+                                  counterText: "",
+                                  hintText: "XXX",
+                                  hintStyle: DMTypo.bold18MutedTextStyle,
+                                ),
+                                keyboardType: TextInputType.number,
+                                maxLength: 3,
+                                maxLines: 1,
+                                validator: (value) =>
+                                    value.length == 3 ? null : "Invalid cvv",
+                                obscureText: true,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                style: DMTypo.bold18BlackTextStyle,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20.0, top: 30.0),
+                  child: Text(
+                    "Card Holder's Name:",
+                    style: DMTypo.bold18BlackTextStyle,
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(left: 20, right: 20.0, top: 10.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      isDense: true,
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: DMColors.primaryBlue, width: 2)),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: DMColors.primaryBlue, width: 2)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: DMColors.primaryBlue, width: 2)),
+                      counterText: "",
+                      hintText: "John Doe",
+                      hintStyle: DMTypo.bold18MutedTextStyle,
+                    ),
+                    keyboardType: TextInputType.name,
+                    maxLength: 20,
+                    maxLines: 1,
+                    validator: (value) =>
+                        value.isNotEmpty ? null : "Enter a name",
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    style: DMTypo.bold18BlackTextStyle,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 50, horizontal: 20),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: 70,
+                          child: Hero(
+                            tag: "proceedBtn",
+                            child: DarkButton(
+                                text: "Proceed",
+                                onPressed: () {
+                                  if (_key.currentState.validate()) {
+                                    Navigator.pushNamed(
+                                        context, Routes.PAYMENT_OTP_SCREEN,
+                                        arguments: paymentSuccessCallback);
+                                  }
+                                }),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
-
-
-

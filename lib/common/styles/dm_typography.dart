@@ -159,4 +159,8 @@ class DMTypo {
       TextStyle(fontSize: 14, color: DMColors.grey);
   static const TextStyle normal12MutedTextStyle =
       TextStyle(fontSize: 12, color: DMColors.grey);
+
+
+  static const TextStyle bold48BlackTextStyle = TextStyle(
+      fontSize: 48, fontWeight: FontWeight.bold, color: DMColors.black);
 }

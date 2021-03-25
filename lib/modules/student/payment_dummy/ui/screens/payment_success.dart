@@ -1,50 +1,54 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:amount_configuration_screen/amount_screen.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
+import 'package:DigiMess/common/styles/dm_colors.dart';
+import 'package:DigiMess/common/styles/dm_typography.dart';
+import 'package:flutter/material.dart';
 
 class PaymentSuccess extends StatefulWidget {
+  final VoidCallback paymentSuccessCallback;
+
+  const PaymentSuccess({Key key, this.paymentSuccessCallback})
+      : super(key: key);
+
   @override
   _PaymentSuccessState createState() => _PaymentSuccessState();
 }
 
 class _PaymentSuccessState extends State<PaymentSuccess> {
   @override
-  void initState(){
-    Timer(Duration(seconds: 3), (){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AmountScreen() ));
-    });
+  void initState() {
     super.initState();
+    widget.paymentSuccessCallback();
+    Timer(Duration(seconds: 3), () {
+      int i = 4;
+      while (i > 0 && Navigator.canPop(context)) {
+        i--;
+        Navigator.pop(context);
+      }
+    });
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Color(0xff317BE1),
-        child: Center(
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: DMColors.primaryBlue,
+        body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                margin: EdgeInsets.only(top: 230.0),
-                child:  Icon(
-                  Icons.check_circle,
-                  color: Colors.white,
-                  size: 200.0,
-                ),
+              Icon(
+                Icons.check_circle,
+                color: Colors.white,
+                size: 160,
               ),
               Container(
-                margin: EdgeInsets.only(top:20.0),
-
+                margin: EdgeInsets.only(top: 30),
                 child: Text(
-                  "Payment Successful !",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 23.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Comfortaa',
-                  ),
+                  "Payment Successful!",
+                  style: DMTypo.bold24WhiteTextStyle,
                 ),
               ),
             ],
@@ -54,4 +58,3 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
     );
   }
 }
-

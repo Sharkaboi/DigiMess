@@ -1,199 +1,160 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:DigiMess/common/router/routes.dart';
+import 'package:DigiMess/common/styles/dm_colors.dart';
+import 'package:DigiMess/common/styles/dm_typography.dart';
+import 'package:DigiMess/common/widgets/dm_buttons.dart';
+import 'package:DigiMess/common/widgets/dm_scaffold.dart';
+import 'package:DigiMess/common/widgets/dm_snackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:amount_configuration_screen/payment_success.dart';
-import 'package:amount_configuration_screen/payment_fail.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-
 class OtpScreen extends StatefulWidget {
+  final VoidCallback paymentSuccessCallback;
+
+  const OtpScreen({Key key, this.paymentSuccessCallback}) : super(key: key);
+
   @override
   _OtpScreenState createState() => _OtpScreenState();
 }
 
-String otpReceived = "";
 class _OtpScreenState extends State<OtpScreen> {
-
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  String currentOtp = "";
+  TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    var androidInitialize = new AndroidInitializationSettings('app_icon');
-    var initializationsSettings =
-    new InitializationSettings(android: androidInitialize);
-    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(initializationsSettings,);
+    final AndroidInitializationSettings androidInitialize =
+        AndroidInitializationSettings('app_icon');
+    final InitializationSettings initializationsSettings =
+        InitializationSettings(android: androidInitialize);
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(
+      initializationsSettings,
+    );
+
+    _showNotification();
   }
 
-  Future _showNotification() async {
+  Future<void> _showNotification() async {
+    final Random random = Random();
+    final int otp = 1000 + random.nextInt(8999);
+    currentOtp = otp.toString();
 
-
-    Random random = new Random();
-    int digits = random.nextInt(9000)+1000;
-    String otpSent = digits.toString();
-    otpReceived = otpSent;
-
-    var androidDetails = new AndroidNotificationDetails(
-        "App ID", "DigiMess", "This is a mess app",
-        importance: Importance.max);
-    var generalNotificationDetails =
-    new NotificationDetails(android: androidDetails);
-    await flutterLocalNotificationsPlugin.show(
-        0, "DigiMess OTP","$otpSent",
-        generalNotificationDetails, payload: "DigiMess");
+    final AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+            "com.sharkaboi.DigiMess",
+            "OTP Notification channel",
+            "Notification channel for showing dummy OTP for payments.",
+            importance: Importance.max);
+    final NotificationDetails generalNotificationDetails =
+        NotificationDetails(android: androidDetails);
+    await flutterLocalNotificationsPlugin.show(0, "OTP for payment in DigiMess",
+        currentOtp, generalNotificationDetails);
   }
 
   @override
   Widget build(BuildContext context) {
-    _showNotification();
-    String otpCollect = "";
-    return Scaffold(
+    return DMScaffold(
+      isAppBarRequired: false,
       body: SingleChildScrollView(
-        child: Container(
-          child: Center(
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 120.0),
-                  child: SvgPicture.asset('assets/icons/mail.svg'),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 30.0),
-                  child: Text(
-                    "Verification",
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontFamily: 'Comfortaa',
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 120),
+                child: SvgPicture.asset('assets/icons/mail.svg',
+                    height: 160, width: 160),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                child: Text("Verification", style: DMTypo.bold30BlackTextStyle),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                child: Text("You will receive an OTP via SMS",
+                    style: DMTypo.bold18MutedTextStyle),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                child: Container(
+                  width: 200,
+                  child: PinCodeTextField(
+                    keyboardType: TextInputType.number,
+                    appContext: context,
+                    controller: _controller,
+                    autoDismissKeyboard: true,
+                    onChanged: (_) {},
+                    textStyle: DMTypo.bold24BlackTextStyle,
+                    length: 4,
+                    showCursor: false,
+                    animationType: AnimationType.none,
+                    pinTheme: PinTheme(
+                      inactiveColor: DMColors.black,
+                      selectedColor: DMColors.black,
+                      activeColor: DMColors.primaryBlue,
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 30.0),
-                  child: Text(
-                    "You will receive an OTP via SMS",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey,
-                      fontFamily: 'Comfortaa',
-                    ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: 70,
+                child: Hero(
+                  tag: "proceedBtn",
+                  child: DarkButton(
+                    text: "Verify",
+                    onPressed: verifyOtp,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 30.0),
-                  child: Container(
-                    width: 200.0,
-                    child: PinCodeTextField(
-                      keyboardType: TextInputType.number,
-                      appContext: context,
-                      autoDismissKeyboard: true,
-                      animationType: AnimationType.fade,
-                      obscureText: true,
-                      blinkWhenObscuring: true,
-                      textStyle:TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                        fontFamily: 'Comfortaa',
-                      ),
-                      length: 4,
-                      onChanged: (value) {
-                        otpCollect = value;
-                        //print(otpCollect);
-                      },
-                      pinTheme: PinTheme(
-                        inactiveColor: Colors.black,
-                        selectedColor: Colors.greenAccent[700],
-                        activeColor: Color(0xff317BE1),
-                      ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Didn't receive an OTP ?",
+                      style: DMTypo.bold14MutedTextStyle,
                     ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 40.0),
-                  child: SizedBox(
-                    height: 45.0,
-                    width: 255.0,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 0.0, right: 0.0),
-                      child: RaisedButton(
-                        textColor: Colors.white,
-                        color: Color(0xff0038CF),
+                    Container(
+                      margin: EdgeInsets.only(left: 10),
+                      child: InkWell(
                         child: Text(
-                          "Verify",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Comfortaa',
-                          ),
+                          "Send again",
+                          style: DMTypo.bold14PrimaryBlueTextStyle,
                         ),
-                        onPressed: () {
-                          if(otpReceived == otpCollect ){
-                            Random rnd = new Random();
-                            int trial = rnd.nextInt(10);
-                            if (trial == 0){
-                              Navigator.push(context, MaterialPageRoute(builder: ((context) => PaymentFail())));
-                            }
-                            else{
-                              Navigator.push(context, MaterialPageRoute(builder: ((context) => PaymentSuccess())));
-                            }
-                          }
-                          else{
-                            Navigator.push(context, MaterialPageRoute(builder: ((context) => PaymentFail())));
-                          }
-                        },
-                        shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0),
-                        ),
+                        onTap: () => {_showNotification()},
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 20.0,left: 50.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(right: 10.0),
-                        child: Text(
-                          "Didn't receive an OTP ?",
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey,
-                            fontFamily: 'Comfortaa',
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: InkWell(
-                          child: Text(
-                            "Send again",
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xff317BE1),
-                              fontFamily: 'Comfortaa',
-                            ),
-                          ),
-                          onTap: () => {
-                            _showNotification()
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
+  }
+
+  void verifyOtp() {
+    if (currentOtp == _controller.text) {
+      Random rnd = Random();
+      int trial = rnd.nextInt(1000);
+      if (trial == 13) {
+        Navigator.pushNamed(context, Routes.PAYMENT_FAILED_SCREEN);
+      } else {
+        Navigator.pushNamed(context, Routes.PAYMENT_SUCCESS_SCREEN,
+            arguments: widget.paymentSuccessCallback);
+      }
+    } else {
+      DMSnackBar.show(context, "Invalid OTP");
+      print("$currentOtp != ${_controller.text}");
+    }
   }
 }
