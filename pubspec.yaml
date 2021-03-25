@@ -58,6 +58,10 @@ dependencies:
   share: ^2.0.1
   # dots indicator for pageview
   dots_indicator: ^2.0.0
+  # otp text field
+  pin_code_fields: ^7.0.0
+  # text formatter
+  flutter_multi_formatter: ^2.0.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -108,6 +112,9 @@ flutter:
     - assets/icons/veg_icon.svg
     - assets/icons/non_veg_icon.svg
     - assets/icons/mess_card_icon.svg
+    - assets/icons/card.svg
+    - assets/icons/mail.svg
+    - assets/icons/failed.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

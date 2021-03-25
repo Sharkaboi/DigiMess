@@ -7,6 +7,12 @@ import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
 import 'package:DigiMess/modules/splash/data/splash_repository.dart';
 import 'package:DigiMess/modules/splash/ui/screens/splash_screen.dart';
 import 'package:DigiMess/modules/student/main/ui/screens/main_screen.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/card_payment.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/otp_screen.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payment_fail.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payment_success.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payments_screen.dart';
+import 'package:DigiMess/modules/student/payment_dummy/util/dummy_payment_args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
@@ -16,7 +22,8 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return PageTransition(
-          type: PageTransitionType.fade,
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
             child: BlocProvider(
                 create: (context) =>
                     SplashBloc(SplashIdle(), SplashRepository()),
@@ -24,19 +31,62 @@ class AppRouter {
       case Routes.AUTH_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
             child: AuthScreen());
       case Routes.LOGIN_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  LoginScreen());
+            duration: Duration(milliseconds: 500),
+            child: LoginScreen());
       case Routes.REGISTER_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  RegisterScreen());
+            duration: Duration(milliseconds: 500),
+            child: RegisterScreen());
       case Routes.MAIN_SCREEN_STUDENT:
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  StudentMainScreen());
+            duration: Duration(milliseconds: 500),
+            child: StudentMainScreen());
+      case Routes.DUMMY_PAYMENT_SCREEN:
+        final DummyPaymentArguments args = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: DummyPaymentsScreen(
+              message: args.message,
+              paymentAmount: args.paymentAmount,
+              paymentSuccessCallback: args.paymentSuccessCallback,
+            ));
+      case Routes.PAYMENT_CARD_DETAILS_SCREEN:
+        final VoidCallback paymentSuccessCallback = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: CardPayment(
+              paymentSuccessCallback: paymentSuccessCallback,
+            ));
+      case Routes.PAYMENT_OTP_SCREEN:
+        final VoidCallback paymentSuccessCallback = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: OtpScreen(
+              paymentSuccessCallback: paymentSuccessCallback,
+            ));
+      case Routes.PAYMENT_SUCCESS_SCREEN:
+        final VoidCallback paymentSuccessCallback = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: PaymentSuccess(
+              paymentSuccessCallback: paymentSuccessCallback,
+            ));
+      case Routes.PAYMENT_FAILED_SCREEN:
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: PaymentFail());
       default:
         return null;
     }

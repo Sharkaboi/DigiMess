@@ -1,4 +1,5 @@
 import 'package:DigiMess/common/firebase/firebase_client.dart';
+import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/modules/student/about/ui/screens/about_screen.dart';
@@ -16,6 +17,7 @@ import 'package:DigiMess/modules/student/menu/bloc/menu_states.dart';
 import 'package:DigiMess/modules/student/menu/data/menu_repository.dart';
 import 'package:DigiMess/modules/student/menu/ui/screens/menu_screen.dart';
 import 'package:DigiMess/modules/student/notices/ui/screens/notices_screen.dart';
+import 'package:DigiMess/modules/student/payment_dummy/util/dummy_payment_args.dart';
 import 'package:DigiMess/modules/student/payment_history/ui/screens/payment_history_screen.dart';
 import 'package:DigiMess/modules/student/profile/ui/screens/profile_screen.dart';
 import 'package:DigiMess/modules/student/settings/ui/screens/settings_screen.dart';
@@ -128,5 +130,9 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
 
   void openMessCard() {
     //todo: navigate to mess card screen
+    Navigator.pushNamed(context, Routes.DUMMY_PAYMENT_SCREEN,
+        arguments: DummyPaymentArguments("Fees of 2020", 4000, () {
+          print("success");
+        }));
   }
 }
