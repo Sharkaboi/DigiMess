@@ -48,6 +48,7 @@
 ### **Complaints**
 - complaintId : *(String)*
   - complaint : *(String)*
+  - category : *(Array<String>)*
   - userId : *(String)*
   - date : *(Timestamp)*
 
