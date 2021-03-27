@@ -27,8 +27,10 @@ class TodaysFoodCard extends StatelessWidget {
         children: [
           Container(
               margin: EdgeInsets.all(20), child: getMenuIconOrClosedIcon()),
-          Container(
-              margin: EdgeInsets.all(20), child: getTodayMessOrClosedHint()),
+          Expanded(
+            child: Container(
+                margin: EdgeInsets.all(20), child: getTodayMessOrClosedHint()),
+          ),
         ],
       ),
     );

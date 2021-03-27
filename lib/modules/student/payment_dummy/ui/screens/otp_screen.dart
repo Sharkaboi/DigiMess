@@ -114,7 +114,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 20.0),
+                margin: EdgeInsets.only(top: 20.0, bottom: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
