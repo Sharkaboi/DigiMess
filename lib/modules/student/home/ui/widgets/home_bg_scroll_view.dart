@@ -11,19 +11,23 @@ class HomeScrollView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: DMColors.lightBlue,
-      height: double.infinity,
-      width: double.infinity,
       child: SingleChildScrollView(
-          child: Stack(
-        children: [
-          Container(
-            height: 130,
-            width: double.infinity,
-            child: SvgPicture.asset("assets/icons/home_bg.svg",
-                fit: BoxFit.fitWidth),
-          ),
-          child,
-        ],
+          child: Container(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height,
+          minWidth: MediaQuery.of(context).size.width,
+        ),
+        child: Stack(
+          children: [
+            Container(
+              height: 130,
+              width: double.infinity,
+              child: SvgPicture.asset("assets/icons/home_bg.svg",
+                  fit: BoxFit.cover),
+            ),
+            child,
+          ],
+        ),
       )),
     );
   }

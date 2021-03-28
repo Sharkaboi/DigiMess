@@ -113,12 +113,21 @@ class FoodImageItem extends StatelessWidget {
               children: [
                 Container(
                     padding: EdgeInsets.symmetric(horizontal: 5),
-                    child: Text(foodName, style: DMTypo.bold12BlackTextStyle)),
+                    child: Text(
+                      foodName,
+                      style: DMTypo.bold12BlackTextStyle,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    )),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                  child: SvgPicture.asset(isVeg
-                      ? "assets/icons/veg_icon.svg"
-                      : "assets/icons/non_veg_icon.svg"),
+                  child: SvgPicture.asset(
+                    isVeg
+                        ? "assets/icons/veg_icon.svg"
+                        : "assets/icons/non_veg_icon.svg",
+                    height: 10,
+                    width: 10,
+                  ),
                 )
               ],
             ),

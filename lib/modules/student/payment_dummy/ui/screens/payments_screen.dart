@@ -61,7 +61,7 @@ class DummyPaymentsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                    margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                     width: MediaQuery.of(context).size.width * 0.8,
                     height: 70,
                     child: Hero(
