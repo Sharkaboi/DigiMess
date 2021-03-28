@@ -116,6 +116,7 @@ class FoodImageItem extends StatelessWidget {
                     child: Text(
                       foodName,
                       style: DMTypo.bold12BlackTextStyle,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     )),
                 Container(

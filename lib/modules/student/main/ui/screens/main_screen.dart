@@ -1,3 +1,4 @@
+import 'package:DigiMess/common/constants/app_strings.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/styles/dm_colors.dart';
@@ -24,6 +25,7 @@ import 'package:DigiMess/modules/student/settings/ui/screens/settings_screen.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:share/share.dart';
 
 class StudentMainScreen extends StatefulWidget {
   @override
@@ -106,7 +108,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
   }
 
   void showShareDialog() {
-    //todo: navigate to share dialog screen
+    Share.share(DMStrings.description + "\n" + DMStrings.githubLink);
   }
 
   void noticesCallback() {
@@ -130,9 +132,5 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
 
   void openMessCard() {
     //todo: navigate to mess card screen
-    Navigator.pushNamed(context, Routes.DUMMY_PAYMENT_SCREEN,
-        arguments: DummyPaymentArguments("Fees of 2020", 4000, () {
-          print("success");
-        }));
   }
 }
