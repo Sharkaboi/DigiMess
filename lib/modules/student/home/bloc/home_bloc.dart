@@ -27,13 +27,13 @@ class StudentHomeBloc extends Bloc<StudentHomeEvents, StudentHomeStates> {
                 latestNotice: noticeResult.taskResultData,
                 listOfTodaysMeals: menuResult.taskResultData);
           } else {
-            yield StudentHomeError(paymentResult.errors);
+            yield StudentHomeError(paymentResult.error);
           }
         } else {
-          yield StudentHomeError(noticeResult.errors);
+          yield StudentHomeError(noticeResult.error);
         }
       } else {
-        yield StudentHomeError(menuResult.errors);
+        yield StudentHomeError(menuResult.error);
       }
     }
   }

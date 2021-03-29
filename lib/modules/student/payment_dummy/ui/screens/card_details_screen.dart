@@ -10,11 +10,11 @@ import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:flutter_multi_formatter/formatters/credit_card_expiration_input_formatter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CardPayment extends StatelessWidget {
+class CardDetailsScreen extends StatelessWidget {
   final VoidCallback paymentSuccessCallback;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  CardPayment({Key key, this.paymentSuccessCallback}) : super(key: key);
+  CardDetailsScreen({Key key, this.paymentSuccessCallback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
 import 'package:DigiMess/common/constants/app_strings.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
-import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/modules/student/about/ui/screens/about_screen.dart';
@@ -18,10 +17,11 @@ import 'package:DigiMess/modules/student/menu/bloc/menu_states.dart';
 import 'package:DigiMess/modules/student/menu/data/menu_repository.dart';
 import 'package:DigiMess/modules/student/menu/ui/screens/menu_screen.dart';
 import 'package:DigiMess/modules/student/notices/ui/screens/notices_screen.dart';
-import 'package:DigiMess/modules/student/payment_dummy/util/dummy_payment_args.dart';
+import 'package:DigiMess/modules/student/payment_history/bloc/payments_bloc.dart';
+import 'package:DigiMess/modules/student/payment_history/bloc/payments_states.dart';
+import 'package:DigiMess/modules/student/payment_history/data/payments_repository.dart';
 import 'package:DigiMess/modules/student/payment_history/ui/screens/payment_history_screen.dart';
 import 'package:DigiMess/modules/student/profile/ui/screens/profile_screen.dart';
-import 'package:DigiMess/modules/student/settings/ui/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -71,7 +71,12 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
       return StudentComplaintsScreen();
     } else if (currentScreen ==
         StudentNavDestinations.PAYMENTS.toStringValue()) {
-      return StudentPaymentHistoryScreen();
+      return BlocProvider(
+          create: (_) => StudentPaymentsBloc(
+              StudentPaymentsIdle(),
+              StudentPaymentsRepository(
+                  FirebaseClient.getPaymentsCollectionReference())),
+          child: StudentPaymentHistoryScreen());
     } else if (currentScreen == StudentNavDestinations.LEAVES.toStringValue()) {
       return StudentLeavesScreen();
     } else if (currentScreen ==
@@ -80,9 +85,6 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
     } else if (currentScreen ==
         StudentNavDestinations.PROFILE.toStringValue()) {
       return StudentProfileScreen();
-    } else if (currentScreen ==
-        StudentNavDestinations.SETTINGS.toStringValue()) {
-      return StudentSettingsScreen();
     } else if (currentScreen == StudentNavDestinations.HELP.toStringValue()) {
       return StudentHelpScreen();
     } else if (currentScreen == StudentNavDestinations.ABOUT.toStringValue()) {

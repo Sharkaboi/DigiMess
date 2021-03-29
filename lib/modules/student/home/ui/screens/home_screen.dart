@@ -80,7 +80,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                       latestNotice: latestNotice,
                       noticesCallback: widget.noticesCallback),
                 ),
-                Visibility(visible: !hasPaidFees, child: PaymentCard())
+                Visibility(visible: !hasPaidFees, child: HomePaymentCard())
               ],
             ));
           } else {

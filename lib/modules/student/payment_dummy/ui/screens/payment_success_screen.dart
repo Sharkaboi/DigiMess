@@ -4,17 +4,17 @@ import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:flutter/material.dart';
 
-class PaymentSuccess extends StatefulWidget {
+class PaymentSuccessScreen extends StatefulWidget {
   final VoidCallback paymentSuccessCallback;
 
-  const PaymentSuccess({Key key, this.paymentSuccessCallback})
+  const PaymentSuccessScreen({Key key, this.paymentSuccessCallback})
       : super(key: key);
 
   @override
-  _PaymentSuccessState createState() => _PaymentSuccessState();
+  _PaymentSuccessScreenState createState() => _PaymentSuccessScreenState();
 }
 
-class _PaymentSuccessState extends State<PaymentSuccess> {
+class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
   @override
   void initState() {
     super.initState();
