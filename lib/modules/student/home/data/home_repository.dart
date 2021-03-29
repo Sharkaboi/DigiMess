@@ -28,20 +28,20 @@ class HomeRepository {
             data.map((e) => MenuItem.fromQueryDocumentSnapshot(e)).toList();
         print(todaysFood);
         return DMTaskState(
-            isTaskSuccess: true, taskResultData: todaysFood, errors: null);
+            isTaskSuccess: true, taskResultData: todaysFood, error: null);
       }).onError((error, stackTrace) {
         print(stackTrace.toString());
         return DMTaskState(
             isTaskSuccess: false,
             taskResultData: null,
-            errors: DMError(message: error.toString()));
+            error: DMError(message: error.toString()));
       });
     } catch (e) {
       print(e);
       return DMTaskState(
           isTaskSuccess: false,
           taskResultData: null,
-          errors: DMError(message: e.toString()));
+          error: DMError(message: e.toString()));
     }
   }
 
@@ -56,20 +56,20 @@ class HomeRepository {
             value.docs.map((e) => Notice.fromDocument(e)).toList();
         print(latestNotice);
         return DMTaskState(
-            isTaskSuccess: true, taskResultData: latestNotice, errors: null);
+            isTaskSuccess: true, taskResultData: latestNotice, error: null);
       }).onError((error, stackTrace) {
         print(stackTrace.toString());
         return DMTaskState(
             isTaskSuccess: false,
             taskResultData: null,
-            errors: DMError(message: error.toString()));
+            error: DMError(message: error.toString()));
       });
     } catch (e) {
       print(e);
       return DMTaskState(
           isTaskSuccess: false,
           taskResultData: null,
-          errors: DMError(message: e.toString()));
+          error: DMError(message: e.toString()));
     }
   }
 
@@ -90,21 +90,21 @@ class HomeRepository {
             isTaskSuccess: true,
             taskResultData: latestPayment != null &&
                 latestPayment.paymentDate.month == today.month,
-            errors: null);
+            error: null);
       }).onError((error, stackTrace) {
         print(stackTrace);
         print(error);
         return DMTaskState(
             isTaskSuccess: false,
             taskResultData: null,
-            errors: DMError(message: error.toString()));
+            error: DMError(message: error.toString()));
       });
     } catch (e) {
       print(e);
       return DMTaskState(
           isTaskSuccess: false,
           taskResultData: null,
-          errors: DMError(message: e.toString()));
+          error: DMError(message: e.toString()));
     }
   }
 }

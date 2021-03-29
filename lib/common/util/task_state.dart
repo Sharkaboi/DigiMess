@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 class DMTaskState extends Equatable {
   final bool isTaskSuccess;
   final dynamic taskResultData;
-  final DMError errors;
+  final DMError error;
 
   DMTaskState(
       {@required this.isTaskSuccess,
       @required this.taskResultData,
-      @required this.errors});
+      @required this.error});
 
   @override
   List<Object> get props =>
-      [this.isTaskSuccess, this.taskResultData, this.errors];
+      [this.isTaskSuccess, this.taskResultData, this.error];
 }

@@ -7,11 +7,11 @@ import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
 import 'package:DigiMess/modules/splash/data/splash_repository.dart';
 import 'package:DigiMess/modules/splash/ui/screens/splash_screen.dart';
 import 'package:DigiMess/modules/student/main/ui/screens/main_screen.dart';
-import 'package:DigiMess/modules/student/payment_dummy/ui/screens/card_payment.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/card_details_screen.dart';
 import 'package:DigiMess/modules/student/payment_dummy/ui/screens/otp_screen.dart';
-import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payment_fail.dart';
-import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payment_success.dart';
-import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payments_screen.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payment_fail_screen.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payment_success_screen.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/dummy_payments_screen.dart';
 import 'package:DigiMess/modules/student/payment_dummy/util/dummy_payment_args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +63,7 @@ class AppRouter {
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: CardPayment(
+            child: CardDetailsScreen(
               paymentSuccessCallback: paymentSuccessCallback,
             ));
       case Routes.PAYMENT_OTP_SCREEN:
@@ -79,14 +79,14 @@ class AppRouter {
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: PaymentSuccess(
+            child: PaymentSuccessScreen(
               paymentSuccessCallback: paymentSuccessCallback,
             ));
       case Routes.PAYMENT_FAILED_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: PaymentFail());
+            child: PaymentFailScreen());
       default:
         return null;
     }

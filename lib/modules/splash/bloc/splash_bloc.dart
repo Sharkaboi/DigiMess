@@ -19,7 +19,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       if (result.isTaskSuccess) {
         yield UserLoginStatus(result.taskResultData);
       } else {
-        yield SplashError(result.errors);
+        yield SplashError(result.error);
       }
     } else {
       yield SplashError(DMError(message: "Invalid event passed!"));

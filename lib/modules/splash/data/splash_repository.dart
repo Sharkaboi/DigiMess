@@ -11,13 +11,13 @@ class SplashRepository {
       final UserType _currentUserType =
           await SharedPrefRepository.getUserType();
       return DMTaskState(
-          isTaskSuccess: true, taskResultData: _currentUserType, errors: null);
+          isTaskSuccess: true, taskResultData: _currentUserType, error: null);
     } catch (e) {
       print(e);
       return DMTaskState(
           isTaskSuccess: false,
           taskResultData: null,
-          errors: DMError(message: e.toString(), throwable: e));
+          error: DMError(message: e.toString(), throwable: e));
     }
   }
 }

@@ -5,7 +5,7 @@ import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class PaymentCard extends StatelessWidget {
+class HomePaymentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
