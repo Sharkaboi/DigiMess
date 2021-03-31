@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 class DarkButton extends StatelessWidget {
   final String text;
+  final TextStyle textStyle;
   final Function() onPressed;
 
-  const DarkButton({Key key, this.text, this.onPressed}) : super(key: key);
+  const DarkButton({Key key, this.text, this.onPressed, this.textStyle = DMTypo.bold24WhiteTextStyle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class DarkButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: DMTypo.bold24WhiteTextStyle,
+        style: textStyle,
       ),
       color: DMColors.darkBlue,
       textColor: DMColors.white,
