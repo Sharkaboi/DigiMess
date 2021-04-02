@@ -3,9 +3,13 @@ import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:DigiMess/common/constants/complaint_type.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:intl/intl.dart';
 
 List <String> complaints = [];
 class StudentComplaintsScreen extends StatelessWidget {
+  String comments;
   TextEditingController _controller = TextEditingController();
   @override
     @override
@@ -80,10 +84,46 @@ class StudentComplaintsScreen extends StatelessWidget {
                           text: "Submit",
                           textStyle: DMTypo.bold18WhiteTextStyle,
                           onPressed: (){
-                            if(!complaints.contains(_controller.text)){
-                              complaints.add(_controller.text);
-                            }
-                            print(complaints);
+                           comments = _controller.text;
+                           DateTime today = new DateTime.now();
+                           String time = DateFormat('j').format(today);
+                           var timeNow = time.split(" ");
+                           String second = today.second.toString();
+                           String minute = today.minute.toString();
+                           if(timeNow[0].length == 1){
+                             timeNow[0] = "0"+timeNow[0];
+                           }
+                           if(second.length == 1){
+                             second = "0"+second;
+                           }
+                           if(minute.length == 1){
+                             minute = "0"+minute;
+                           }
+                           String now;
+                           var month ={
+                             1  : "January",
+                             2  : "February",
+                             3  : "March",
+                             4  : "April",
+                             5  : "May",
+                             6  : "June",
+                             7  : "July",
+                             8  : "August",
+                             9  : "September",
+                             10 : "October",
+                             11 : "November",
+                             12 : "December",
+                           };
+                           now = "${month[today.month]} ${today.day}, ${today.year} at ${timeNow[0]}:$minute:$second ${timeNow[1]}  UTC+5:30 ";
+                            FirebaseFirestore.instance
+                                .collection('complaints')
+                                .add({
+                              'category': complaints,
+                              'complaint': comments,
+                              'date': now,
+                              'userId': "John Doe",
+                                });
+                            print(comments);
                           },
                         )
                     ),
