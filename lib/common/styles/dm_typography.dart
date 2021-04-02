@@ -160,7 +160,32 @@ class DMTypo {
   static const TextStyle normal12MutedTextStyle =
       TextStyle(fontSize: 12, color: DMColors.grey);
 
-
   static const TextStyle bold48BlackTextStyle = TextStyle(
       fontSize: 48, fontWeight: FontWeight.bold, color: DMColors.black);
+
+  static const TextStyle bold30GreenTextStyle = TextStyle(
+      fontSize: 30, fontWeight: FontWeight.bold, color: DMColors.green);
+  static const TextStyle bold24GreenTextStyle = TextStyle(
+      fontSize: 24, fontWeight: FontWeight.bold, color: DMColors.green);
+  static const TextStyle bold18GreenTextStyle = TextStyle(
+      fontSize: 18, fontWeight: FontWeight.bold, color: DMColors.green);
+  static const TextStyle bold16GreenTextStyle = TextStyle(
+      fontSize: 16, fontWeight: FontWeight.bold, color: DMColors.green);
+  static const TextStyle bold14GreenTextStyle = TextStyle(
+      fontSize: 14, fontWeight: FontWeight.bold, color: DMColors.green);
+  static const TextStyle bold12GreenTextStyle = TextStyle(
+      fontSize: 12, fontWeight: FontWeight.bold, color: DMColors.green);
+
+  static const TextStyle normal30GreenTextStyle =
+      TextStyle(fontSize: 30, color: DMColors.green);
+  static const TextStyle normal24GreenTextStyle =
+      TextStyle(fontSize: 24, color: DMColors.green);
+  static const TextStyle normal18GreenTextStyle =
+      TextStyle(fontSize: 18, color: DMColors.green);
+  static const TextStyle normal16GreenTextStyle =
+      TextStyle(fontSize: 16, color: DMColors.green);
+  static const TextStyle normal14GreenTextStyle =
+      TextStyle(fontSize: 14, color: DMColors.green);
+  static const TextStyle normal12GreenTextStyle =
+      TextStyle(fontSize: 12, color: DMColors.green);
 }

@@ -6,7 +6,6 @@ enum StudentNavDestinations {
   LEAVES,
   NOTICES,
   PROFILE,
-  SETTINGS,
   HELP,
   ABOUT,
   SHARE

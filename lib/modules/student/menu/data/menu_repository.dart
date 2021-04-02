@@ -26,20 +26,20 @@ class MenuRepository {
             data.map((e) => MenuItem.fromQueryDocumentSnapshot(e)).toList();
         print(menuList);
         return DMTaskState(
-            isTaskSuccess: true, taskResultData: menuList, errors: null);
+            isTaskSuccess: true, taskResultData: menuList, error: null);
       }).onError((error, stackTrace) {
         print(stackTrace.toString());
         return DMTaskState(
             isTaskSuccess: false,
             taskResultData: null,
-            errors: DMError(message: error.toString()));
+            error: DMError(message: error.toString()));
       });
     } catch (e) {
       print(e);
       return DMTaskState(
           isTaskSuccess: false,
           taskResultData: null,
-          errors: DMError(message: e.toString()));
+          error: DMError(message: e.toString()));
     }
   }
 }

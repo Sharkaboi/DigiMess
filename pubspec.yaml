@@ -104,7 +104,6 @@ flutter:
     - assets/icons/notices.svg
     - assets/icons/payments.svg
     - assets/icons/profile.svg
-    - assets/icons/settings.svg
     - assets/icons/share.svg
     - assets/icons/home_bg.svg
     - assets/icons/food_icon.svg
@@ -115,6 +114,7 @@ flutter:
     - assets/icons/card.svg
     - assets/icons/mail.svg
     - assets/icons/failed.svg
+    - assets/icons/check.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

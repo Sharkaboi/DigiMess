@@ -1,6 +1,7 @@
 import 'package:DigiMess/common/bloc/dm_bloc.dart';
 import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/bloc/dm_states.dart';
+import 'package:DigiMess/common/extensions/string_extensions.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/styles/dm_typography.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
-import 'package:DigiMess/common/extensions/string_extensions.dart';
 
 class DMScaffold extends StatelessWidget {
   final body;
@@ -56,7 +56,7 @@ class DMScaffold extends StatelessWidget {
     this.endDrawer,
     this.bottomNavigationBar,
     this.bottomSheet,
-    this.backgroundColor,
+    this.backgroundColor = DMColors.lightBlue,
     this.resizeToAvoidBottomInset,
     this.primary = true,
     this.drawerDragStartBehavior = DragStartBehavior.start,

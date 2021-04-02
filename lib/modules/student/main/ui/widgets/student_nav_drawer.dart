@@ -42,7 +42,7 @@ class StudentNavDrawer extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.only(top: 10),
                   decoration: BoxDecoration(
                       color: DMColors.white,
                       borderRadius: BorderRadius.only(
@@ -116,14 +116,6 @@ class StudentNavDrawer extends StatelessWidget {
                               StudentNavDestinations.PROFILE.toStringValue(),
                           onClick: () => itemOnClickCallBack(
                               StudentNavDestinations.PROFILE.toStringValue()),
-                        ),
-                        NavItem(
-                          text: "Settings",
-                          iconAsset: "assets/icons/settings.svg",
-                          isItemSelected: currentScreen ==
-                              StudentNavDestinations.SETTINGS.toStringValue(),
-                          onClick: () => itemOnClickCallBack(
-                              StudentNavDestinations.SETTINGS.toStringValue()),
                         ),
                         NavItem(
                           text: "Help",

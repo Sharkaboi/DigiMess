@@ -132,6 +132,10 @@ class _StudentMenuScreenState extends State<StudentMenuScreen> {
       searchDebounceTimer.cancel();
     }
     searchDebounceTimer = Timer(Duration(milliseconds: 500), () {
+      final FocusScopeNode currentScope = FocusScope.of(context);
+      if (!currentScope.hasPrimaryFocus && currentScope.hasFocus) {
+        FocusManager.instance.primaryFocus.unfocus();
+      }
       setState(() {
         if (searchQuery.isEmpty) {
           currentList = fullList;
@@ -162,10 +166,9 @@ class _StudentMenuScreenState extends State<StudentMenuScreen> {
   Widget getListViewOrEmptyHint() {
     if (currentList.isEmpty) {
       return Container(
-        child: Center(
-          child: Text("No items for the selected search and filter found.",
-              style: DMTypo.bold14MutedTextStyle),
-        ),
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        child: Text("No items for the selected search and filter found.",
+            style: DMTypo.bold14MutedTextStyle, textAlign: TextAlign.center),
       );
     } else {
       return Container(

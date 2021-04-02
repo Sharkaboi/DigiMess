@@ -18,7 +18,7 @@ class StudentMenuBloc extends Bloc<StudentMenuEvents, StudentMenuStates> {
       if (result.isTaskSuccess) {
         yield StudentMenuSuccess(result.taskResultData);
       } else {
-        yield StudentMenuError(result.errors);
+        yield StudentMenuError(result.error);
       }
     }
   }
