@@ -31,8 +31,6 @@ class HomePaymentCard extends StatelessWidget {
             ),
           ),
           Container(
-            height: 30,
-            width: 100,
             margin: EdgeInsets.all(20),
             child: FlatButton(
               onPressed: () {},
