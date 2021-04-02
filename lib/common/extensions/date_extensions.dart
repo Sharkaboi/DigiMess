@@ -76,6 +76,10 @@ extension DateExtensions on DateTime {
       return 'Just now';
     }
   }
+
+  String getDifferenceInDays(DateTime other) {
+    return "${this.difference(other).inDays.abs()} days";
+  }
 }
 
 DateTime getDateTimeOrNull(timestamp) {

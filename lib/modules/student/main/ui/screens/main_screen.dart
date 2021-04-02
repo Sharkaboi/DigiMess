@@ -9,6 +9,9 @@ import 'package:DigiMess/modules/student/home/bloc/home_bloc.dart';
 import 'package:DigiMess/modules/student/home/bloc/home_states.dart';
 import 'package:DigiMess/modules/student/home/data/home_repository.dart';
 import 'package:DigiMess/modules/student/home/ui/screens/home_screen.dart';
+import 'package:DigiMess/modules/student/leaves/bloc/leaves_bloc.dart';
+import 'package:DigiMess/modules/student/leaves/bloc/leaves_states.dart';
+import 'package:DigiMess/modules/student/leaves/data/leaves_repository.dart';
 import 'package:DigiMess/modules/student/leaves/ui/screens/leaves_screen.dart';
 import 'package:DigiMess/modules/student/main/ui/widgets/student_nav_drawer.dart';
 import 'package:DigiMess/modules/student/main/util/nav_destination_enum.dart';
@@ -78,7 +81,12 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                   FirebaseClient.getPaymentsCollectionReference())),
           child: StudentPaymentHistoryScreen());
     } else if (currentScreen == StudentNavDestinations.LEAVES.toStringValue()) {
-      return StudentLeavesScreen();
+      return BlocProvider(
+          create: (_) => StudentLeaveBloc(
+              StudentLeaveIdle(),
+              StudentLeavesRepository(
+                  FirebaseClient.getAbsenteesCollectionReference())),
+          child: StudentLeavesScreen());
     } else if (currentScreen ==
         StudentNavDestinations.NOTICES.toStringValue()) {
       return StudentNoticesScreen();
