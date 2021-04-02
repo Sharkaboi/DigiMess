@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class Complaint extends Equatable {
   final String complaintId;
   final String complaint;
+  final List<String> categories;
   final String userId;
   final DateTime date;
 
@@ -13,7 +14,8 @@ class Complaint extends Equatable {
       {@required this.complaintId,
       @required this.complaint,
       @required this.userId,
-      @required this.date});
+      @required this.date,
+      @required this.categories});
 
   factory Complaint.fromDocument(QueryDocumentSnapshot documentSnapshot) {
     final Map<String, dynamic> documentData = documentSnapshot.data();
@@ -21,6 +23,7 @@ class Complaint extends Equatable {
         complaintId: documentSnapshot.id,
         userId: documentData['userId'],
         date: getDateTimeOrNull(documentData['date']),
+        categories: documentData['category'],
         complaint: documentData['complaint']);
   }
 
@@ -28,11 +31,17 @@ class Complaint extends Equatable {
     return {
       'userId': this.userId,
       'date': Timestamp.fromDate(this.date),
-      'complaint': this.complaint
+      'complaint': this.complaint,
+      'category': this.categories
     };
   }
 
   @override
-  List<Object> get props =>
-      [this.complaintId, this.complaint, this.userId, this.date];
+  List<Object> get props => [
+        this.complaintId,
+        this.complaint,
+        this.userId,
+        this.date,
+        this.categories
+      ];
 }

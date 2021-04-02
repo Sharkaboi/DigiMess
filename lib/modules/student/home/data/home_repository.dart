@@ -7,12 +7,12 @@ import 'package:DigiMess/common/shared_prefs/shared_pref_repository.dart';
 import 'package:DigiMess/common/util/task_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class HomeRepository {
+class StudentHomeRepository {
   final CollectionReference _menuClient;
   final CollectionReference _noticesClient;
   final CollectionReference _paymentsClient;
 
-  HomeRepository(this._menuClient, this._noticesClient, this._paymentsClient);
+  StudentHomeRepository(this._menuClient, this._noticesClient, this._paymentsClient);
 
   Future<DMTaskState> getTodaysMenu() async {
     try {

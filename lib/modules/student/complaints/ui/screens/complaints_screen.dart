@@ -1,220 +1,167 @@
+import 'package:DigiMess/common/constants/complaint_category.dart';
 import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
+import 'package:DigiMess/common/widgets/dm_snackbar.dart';
+import 'package:DigiMess/modules/student/complaints/bloc/complaints_bloc.dart';
+import 'package:DigiMess/modules/student/complaints/bloc/complaints_events.dart';
+import 'package:DigiMess/modules/student/complaints/bloc/complaints_states.dart';
+import 'package:DigiMess/modules/student/complaints/ui/widgets/filter_chip.dart';
 import 'package:flutter/material.dart';
-import 'package:DigiMess/common/constants/complaint_type.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-List <String> complaints = [];
-class StudentComplaintsScreen extends StatelessWidget {
-  String comments;
-  TextEditingController _controller = TextEditingController();
+class StudentComplaintsScreen extends StatefulWidget {
   @override
-    @override
-    Widget build(BuildContext context) {
-      return SingleChildScrollView(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 20, left: 10, bottom: 10),
-                child: Center(
-                  child: Text(
-                    "Frequent Complaints",
-                    style: DMTypo.bold18BlackTextStyle,
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 50, right: 50),
-                child: Divider(
-                  thickness: 1,
-                  color: DMColors.primaryBlue,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(15.0),
-                child: Wrap(
-                  spacing: 30.0,
-                  runSpacing: 5.0,
-                  children: [
-                    FilterChips(chipName: "Hygiene",),
-                    FilterChips(chipName: "Taste of Food",),
-                    FilterChips(chipName: "Service",),
-                    FilterChips(chipName: "Portion Size",),
-                    FilterChips(chipName: "App related",),
-                    FilterChips(chipName: "Others",),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  border: Border.all(color: DMColors.accentBlue),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    buildCounter: (BuildContext context, { int currentLength, int maxLength, bool isFocused }) => null,
-                    maxLines: 8,
-                    controller: _controller,
-                    maxLength: 350,
-                    decoration: InputDecoration.collapsed(hintText: "Type your complaint here...",hintStyle: DMTypo.bold18MutedTextStyle),
-                    style: DMTypo.bold18BlackTextStyle,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 10.0,right: 10.0),
-                padding: EdgeInsets.only(right: 10.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                        flex: 2,
-                        child: Container()
-                    ),
-                    Expanded(
-                        flex: 1,
-                        child: DarkButton(
-                          text: "Submit",
-                          textStyle: DMTypo.bold18WhiteTextStyle,
-                          onPressed: (){
-                           comments = _controller.text;
-                           DateTime today = new DateTime.now();
-                           String time = DateFormat('j').format(today);
-                           var timeNow = time.split(" ");
-                           String second = today.second.toString();
-                           String minute = today.minute.toString();
-                           if(timeNow[0].length == 1){
-                             timeNow[0] = "0"+timeNow[0];
-                           }
-                           if(second.length == 1){
-                             second = "0"+second;
-                           }
-                           if(minute.length == 1){
-                             minute = "0"+minute;
-                           }
-                           String now;
-                           var month ={
-                             1  : "January",
-                             2  : "February",
-                             3  : "March",
-                             4  : "April",
-                             5  : "May",
-                             6  : "June",
-                             7  : "July",
-                             8  : "August",
-                             9  : "September",
-                             10 : "October",
-                             11 : "November",
-                             12 : "December",
-                           };
-                           now = "${month[today.month]} ${today.day}, ${today.year} at ${timeNow[0]}:$minute:$second ${timeNow[1]}  UTC+5:30 ";
-                            FirebaseFirestore.instance
-                                .collection('complaints')
-                                .add({
-                              'category': complaints,
-                              'complaint': comments,
-                              'date': now,
-                              'userId': "John Doe",
-                                });
-                            print(comments);
-                          },
-                        )
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-
-
-class FilterChips extends StatefulWidget {
-  final String chipName;
-
-  FilterChips({Key key, this.chipName,}) : super(key: key);
-  @override
-  _FilterChipsState createState() => _FilterChipsState();
+  _StudentComplaintsScreenState createState() =>
+      _StudentComplaintsScreenState();
 }
 
-class _FilterChipsState extends State<FilterChips> {
-  TextStyle fontColor = DMTypo.bold14AccentBlueTextStyle;
-  bool _isSelected = false;
+class _StudentComplaintsScreenState extends State<StudentComplaintsScreen> {
+  TextEditingController _controller = TextEditingController();
+  Set<String> selectedCategories = Set<String>();
+  bool _isLoading = false;
+  StudentComplaintsBloc _bloc;
+
+  @override
   @override
   Widget build(BuildContext context) {
-    return Transform(
-      transform: new Matrix4.identity()..scale(1.15),
-      child: FilterChip(
-        padding: EdgeInsets.only(top: 5.0,bottom: 5.0,left: 5.0,right: 5.0),
-        showCheckmark: false,
-        elevation: 6.0,
-        backgroundColor: DMColors.white,
-        label:Text(
-          widget.chipName,
-        style: fontColor,
-        ),
-        selected: _isSelected,
-        selectedColor: DMColors.primaryBlue,
-        onSelected: (bool selected) {
+    return ModalProgressHUD(
+      dismissible: false,
+      inAsyncCall: _isLoading,
+      child: BlocConsumer<StudentComplaintsBloc, StudentComplaintsStates>(
+        listener: (context, state) {
           setState(() {
-            _isSelected = selected;
-            if(_isSelected == false){
-              fontColor = DMTypo.bold14AccentBlueTextStyle;
-              if(widget.chipName == "Hygiene"){
-                complaints.remove(ComplaintType.HYGIENE.toStringValue());
-              }
-              if(widget.chipName == "Taste of Food"){
-                complaints.remove(ComplaintType.TASTE.toStringValue());
-              }
-              if(widget.chipName == "Service"){
-                complaints.remove(ComplaintType.SERVICE.toStringValue());
-              }
-              if(widget.chipName == "Portion Size"){
-                complaints.remove(ComplaintType.PORTION.toStringValue());
-              }
-              if(widget.chipName == "App related"){
-                complaints.remove(ComplaintType.APP.toStringValue());
-              }
-              if(widget.chipName == "Others"){
-                complaints.remove(ComplaintType.OTHER.toStringValue());
-              }
-            }
-            else{
-              fontColor = DMTypo.bold14WhiteTextStyle;
-              if(widget.chipName == "Hygiene"){
-                complaints.add(ComplaintType.HYGIENE.toStringValue());
-              }
-              if(widget.chipName == "Taste of Food"){
-                complaints.add(ComplaintType.TASTE.toStringValue());
-              }
-              if(widget.chipName == "Service"){
-                complaints.add(ComplaintType.SERVICE.toStringValue());
-              }
-              if(widget.chipName == "Portion Size"){
-                complaints.add(ComplaintType.PORTION.toStringValue());
-              }
-              if(widget.chipName == "App related"){
-                complaints.add(ComplaintType.APP.toStringValue());
-              }
-              if(widget.chipName == "Others"){
-                complaints.add(ComplaintType.OTHER.toStringValue());
-              }
-            }
+            _isLoading = state is StudentComplaintsLoading;
           });
-          print(complaints);
+          if (state is StudentComplaintsError) {
+            DMSnackBar.show(context, state.error.message);
+          } else if (state is StudentComplaintsSuccess) {
+            DMSnackBar.show(context, "Complaint Placed");
+            selectedCategories.clear();
+            _controller.text = "";
+          }
+        },
+        builder: (context, state) {
+          _bloc = BlocProvider.of<StudentComplaintsBloc>(context);
+          if (state is StudentComplaintsLoading) {
+            return Container();
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: 20, left: 20, right: 20, bottom: 10),
+                    child: Center(
+                      child: Text(
+                        "Frequent Complaints",
+                        style: DMTypo.bold16BlackTextStyle,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    child: Divider(
+                      thickness: 1,
+                      color: DMColors.primaryBlue,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    child: Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: List.generate(ComplaintCategory.values.length,
+                          (index) {
+                        return InkWell(
+                          customBorder: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          onTap: () {
+                            setState(() {
+                              final String category = ComplaintCategory
+                                  .values[index]
+                                  .toStringValue();
+                              if (selectedCategories.contains(category)) {
+                                selectedCategories.remove(category);
+                              } else {
+                                selectedCategories.add(category);
+                              }
+                            });
+                          },
+                          child: FilterChips(
+                            chipName: ComplaintCategoryExtensions
+                                .ComplaintCategoryHints[index],
+                            isSelected: selectedCategories.contains(
+                                ComplaintCategory.values[index]
+                                    .toStringValue()),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: TextField(
+                      maxLines: 8,
+                      controller: _controller,
+                      maxLength: 350,
+                      decoration: InputDecoration(
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  width: 1, color: DMColors.primaryBlue)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  width: 1, color: DMColors.primaryBlue)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  width: 1, color: DMColors.primaryBlue)),
+                          isDense: true,
+                          counterText: "",
+                          fillColor: DMColors.white,
+                          hintText: "Type your complaint here...",
+                          hintStyle: DMTypo.bold16MutedTextStyle),
+                      style: DMTypo.bold18BlackTextStyle,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: Row(
+                      children: [
+                        Expanded(flex: 2, child: Container()),
+                        DarkButton(
+                            text: "Submit",
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            textStyle: DMTypo.bold18WhiteTextStyle,
+                            onPressed: () {
+                              final String complaint = _controller.text;
+                              if (complaint.isEmpty) {
+                                DMSnackBar.show(
+                                    context, "Enter your complaint");
+                              } else if (selectedCategories.isEmpty) {
+                                DMSnackBar.show(
+                                    context, "Choose at least one category");
+                              } else {
+                                _bloc.add(PlaceComplaint(
+                                    selectedCategories.toList(), complaint));
+                              }
+                            }),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
         },
       ),
     );
   }
 }
-
-

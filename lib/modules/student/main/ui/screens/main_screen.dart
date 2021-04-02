@@ -3,6 +3,9 @@ import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/modules/student/about/ui/screens/about_screen.dart';
+import 'package:DigiMess/modules/student/complaints/bloc/complaints_bloc.dart';
+import 'package:DigiMess/modules/student/complaints/bloc/complaints_states.dart';
+import 'package:DigiMess/modules/student/complaints/data/complaints_repository.dart';
 import 'package:DigiMess/modules/student/complaints/ui/screens/complaints_screen.dart';
 import 'package:DigiMess/modules/student/help/ui/screens/help_screen.dart';
 import 'package:DigiMess/modules/student/home/bloc/home_bloc.dart';
@@ -57,7 +60,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
       return BlocProvider(
           create: (_) => StudentHomeBloc(
               StudentHomeIdle(),
-              HomeRepository(
+              StudentHomeRepository(
                   FirebaseClient.getMenuCollectionReference(),
                   FirebaseClient.getNoticesCollectionReference(),
                   FirebaseClient.getPaymentsCollectionReference())),
@@ -67,11 +70,14 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
     } else if (currentScreen == StudentNavDestinations.MENU.toStringValue()) {
       return BlocProvider(
           create: (_) => StudentMenuBloc(StudentMenuIdle(),
-              MenuRepository(FirebaseClient.getMenuCollectionReference())),
+              StudentMenuRepository(FirebaseClient.getMenuCollectionReference())),
           child: StudentMenuScreen());
     } else if (currentScreen ==
         StudentNavDestinations.COMPLAINTS.toStringValue()) {
-      return StudentComplaintsScreen();
+      return BlocProvider(
+          create: (_) => StudentComplaintsBloc(StudentComplaintsIdle(),
+              StudentComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
+          child: StudentComplaintsScreen());
     } else if (currentScreen ==
         StudentNavDestinations.PAYMENTS.toStringValue()) {
       return BlocProvider(
