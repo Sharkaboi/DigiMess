@@ -49,27 +49,7 @@ class _StudentPaymentHistoryScreenState
           } else if (state is StudentPaymentsLoading) {
             return Container();
           } else {
-            return Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                      child: Text("All payments",
-                          style: DMTypo.bold16BlackTextStyle)),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                    child: Divider(
-                      color: DMColors.primaryBlue,
-                      thickness: 1,
-                    ),
-                  ),
-                  getListOrEmptyHint()
-                ],
-              ),
-            );
+            return Container(child: getListOrEmptyHint());
           }
         },
       ),
@@ -78,21 +58,53 @@ class _StudentPaymentHistoryScreenState
 
   Widget getListOrEmptyHint() {
     if (listOfPayments == null || listOfPayments.isEmpty) {
-      return Expanded(
-        child: Center(
-          child: Text("No payments done so far.",
-              style: DMTypo.bold14MutedTextStyle),
-        ),
+      return Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: Text("All payments", style: DMTypo.bold16BlackTextStyle)),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+            child: Divider(
+              color: DMColors.primaryBlue,
+              thickness: 1,
+            ),
+          ),
+          Expanded(
+            child: Center(
+              child: Text("No payments done so far.",
+                  style: DMTypo.bold14MutedTextStyle),
+            ),
+          ),
+        ],
       );
     } else {
-      return Expanded(
-        child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            itemCount: listOfPayments.length,
-            itemBuilder: (context, index) {
-              return PaymentsCard(payment: listOfPayments[index]);
-            }),
-      );
+      return ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          itemCount: listOfPayments.length + 2,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Container(
+                  margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  child: Center(
+                    child: Text("All payments",
+                        style: DMTypo.bold16BlackTextStyle),
+                  ));
+            } else if (index == 1) {
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Divider(
+                  color: DMColors.primaryBlue,
+                  thickness: 1,
+                ),
+              );
+            } else {
+              return PaymentsCard(payment: listOfPayments[index - 2]);
+            }
+          });
     }
   }
 }

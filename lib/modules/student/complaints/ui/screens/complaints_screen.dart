@@ -76,9 +76,11 @@ class _StudentComplaintsScreenState extends State<StudentComplaintsScreen> {
                       runSpacing: 10,
                       children: List.generate(ComplaintCategory.values.length,
                           (index) {
-                        return InkWell(
-                          customBorder: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
+                        return FilterChips(
+                          chipName: ComplaintCategoryExtensions
+                              .ComplaintCategoryHints[index],
+                          isSelected: selectedCategories.contains(
+                              ComplaintCategory.values[index].toStringValue()),
                           onTap: () {
                             setState(() {
                               final String category = ComplaintCategory
@@ -91,13 +93,6 @@ class _StudentComplaintsScreenState extends State<StudentComplaintsScreen> {
                               }
                             });
                           },
-                          child: FilterChips(
-                            chipName: ComplaintCategoryExtensions
-                                .ComplaintCategoryHints[index],
-                            isSelected: selectedCategories.contains(
-                                ComplaintCategory.values[index]
-                                    .toStringValue()),
-                          ),
                         );
                       }),
                     ),

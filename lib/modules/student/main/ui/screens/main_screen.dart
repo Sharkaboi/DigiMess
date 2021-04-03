@@ -22,6 +22,9 @@ import 'package:DigiMess/modules/student/menu/bloc/menu_bloc.dart';
 import 'package:DigiMess/modules/student/menu/bloc/menu_states.dart';
 import 'package:DigiMess/modules/student/menu/data/menu_repository.dart';
 import 'package:DigiMess/modules/student/menu/ui/screens/menu_screen.dart';
+import 'package:DigiMess/modules/student/notices/bloc/notices_bloc.dart';
+import 'package:DigiMess/modules/student/notices/bloc/notices_states.dart';
+import 'package:DigiMess/modules/student/notices/data/notices_repository.dart';
 import 'package:DigiMess/modules/student/notices/ui/screens/notices_screen.dart';
 import 'package:DigiMess/modules/student/payment_history/bloc/payments_bloc.dart';
 import 'package:DigiMess/modules/student/payment_history/bloc/payments_states.dart';
@@ -69,14 +72,18 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
           ));
     } else if (currentScreen == StudentNavDestinations.MENU.toStringValue()) {
       return BlocProvider(
-          create: (_) => StudentMenuBloc(StudentMenuIdle(),
-              StudentMenuRepository(FirebaseClient.getMenuCollectionReference())),
+          create: (_) => StudentMenuBloc(
+              StudentMenuIdle(),
+              StudentMenuRepository(
+                  FirebaseClient.getMenuCollectionReference())),
           child: StudentMenuScreen());
     } else if (currentScreen ==
         StudentNavDestinations.COMPLAINTS.toStringValue()) {
       return BlocProvider(
-          create: (_) => StudentComplaintsBloc(StudentComplaintsIdle(),
-              StudentComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
+          create: (_) => StudentComplaintsBloc(
+              StudentComplaintsIdle(),
+              StudentComplaintsRepository(
+                  FirebaseClient.getComplaintsCollectionReference())),
           child: StudentComplaintsScreen());
     } else if (currentScreen ==
         StudentNavDestinations.PAYMENTS.toStringValue()) {
@@ -95,7 +102,12 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
           child: StudentLeavesScreen());
     } else if (currentScreen ==
         StudentNavDestinations.NOTICES.toStringValue()) {
-      return StudentNoticesScreen();
+      return BlocProvider(
+          create: (_) => StudentNoticesBloc(
+              StudentNoticesIdle(),
+              StudentNoticesRepository(
+                  FirebaseClient.getNoticesCollectionReference())),
+          child: StudentNoticesScreen());
     } else if (currentScreen ==
         StudentNavDestinations.PROFILE.toStringValue()) {
       return StudentProfileScreen();
@@ -134,7 +146,8 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
   }
 
   FloatingActionButton getFab() {
-    if (currentScreen == StudentNavDestinations.HOME.toStringValue()) {
+    if (currentScreen == StudentNavDestinations.HOME.toStringValue() ||
+        currentScreen == StudentNavDestinations.PROFILE.toStringValue()) {
       return FloatingActionButton(
           onPressed: openMessCard,
           heroTag: "messCard",

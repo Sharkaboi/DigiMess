@@ -4,7 +4,7 @@ import 'package:DigiMess/modules/student/payment_history/bloc/payments_states.da
 import 'package:DigiMess/modules/student/payment_history/data/payments_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class StudentPaymentsBloc extends Bloc<PaymentsEvents, StudentPaymentsStates> {
+class StudentPaymentsBloc extends Bloc<StudentPaymentsEvents, StudentPaymentsStates> {
   final StudentPaymentsRepository _paymentsRepository;
 
   StudentPaymentsBloc(
@@ -12,7 +12,7 @@ class StudentPaymentsBloc extends Bloc<PaymentsEvents, StudentPaymentsStates> {
       : super(initialState);
 
   @override
-  Stream<StudentPaymentsStates> mapEventToState(PaymentsEvents event) async* {
+  Stream<StudentPaymentsStates> mapEventToState(StudentPaymentsEvents event) async* {
     yield StudentPaymentsLoading();
     if (event is GetAllPayments) {
       final DMTaskState result = await _paymentsRepository.getAllPayments();
