@@ -5,7 +5,7 @@ import 'package:DigiMess/modules/student/menu/data/menu_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StudentMenuBloc extends Bloc<StudentMenuEvents, StudentMenuStates> {
-  final MenuRepository _menuRepository;
+  final StudentMenuRepository _menuRepository;
 
   StudentMenuBloc(StudentMenuStates initialState, this._menuRepository)
       : super(initialState);

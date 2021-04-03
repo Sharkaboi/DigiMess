@@ -5,7 +5,7 @@ import 'package:DigiMess/modules/student/home/data/home_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StudentHomeBloc extends Bloc<StudentHomeEvents, StudentHomeStates> {
-  final HomeRepository _homeRepository;
+  final StudentHomeRepository _homeRepository;
 
   StudentHomeBloc(StudentHomeStates initialState, this._homeRepository)
       : super(initialState);

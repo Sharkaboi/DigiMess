@@ -4,10 +4,10 @@ import 'package:DigiMess/common/util/task_state.dart';
 import 'package:DigiMess/modules/student/menu/data/util/menu_filter_type.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class MenuRepository {
+class StudentMenuRepository {
   final CollectionReference _menuClient;
 
-  MenuRepository(this._menuClient);
+  StudentMenuRepository(this._menuClient);
 
   Future<DMTaskState> getMenuItems(
       {MenuFilterType menuFilterType = MenuFilterType.BOTH}) async {
