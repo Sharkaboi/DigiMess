@@ -31,6 +31,8 @@ University Android mini project.
  - [Flutter local notifications](https://pub.dev/packages/flutter_local_notifications)
  - [share](https://pub.dev/packages/share)
  - [Dots indicator](https://pub.dev/packages/dots_indicator)
+ - [pin_code_fields](https://pub.dev/packages/pin_code_fields)
+ - [flutter_multi_formatter](https://pub.dev/packages/flutter_multi_formatter)
 
 ## Architecture
 ![](./docs/architecture.png)

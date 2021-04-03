@@ -2,25 +2,21 @@ import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:flutter/material.dart';
 
-class FilterChips extends StatefulWidget {
+class FilterChips extends StatelessWidget {
   final String chipName;
   final bool isSelected;
+  final VoidCallback onTap;
 
   FilterChips({
     Key key,
     this.chipName,
     this.isSelected,
+    this.onTap,
   }) : super(key: key);
 
   @override
-  _FilterChipsState createState() => _FilterChipsState();
-}
-
-class _FilterChipsState extends State<FilterChips> {
-  @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -28,13 +24,24 @@ class _FilterChipsState extends State<FilterChips> {
                 offset: Offset(0, 4),
                 blurRadius: 4)
           ],
-          color: widget.isSelected ? DMColors.primaryBlue : DMColors.white,
+          color: isSelected ? DMColors.primaryBlue : DMColors.white,
           borderRadius: BorderRadius.circular(20)),
-      child: Text(
-        widget.chipName,
-        style: widget.isSelected
-            ? DMTypo.bold16WhiteTextStyle
-            : DMTypo.bold16PrimaryBlueTextStyle,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          customBorder:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text(
+              chipName,
+              style: isSelected
+                  ? DMTypo.bold16WhiteTextStyle
+                  : DMTypo.bold16PrimaryBlueTextStyle,
+            ),
+          ),
+        ),
       ),
     );
   }

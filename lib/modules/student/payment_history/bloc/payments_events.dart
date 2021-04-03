@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-abstract class PaymentsEvents extends Equatable {
-  const PaymentsEvents();
+abstract class StudentPaymentsEvents extends Equatable {
+  const StudentPaymentsEvents();
 }
 
-class GetAllPayments extends PaymentsEvents {
+class GetAllPayments extends StudentPaymentsEvents {
   @override
   List<Object> get props => [];
 }
