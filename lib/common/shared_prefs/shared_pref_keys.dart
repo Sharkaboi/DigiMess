@@ -3,4 +3,5 @@ class SharedPrefKeys {
 
   static const USER_TYPE = "userType";
   static const USER_ID = "userId";
+  static const USERNAME = "username";
 }

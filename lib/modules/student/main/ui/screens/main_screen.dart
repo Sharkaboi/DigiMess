@@ -22,6 +22,7 @@ import 'package:DigiMess/modules/student/menu/bloc/menu_bloc.dart';
 import 'package:DigiMess/modules/student/menu/bloc/menu_states.dart';
 import 'package:DigiMess/modules/student/menu/data/menu_repository.dart';
 import 'package:DigiMess/modules/student/menu/ui/screens/menu_screen.dart';
+import 'package:DigiMess/modules/student/mess_card/ui/mess_card.dart';
 import 'package:DigiMess/modules/student/notices/bloc/notices_bloc.dart';
 import 'package:DigiMess/modules/student/notices/bloc/notices_states.dart';
 import 'package:DigiMess/modules/student/notices/data/notices_repository.dart';
@@ -30,6 +31,9 @@ import 'package:DigiMess/modules/student/payment_history/bloc/payments_bloc.dart
 import 'package:DigiMess/modules/student/payment_history/bloc/payments_states.dart';
 import 'package:DigiMess/modules/student/payment_history/data/payments_repository.dart';
 import 'package:DigiMess/modules/student/payment_history/ui/screens/payment_history_screen.dart';
+import 'package:DigiMess/modules/student/profile/bloc/profile_bloc.dart';
+import 'package:DigiMess/modules/student/profile/bloc/profile_states.dart';
+import 'package:DigiMess/modules/student/profile/data/profile_repository.dart';
 import 'package:DigiMess/modules/student/profile/ui/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -110,7 +114,12 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
           child: StudentNoticesScreen());
     } else if (currentScreen ==
         StudentNavDestinations.PROFILE.toStringValue()) {
-      return StudentProfileScreen();
+      return BlocProvider(
+          create: (_) => StudentProfileBloc(
+              StudentProfileIdle(),
+              StudentProfileRepository(
+                  FirebaseClient.getUsersCollectionReference())),
+          child: StudentProfileScreen());
     } else if (currentScreen == StudentNavDestinations.HELP.toStringValue()) {
       return StudentHelpScreen();
     } else if (currentScreen == StudentNavDestinations.ABOUT.toStringValue()) {
@@ -160,6 +169,6 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
   }
 
   void openMessCard() {
-    //todo: navigate to mess card screen
+    StudentMessCard.show(context);
   }
 }

@@ -17,7 +17,7 @@ class User extends Equatable {
   final DateTime yearOfCompletion;
   final Branch branch;
   final DateTime dob;
-  final int phoneNumber;
+  final String phoneNumber;
   final String email;
   final bool isVeg;
 
@@ -37,7 +37,7 @@ class User extends Equatable {
       @required this.email,
       @required this.isVeg});
 
-  factory User.fromDocument(QueryDocumentSnapshot documentSnapshot) {
+  factory User.fromDocument(DocumentSnapshot documentSnapshot) {
     final Map<String, dynamic> documentData = documentSnapshot.data();
     return User(
         userId: documentSnapshot.id,

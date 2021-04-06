@@ -7,7 +7,6 @@ import 'package:DigiMess/modules/student/notices/bloc/notices_bloc.dart';
 import 'package:DigiMess/modules/student/notices/bloc/notices_events.dart';
 import 'package:DigiMess/modules/student/notices/bloc/notices_states.dart';
 import 'package:DigiMess/modules/student/notices/ui/widgets/notices_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';

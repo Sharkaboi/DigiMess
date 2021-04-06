@@ -107,7 +107,7 @@ class _PlaceLeaveCardState extends State<PlaceLeaveCard> {
               margin: EdgeInsets.symmetric(vertical: 20),
               child: Text(getIntervalDuration(),
                   style: DMTypo.bold14BlackTextStyle)),
-          DarkButton(
+          DMPillButton(
             text: "Submit",
             isEnabled: !widget.isLeaveOngoing,
             textStyle: DMTypo.bold14WhiteTextStyle,

@@ -2,6 +2,7 @@ class DMStrings {
   DMStrings._();
 
   static const appName = "DigiMess";
+  static const appVersion = "1.0.0";
   static const description =
       "Welcome to DigiMess.\nAn app to help organizations manage "
       "their food mess, mainly colleges.";

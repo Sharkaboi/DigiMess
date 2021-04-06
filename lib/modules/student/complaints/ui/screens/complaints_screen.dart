@@ -130,7 +130,7 @@ class _StudentComplaintsScreenState extends State<StudentComplaintsScreen> {
                     child: Row(
                       children: [
                         Expanded(flex: 2, child: Container()),
-                        DarkButton(
+                        DMPillButton(
                             text: "Submit",
                             padding: EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 10),

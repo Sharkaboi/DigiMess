@@ -31,7 +31,7 @@ class PaymentFailScreen extends StatelessWidget {
                 height: 70,
                 child: Hero(
                   tag: "proceedBtn",
-                  child: DarkButton(
+                  child: DMPillButton(
                     text: "Try Again",
                     onPressed: () => navigateBackToDummyPayment(context),
                   ),

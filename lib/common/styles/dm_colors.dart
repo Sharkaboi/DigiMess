@@ -16,4 +16,5 @@ class DMColors {
   static const Color blueBg = Color.fromRGBO(193, 219, 255, 1);
   static const Color yellow = Color.fromRGBO(234, 238, 50, 1);
   static const Color green = Color.fromRGBO(47, 171, 44, 1);
+  static const Color red = Color.fromRGBO(244, 9, 9, 1);
 }

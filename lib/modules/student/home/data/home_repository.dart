@@ -12,7 +12,8 @@ class StudentHomeRepository {
   final CollectionReference _noticesClient;
   final CollectionReference _paymentsClient;
 
-  StudentHomeRepository(this._menuClient, this._noticesClient, this._paymentsClient);
+  StudentHomeRepository(
+      this._menuClient, this._noticesClient, this._paymentsClient);
 
   Future<DMTaskState> getTodaysMenu() async {
     try {
@@ -89,7 +90,8 @@ class StudentHomeRepository {
         return DMTaskState(
             isTaskSuccess: true,
             taskResultData: latestPayment != null &&
-                latestPayment.paymentDate.month == today.month,
+                latestPayment.paymentDate.month == today.month &&
+                latestPayment.paymentDate.year == today.year,
             error: null);
       }).onError((error, stackTrace) {
         print(stackTrace);
