@@ -9,26 +9,28 @@ class HomeScrollView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: DMColors.lightBlue,
-      child: SingleChildScrollView(
-          child: Container(
-        constraints: BoxConstraints(
-          minHeight: MediaQuery.of(context).size.height,
-          minWidth: MediaQuery.of(context).size.width,
-        ),
-        child: Stack(
-          children: [
-            Container(
-              height: 130,
-              width: double.infinity,
-              child: SvgPicture.asset("assets/icons/home_bg.svg",
-                  fit: BoxFit.cover),
-            ),
-            child,
-          ],
-        ),
-      )),
-    );
+    return LayoutBuilder(builder: (context,constraints){
+      return Container(
+        color: DMColors.lightBlue,
+        child: SingleChildScrollView(
+            child: Container(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
+                minWidth: constraints.maxWidth,
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                    height: 130,
+                    width: double.infinity,
+                    child: SvgPicture.asset("assets/icons/home_bg.svg",
+                        fit: BoxFit.cover),
+                  ),
+                  child,
+                ],
+              ),
+            )),
+      );
+    });
   }
 }

@@ -12,7 +12,7 @@ class AuthScreen extends StatelessWidget {
       body: Center(
           child: Container(
         height: 60,
-        child: DarkButton(
+        child: DMPillButton(
           onPressed: () {
             SharedPrefRepository.setUserType(UserType.STUDENT);
             Navigator.of(context)

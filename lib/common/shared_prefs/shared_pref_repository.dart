@@ -26,4 +26,9 @@ class SharedPrefRepository {
     final sharedPrefs = await SharedPreferences.getInstance();
     sharedPrefs.setString(SharedPrefKeys.USER_ID, userId);
   }
+
+  static Future<String> getUsername() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    return sharedPrefs.getString(SharedPrefKeys.USERNAME);
+  }
 }

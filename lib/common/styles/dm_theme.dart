@@ -72,8 +72,8 @@ class DMTheme {
                     borderRadius: BorderRadius.circular(30))),
                 overlayColor: MaterialStateProperty.all(
                     DMColors.primaryBlue.withOpacity(0.3)),
-                textStyle: MaterialStateProperty.all(
-                    TextStyle(color: DMColors.primaryBlue)),
+                textStyle: MaterialStateProperty.all(TextStyle(
+                    color: DMColors.primaryBlue, fontFamily: FONT_NAME)),
                 foregroundColor:
                     MaterialStateProperty.all(DMColors.primaryBlue))),
         dividerColor: DMColors.mutedBlue,
@@ -93,11 +93,13 @@ class DMTheme {
         ),
         popupMenuTheme: PopupMenuThemeData(
             color: DMColors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5)),
-            textStyle: TextStyle(fontSize: 14, color: DMColors.black)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            textStyle: TextStyle(
+                fontSize: 14, color: DMColors.black, fontFamily: FONT_NAME)),
         tooltipTheme: TooltipThemeData(
-            textStyle: TextStyle(color: DMColors.primaryBlue),
+            textStyle:
+                TextStyle(color: DMColors.primaryBlue, fontFamily: FONT_NAME),
             decoration: BoxDecoration(color: DMColors.white)),
         buttonTheme: ButtonThemeData(
             buttonColor: DMColors.primaryBlue,

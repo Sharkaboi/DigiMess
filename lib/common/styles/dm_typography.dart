@@ -188,4 +188,30 @@ class DMTypo {
       TextStyle(fontSize: 14, color: DMColors.green);
   static const TextStyle normal12GreenTextStyle =
       TextStyle(fontSize: 12, color: DMColors.green);
+
+  static const TextStyle bold30RedTextStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: DMColors.red);
+  static const TextStyle bold24RedTextStyle =
+      TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: DMColors.red);
+  static const TextStyle bold18RedTextStyle =
+      TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: DMColors.red);
+  static const TextStyle bold16RedTextStyle =
+      TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: DMColors.red);
+  static const TextStyle bold14RedTextStyle =
+      TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: DMColors.red);
+  static const TextStyle bold12RedTextStyle =
+      TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: DMColors.red);
+
+  static const TextStyle normal30RedTextStyle =
+      TextStyle(fontSize: 30, color: DMColors.red);
+  static const TextStyle normal24RedTextStyle =
+      TextStyle(fontSize: 24, color: DMColors.red);
+  static const TextStyle normal18RedTextStyle =
+      TextStyle(fontSize: 18, color: DMColors.red);
+  static const TextStyle normal16RedTextStyle =
+      TextStyle(fontSize: 16, color: DMColors.red);
+  static const TextStyle normal14RedTextStyle =
+      TextStyle(fontSize: 14, color: DMColors.red);
+  static const TextStyle normal12RedTextStyle =
+      TextStyle(fontSize: 12, color: DMColors.red);
 }

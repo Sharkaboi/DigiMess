@@ -34,6 +34,9 @@ class CardDetailsScreen extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
+                  constraints: BoxConstraints(
+                    minHeight: 56
+                  ),
                   color: DMColors.primaryBlue,
                   padding: EdgeInsets.all(10),
                   child: Row(
@@ -257,7 +260,7 @@ class CardDetailsScreen extends StatelessWidget {
                           height: 70,
                           child: Hero(
                             tag: "proceedBtn",
-                            child: DarkButton(
+                            child: DMPillButton(
                                 text: "Proceed",
                                 onPressed: () {
                                   if (_key.currentState.validate()) {

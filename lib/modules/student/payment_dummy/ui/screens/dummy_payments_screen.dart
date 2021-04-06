@@ -66,7 +66,7 @@ class DummyPaymentsScreen extends StatelessWidget {
                     height: 70,
                     child: Hero(
                       tag: "proceedBtn",
-                      child: DarkButton(
+                      child: DMPillButton(
                           text: "Pay Now",
                           onPressed: () {
                             Navigator.pushNamed(

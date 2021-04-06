@@ -107,7 +107,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 height: 70,
                 child: Hero(
                   tag: "proceedBtn",
-                  child: DarkButton(
+                  child: DMPillButton(
                     text: "Verify",
                     onPressed: verifyOtp,
                   ),

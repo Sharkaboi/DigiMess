@@ -116,6 +116,9 @@ flutter:
     - assets/icons/failed.svg
     - assets/icons/check.svg
     - assets/icons/notice_alarm.svg
+    - assets/icons/profile_circle.svg
+    - assets/icons/corner_icon_top.svg
+    - assets/icons/corner_icon_bottom.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -129,14 +132,14 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-   - family: Comfortaa
-     fonts:
-       - asset: assets/fonts/Comfortaa-Bold.ttf
-       - asset: assets/fonts/Comfortaa-Light.ttf
-       - asset: assets/fonts/Comfortaa-Medium.ttf
-       - asset: assets/fonts/Comfortaa-Regular.ttf
-       - asset: assets/fonts/Comfortaa-SemiBold.ttf
-       - asset: assets/fonts/Comfortaa-VariableFont_wght.ttf
+    - family: Comfortaa
+      fonts:
+        - asset: assets/fonts/Comfortaa-Bold.ttf
+        - asset: assets/fonts/Comfortaa-Light.ttf
+        - asset: assets/fonts/Comfortaa-Medium.ttf
+        - asset: assets/fonts/Comfortaa-Regular.ttf
+        - asset: assets/fonts/Comfortaa-SemiBold.ttf
+        - asset: assets/fonts/Comfortaa-VariableFont_wght.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
