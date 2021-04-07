@@ -1,4 +1,5 @@
 import 'package:DigiMess/common/errors/error_wrapper.dart';
+import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/firebase/models/leave_entry.dart';
 import 'package:DigiMess/common/shared_prefs/shared_pref_repository.dart';
 import 'package:DigiMess/common/util/task_state.dart';
@@ -13,8 +14,10 @@ class StudentLeavesRepository {
   Future<DMTaskState> getAllLeaves() async {
     try {
       final String userId = await SharedPrefRepository.getTheUserId();
+      final DocumentReference user =
+      FirebaseClient.getUsersCollectionReference().doc(userId);
       return await _absenteesClient
-          .where('userId', isEqualTo: userId)
+          .where('userId', isEqualTo: user)
           .orderBy('applyDate', descending: true)
           .get()
           .then((value) {
@@ -43,12 +46,14 @@ class StudentLeavesRepository {
   Future<DMTaskState> applyForLeave(DateTimeRange leaveInterval) async {
     try {
       final String userId = await SharedPrefRepository.getTheUserId();
+      final DocumentReference user =
+          FirebaseClient.getUsersCollectionReference().doc(userId);
       return await _absenteesClient
           .add(LeaveEntry(
                   startDate: leaveInterval.start,
                   endDate: leaveInterval.end,
                   applyDate: DateTime.now(),
-                  userId: userId,
+                  user: user,
                   leaveEntryId: '')
               .toMap())
           .then((value) {

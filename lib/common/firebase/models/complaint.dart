@@ -7,13 +7,13 @@ class Complaint extends Equatable {
   final String complaintId;
   final String complaint;
   final List<String> categories;
-  final String userId;
+  final DocumentReference user;
   final DateTime date;
 
   Complaint(
       {@required this.complaintId,
       @required this.complaint,
-      @required this.userId,
+      @required this.user,
       @required this.date,
       @required this.categories});
 
@@ -21,7 +21,7 @@ class Complaint extends Equatable {
     final Map<String, dynamic> documentData = documentSnapshot.data();
     return Complaint(
         complaintId: documentSnapshot.id,
-        userId: documentData['userId'],
+        user: documentData['userId'],
         date: getDateTimeOrNull(documentData['date']),
         categories: documentData['category'],
         complaint: documentData['complaint']);
@@ -29,7 +29,7 @@ class Complaint extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'userId': this.userId,
+      'userId': this.user,
       'date': Timestamp.fromDate(this.date),
       'complaint': this.complaint,
       'category': this.categories
@@ -40,7 +40,7 @@ class Complaint extends Equatable {
   List<Object> get props => [
         this.complaintId,
         this.complaint,
-        this.userId,
+        this.user,
         this.date,
         this.categories
       ];

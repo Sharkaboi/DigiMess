@@ -12,7 +12,8 @@ class HomePaymentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin:
+          EdgeInsets.symmetric(horizontal: 20, vertical: 20).copyWith(top: 10),
       decoration: BoxDecoration(
           color: DMColors.primaryBlue, borderRadius: BorderRadius.circular(10)),
       child: Row(
@@ -25,7 +26,7 @@ class HomePaymentCard extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
                     child:
-                    Text(getDueFees(), style: DMTypo.bold30WhiteTextStyle)),
+                        Text(getDueFees(), style: DMTypo.bold30WhiteTextStyle)),
                 Container(
                   margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
                   child: Text(getDueDate(), style: DMTypo.bold12WhiteTextStyle),
@@ -38,14 +39,14 @@ class HomePaymentCard extends StatelessWidget {
             child: DMPillButton(
                 onPressed: () {
                   Navigator.pushNamed(context, Routes.DUMMY_PAYMENT_SCREEN,
-                      arguments: DummyPaymentArguments("Fees of 2020", 4000, () {
+                      arguments:
+                          DummyPaymentArguments("Fees of 2020", 4000, () {
                         print("success");
                       }));
                 },
                 text: "Pay Now",
                 textStyle: DMTypo.bold14WhiteTextStyle,
-                padding: EdgeInsets.symmetric(horizontal: 20)
-            ),
+                padding: EdgeInsets.symmetric(horizontal: 20)),
           )
         ],
       ),

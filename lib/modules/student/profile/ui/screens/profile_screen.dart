@@ -5,6 +5,7 @@ import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
 import 'package:DigiMess/common/widgets/dm_dialogs.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
+import 'package:DigiMess/modules/student/annual_poll/ui/widgets/annual_poll_card.dart';
 import 'package:DigiMess/modules/student/profile/bloc/profile_bloc.dart';
 import 'package:DigiMess/modules/student/profile/bloc/profile_events.dart';
 import 'package:DigiMess/modules/student/profile/bloc/profile_states.dart';
@@ -62,7 +63,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                     children: [
                       ProfileCard(userDetails: _userDetails),
                       Container(
-                        margin: EdgeInsets.only(bottom: 30),
+                        margin: EdgeInsets.only(bottom: 20),
                         child: Column(
                           children: [
                             Container(
@@ -101,7 +102,8 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                             )
                           ],
                         ),
-                      )
+                      ),
+                      StudentAnnualPollCard()
                     ],
                   ),
                 ),

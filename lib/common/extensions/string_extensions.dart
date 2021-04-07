@@ -2,14 +2,14 @@ import 'package:intl/intl.dart';
 
 extension StringExtensions on String {
   String capitalize() {
-    if (this.isEmpty) {
+    if (this.trim().isEmpty) {
       return this;
     }
     return "${this[0].toUpperCase()}${this.substring(1)}";
   }
 
   String capitalizeFirst() {
-    if (this.isEmpty) {
+    if (this.trim().isEmpty) {
       return this;
     }
     return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";

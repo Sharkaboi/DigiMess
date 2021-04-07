@@ -1,5 +1,6 @@
 import 'package:DigiMess/common/errors/error_wrapper.dart';
 import 'package:DigiMess/common/extensions/date_extensions.dart';
+import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/firebase/models/notice.dart';
 import 'package:DigiMess/common/firebase/models/payment.dart';
@@ -77,8 +78,10 @@ class StudentHomeRepository {
   Future<DMTaskState> getPaymentStatus() async {
     try {
       final String userId = await SharedPrefRepository.getTheUserId();
+      final DocumentReference user =
+      FirebaseClient.getUsersCollectionReference().doc(userId);
       return await _paymentsClient
-          .where('userId', isEqualTo: userId)
+          .where('userId', isEqualTo: user)
           .orderBy('date', descending: true)
           .limit(1)
           .get()

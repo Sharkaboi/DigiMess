@@ -1,4 +1,5 @@
 import 'package:DigiMess/common/errors/error_wrapper.dart';
+import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/firebase/models/payment.dart';
 import 'package:DigiMess/common/shared_prefs/shared_pref_repository.dart';
 import 'package:DigiMess/common/util/task_state.dart';
@@ -12,8 +13,10 @@ class MessCardRepository {
   Future<DMTaskState> getMessCardStatus() async {
     try {
       final String userId = await SharedPrefRepository.getTheUserId();
+      final DocumentReference user =
+          FirebaseClient.getUsersCollectionReference().doc(userId);
       return await _paymentsClient
-          .where('userId', isEqualTo: userId)
+          .where('userId', isEqualTo: user)
           .orderBy('date', descending: true)
           .limit(1)
           .get()

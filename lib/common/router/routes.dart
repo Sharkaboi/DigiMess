@@ -12,5 +12,5 @@ class Routes {
   static const String PAYMENT_OTP_SCREEN = "/otp_screen";
   static const String PAYMENT_SUCCESS_SCREEN = "/payment_success_screen";
   static const String PAYMENT_FAILED_SCREEN = "/payment_failed_screen";
-
+  static const String ANNUAL_POLL_SCREEN = "/annual_poll_screen";
 }
