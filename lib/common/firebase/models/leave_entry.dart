@@ -19,6 +19,9 @@ class LeaveEntry extends Equatable {
 
   factory LeaveEntry.fromDocument(QueryDocumentSnapshot documentSnapshot) {
     final Map<String, dynamic> documentData = documentSnapshot.data();
+    if (documentData == null) {
+      return null;
+    }
     return LeaveEntry(
         leaveEntryId: documentSnapshot.id,
         user: documentData['userId'],

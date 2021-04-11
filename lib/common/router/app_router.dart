@@ -24,7 +24,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AppRouter {
-  Route onGenerateRoute(RouteSettings settings) {
+  AppRouter._();
+
+  static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
         return PageTransition(

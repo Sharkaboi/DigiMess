@@ -1,7 +1,7 @@
 import 'package:DigiMess/common/extensions/list_extensions.dart';
 import 'package:DigiMess/common/firebase/models/notice.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/student/notices/bloc/notices_bloc.dart';
 import 'package:DigiMess/modules/student/notices/bloc/notices_events.dart';

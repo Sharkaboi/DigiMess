@@ -121,6 +121,10 @@ flutter:
     - assets/icons/profile_circle.svg
     - assets/icons/corner_icon_top.svg
     - assets/icons/corner_icon_bottom.svg
+    - assets/icons/log_out.svg
+    - assets/icons/poll.svg
+    - assets/icons/students.svg
+    - assets/icons/todays_food.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -136,12 +140,16 @@ flutter:
   fonts:
     - family: Comfortaa
       fonts:
-        - asset: assets/fonts/Comfortaa-Bold.ttf
         - asset: assets/fonts/Comfortaa-Light.ttf
-        - asset: assets/fonts/Comfortaa-Medium.ttf
+          weight: 300
         - asset: assets/fonts/Comfortaa-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Comfortaa-Medium.ttf
+          weight: 500
         - asset: assets/fonts/Comfortaa-SemiBold.ttf
-        - asset: assets/fonts/Comfortaa-VariableFont_wght.ttf
+          weight: 600
+        - asset: assets/fonts/Comfortaa-Bold.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

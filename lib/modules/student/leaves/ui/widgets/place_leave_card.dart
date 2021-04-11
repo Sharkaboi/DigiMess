@@ -1,6 +1,6 @@
 import 'package:DigiMess/common/extensions/date_extensions.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
 import 'package:DigiMess/common/widgets/dm_date_picker.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';

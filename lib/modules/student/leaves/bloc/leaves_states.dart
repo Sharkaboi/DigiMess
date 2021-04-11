@@ -1,5 +1,5 @@
-import 'package:DigiMess/common/errors/error_wrapper.dart';
 import 'package:DigiMess/common/firebase/models/leave_entry.dart';
+import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class StudentLeaveStates extends Equatable {

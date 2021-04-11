@@ -1,8 +1,8 @@
-import 'package:DigiMess/common/constants/app_strings.dart';
+import 'package:DigiMess/common/constants/dm_details.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
-import 'package:DigiMess/modules/student/about/ui/screens/about_screen.dart';
+import 'package:DigiMess/modules/student/about/ui/about_dialog.dart';
 import 'package:DigiMess/modules/student/complaints/bloc/complaints_bloc.dart';
 import 'package:DigiMess/modules/student/complaints/bloc/complaints_states.dart';
 import 'package:DigiMess/modules/student/complaints/data/complaints_repository.dart';
@@ -17,7 +17,7 @@ import 'package:DigiMess/modules/student/leaves/bloc/leaves_states.dart';
 import 'package:DigiMess/modules/student/leaves/data/leaves_repository.dart';
 import 'package:DigiMess/modules/student/leaves/ui/screens/leaves_screen.dart';
 import 'package:DigiMess/modules/student/main/ui/widgets/student_nav_drawer.dart';
-import 'package:DigiMess/modules/student/main/util/nav_destination_enum.dart';
+import 'package:DigiMess/modules/student/main/util/student_nav_destinations.dart';
 import 'package:DigiMess/modules/student/menu/bloc/menu_bloc.dart';
 import 'package:DigiMess/modules/student/menu/bloc/menu_states.dart';
 import 'package:DigiMess/modules/student/menu/data/menu_repository.dart';
@@ -35,7 +35,7 @@ import 'package:DigiMess/modules/student/profile/bloc/profile_bloc.dart';
 import 'package:DigiMess/modules/student/profile/bloc/profile_states.dart';
 import 'package:DigiMess/modules/student/profile/data/profile_repository.dart';
 import 'package:DigiMess/modules/student/profile/ui/screens/profile_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide AboutDialog;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share/share.dart';
@@ -122,8 +122,6 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
           child: StudentProfileScreen());
     } else if (currentScreen == StudentNavDestinations.HELP.toStringValue()) {
       return StudentHelpScreen();
-    } else if (currentScreen == StudentNavDestinations.ABOUT.toStringValue()) {
-      return StudentAboutScreen();
     } else {
       return Container();
     }
@@ -133,6 +131,8 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
     Navigator.pop(context);
     if (destination == StudentNavDestinations.SHARE.toStringValue()) {
       showShareDialog();
+    } else if (destination == StudentNavDestinations.ABOUT.toStringValue()) {
+      openAboutDialog();
     } else {
       setState(() {
         currentScreen = destination;
@@ -145,7 +145,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
   }
 
   void showShareDialog() {
-    Share.share(DMStrings.description + "\n" + DMStrings.githubLink);
+    Share.share(DMDetails.description + "\n" + DMDetails.githubLink);
   }
 
   void noticesCallback() {
@@ -170,5 +170,9 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
 
   void openMessCard() {
     StudentMessCard.show(context);
+  }
+
+  void openAboutDialog() {
+    AboutDialog.show(context);
   }
 }

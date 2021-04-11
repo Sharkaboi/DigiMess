@@ -1,5 +1,5 @@
-class DMStrings {
-  DMStrings._();
+class DMDetails {
+  DMDetails._();
 
   static const appName = "DigiMess";
   static const appVersion = "1.0.0";
@@ -16,11 +16,4 @@ class DMStrings {
   ];
 
   static const githubLink = "https://github.com/Sharkaboi/DigiMess";
-}
-
-class DMHints {
-  DMHints._();
-
-  static const student = "Student";
-  static const staff = "Staff";
 }

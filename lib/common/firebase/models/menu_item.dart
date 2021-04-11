@@ -36,6 +36,9 @@ class MenuItem extends Equatable {
 
   factory MenuItem.fromQueryDocumentSnapshot(QueryDocumentSnapshot doc) {
     final Map<String, dynamic> data = doc.data();
+    if (data == null) {
+      return null;
+    }
     return MenuItem(
         itemId: doc.id,
         name: data['name'],
@@ -71,6 +74,10 @@ class _MenuItemIsAvailable extends Equatable {
       @required this.isDinner});
 
   factory _MenuItemIsAvailable.fromMap(Map<String, dynamic> mapField) {
+    if (mapField == null) {
+      return _MenuItemIsAvailable(
+          isBreakfast: false, isLunch: false, isDinner: false);
+    }
     return _MenuItemIsAvailable(
         isBreakfast: mapField['breakfast'],
         isDinner: mapField['dinner'],
@@ -109,6 +116,16 @@ class _DaysAvailable extends Equatable {
   });
 
   factory _DaysAvailable.fromMap(Map<String, dynamic> mapField) {
+    if (mapField == null) {
+      return _DaysAvailable(
+          monday: false,
+          tuesday: false,
+          wednesday: false,
+          thursday: false,
+          friday: false,
+          saturday: false,
+          sunday: false);
+    }
     return _DaysAvailable(
         monday: mapField['monday'],
         tuesday: mapField['tuesday'],
@@ -154,6 +171,9 @@ class _AnnualPollVotes extends Equatable {
       @required this.forDinner});
 
   factory _AnnualPollVotes.fromMap(Map<String, dynamic> mapField) {
+    if (mapField == null) {
+      return _AnnualPollVotes(forBreakFast: 0, forDinner: 0, forLunch: 0);
+    }
     return _AnnualPollVotes(
         forBreakFast: mapField['forBreakFast'],
         forLunch: mapField['forLunch'],

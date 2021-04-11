@@ -19,6 +19,9 @@ class Complaint extends Equatable {
 
   factory Complaint.fromDocument(QueryDocumentSnapshot documentSnapshot) {
     final Map<String, dynamic> documentData = documentSnapshot.data();
+    if (documentData == null) {
+      return null;
+    }
     return Complaint(
         complaintId: documentSnapshot.id,
         user: documentData['userId'],
@@ -37,11 +40,6 @@ class Complaint extends Equatable {
   }
 
   @override
-  List<Object> get props => [
-        this.complaintId,
-        this.complaint,
-        this.user,
-        this.date,
-        this.categories
-      ];
+  List<Object> get props =>
+      [this.complaintId, this.complaint, this.user, this.date, this.categories];
 }

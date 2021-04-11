@@ -1,5 +1,5 @@
-import 'package:DigiMess/common/errors/error_wrapper.dart';
 import 'package:DigiMess/common/firebase/models/notice.dart';
+import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:DigiMess/common/util/task_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

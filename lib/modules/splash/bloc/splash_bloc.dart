@@ -1,4 +1,5 @@
-import 'package:DigiMess/common/errors/error_wrapper.dart';
+import 'package:DigiMess/common/shared_prefs/shared_pref_repository.dart';
+import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:DigiMess/common/util/task_state.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_events.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
@@ -17,10 +18,13 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     if (event is InitApp) {
       final DMTaskState result = await _splashRepository.initApp();
       if (result.isTaskSuccess) {
-        yield UserLoginStatus(result.taskResultData);
+        yield SplashSuccess(result.taskResultData);
       } else {
         yield SplashError(result.error);
       }
+    } else if (event is LogOutUserSplash) {
+      await SharedPrefRepository.logOutUser();
+      yield UserLoggedOutSplash();
     } else {
       yield SplashError(DMError(message: "Invalid event passed!"));
     }

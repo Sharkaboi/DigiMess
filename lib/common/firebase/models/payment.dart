@@ -1,4 +1,4 @@
-import 'package:DigiMess/common/constants/payment_account_type.dart';
+import 'package:DigiMess/common/constants/enums/payment_account_type.dart';
 import 'package:DigiMess/common/extensions/date_extensions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -22,6 +22,9 @@ class Payment extends Equatable {
 
   factory Payment.fromDocument(QueryDocumentSnapshot documentSnapshot) {
     final Map<String, dynamic> documentData = documentSnapshot.data();
+    if (documentData == null) {
+      return null;
+    }
     return Payment(
         paymentId: documentSnapshot.id,
         user: documentData['userId'],

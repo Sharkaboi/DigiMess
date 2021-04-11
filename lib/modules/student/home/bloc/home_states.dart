@@ -1,6 +1,6 @@
-import 'package:DigiMess/common/errors/error_wrapper.dart';
 import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/firebase/models/notice.dart';
+import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

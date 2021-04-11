@@ -1,4 +1,4 @@
-import 'package:DigiMess/common/styles/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/widgets/nav_item.dart';
 import 'package:DigiMess/modules/staff/main/util/staff_nav_destinations.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +63,7 @@ class StaffNavDrawer extends StatelessWidget {
                         ),
                         NavItem(
                           text: "Students",
-                          iconAsset: "assets/icons/home.svg",
+                          iconAsset: "assets/icons/students.svg",
                           isItemSelected:
                               currentScreen == StaffNavDestinations.STUDENTS,
                           onClick: () => itemOnClickCallBack(
@@ -79,7 +79,7 @@ class StaffNavDrawer extends StatelessWidget {
                         ),
                         NavItem(
                           text: "Today's Food",
-                          iconAsset: "assets/icons/menu.svg",
+                          iconAsset: "assets/icons/todays_food.svg",
                           isItemSelected:
                               currentScreen == StaffNavDestinations.TODAYS_FOOD,
                           onClick: () => itemOnClickCallBack(
@@ -111,7 +111,7 @@ class StaffNavDrawer extends StatelessWidget {
                         ),
                         NavItem(
                           text: "Annual Poll",
-                          iconAsset: "assets/icons/leaves.svg",
+                          iconAsset: "assets/icons/poll.svg",
                           isItemSelected:
                               currentScreen == StaffNavDestinations.POLL,
                           onClick: () =>
@@ -150,7 +150,7 @@ class StaffNavDrawer extends StatelessWidget {
                         ),
                         NavItem(
                           text: "Logout",
-                          iconAsset: "assets/icons/share.svg",
+                          iconAsset: "assets/icons/log_out.svg",
                           isItemSelected:
                               currentScreen == StaffNavDestinations.LOGOUT,
                           onClick: () =>

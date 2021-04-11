@@ -1,5 +1,5 @@
 extension ListExtensions<T> on List<T> {
-  dynamic takeFirstOrNull() {
+  T takeFirstOrNull() {
     if (this.isEmpty) {
       return null;
     } else {
