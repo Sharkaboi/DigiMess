@@ -31,6 +31,9 @@ class DMPillButton extends StatelessWidget {
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
               isEnabled ? DMColors.darkBlue : DMColors.grey),
+          overlayColor: MaterialStateProperty.all(isEnabled
+              ? DMColors.accentBlue.withOpacity(0.3)
+              : DMColors.white.withOpacity(0.3)),
           padding: MaterialStateProperty.all(padding ?? EdgeInsets.zero),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),

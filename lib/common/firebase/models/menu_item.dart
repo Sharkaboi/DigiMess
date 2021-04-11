@@ -8,9 +8,9 @@ class MenuItem extends Equatable {
   final String name;
   final bool isEnabled;
   final String imageUrl;
-  final int count;
   final _MenuItemIsAvailable itemIsAvailable;
   final _DaysAvailable daysAvailable;
+  final _AnnualPollVotes annualPollVotes;
 
   MenuItem(
       {@required this.itemId,
@@ -19,7 +19,7 @@ class MenuItem extends Equatable {
       @required this.isEnabled,
       @required this.imageUrl,
       @required this.itemIsAvailable,
-      @required this.count,
+      @required this.annualPollVotes,
       @required this.daysAvailable});
 
   @override
@@ -30,7 +30,7 @@ class MenuItem extends Equatable {
         this.isEnabled,
         this.imageUrl,
         this.itemIsAvailable,
-        this.count,
+        this.annualPollVotes,
         this.daysAvailable
       ];
 
@@ -43,8 +43,20 @@ class MenuItem extends Equatable {
         isEnabled: data['isEnabled'],
         imageUrl: data['imageUrl'],
         itemIsAvailable: _MenuItemIsAvailable.fromMap(data['isAvailable']),
-        count: data['count'],
+        annualPollVotes: _AnnualPollVotes.fromMap(data['annualPoll']),
         daysAvailable: _DaysAvailable.fromMap(data['daysAvailable']));
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': this.name,
+      'isVeg': this.isVeg,
+      'isEnabled': this.isEnabled,
+      'imageUrl': this.imageUrl,
+      'isAvailable': this.itemIsAvailable.toMap(),
+      'annualPoll': this.annualPollVotes.toMap(),
+      'daysAvailable': this.daysAvailable.toMap(),
+    };
   }
 }
 
@@ -129,4 +141,33 @@ class _DaysAvailable extends Equatable {
         this.saturday,
         this.sunday
       ];
+}
+
+class _AnnualPollVotes extends Equatable {
+  final int forBreakFast;
+  final int forLunch;
+  final int forDinner;
+
+  _AnnualPollVotes(
+      {@required this.forBreakFast,
+      @required this.forLunch,
+      @required this.forDinner});
+
+  factory _AnnualPollVotes.fromMap(Map<String, dynamic> mapField) {
+    return _AnnualPollVotes(
+        forBreakFast: mapField['forBreakFast'],
+        forLunch: mapField['forLunch'],
+        forDinner: mapField['forDinner']);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'forBreakFast': this.forBreakFast,
+      'forLunch': this.forLunch,
+      'forDinner': this.forDinner
+    };
+  }
+
+  @override
+  List<Object> get props => [this.forDinner, this.forLunch, this.forBreakFast];
 }

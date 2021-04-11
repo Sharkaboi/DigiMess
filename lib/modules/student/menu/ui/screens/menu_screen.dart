@@ -26,6 +26,7 @@ class _StudentMenuScreenState extends State<StudentMenuScreen> {
   bool _isLoading = false;
   StudentMenuBloc _bloc;
   String searchQuery = "";
+  TextEditingController _searchController = TextEditingController(text: "");
   MenuFilterType currentFilter = MenuFilterType.BOTH;
   Timer searchDebounceTimer;
   int selectedFilterIndex = 2;
@@ -91,7 +92,7 @@ class _StudentMenuScreenState extends State<StudentMenuScreen> {
                             maxLines: 1,
                             style: DMTypo.bold16BlackTextStyle,
                             keyboardType: TextInputType.text,
-                            initialValue: searchQuery,
+                            controller: _searchController,
                             onChanged: onSearch,
                           ),
                         ),
@@ -137,13 +138,15 @@ class _StudentMenuScreenState extends State<StudentMenuScreen> {
         FocusManager.instance.primaryFocus.unfocus();
       }
       setState(() {
-        if (searchQuery.isEmpty) {
+        if (searchQuery.trim().isEmpty) {
+          _searchController.text = "";
           currentList = fullList;
         } else {
           currentList = fullList
               .where((element) => element.name
+                  .trim()
                   .toLowerCase()
-                  .contains(searchQuery.toLowerCase()))
+                  .contains(searchQuery.trim().toLowerCase()))
               .toList();
         }
       });
@@ -153,6 +156,7 @@ class _StudentMenuScreenState extends State<StudentMenuScreen> {
   void filterBySelected(int value) {
     selectedFilterIndex = value;
     searchQuery = "";
+    _searchController.text = "";
     if (value == 0) {
       currentFilter = MenuFilterType.VEG;
     } else if (value == 1) {

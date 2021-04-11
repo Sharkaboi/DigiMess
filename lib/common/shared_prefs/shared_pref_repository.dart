@@ -13,22 +13,50 @@ class SharedPrefRepository {
 
   static setUserType(UserType userType) async {
     final sharedPrefs = await SharedPreferences.getInstance();
-    sharedPrefs.setString(SharedPrefKeys.USER_TYPE, userType.toStringValue());
+    await sharedPrefs.setString(
+        SharedPrefKeys.USER_TYPE, userType.toStringValue());
   }
 
   static Future<String> getTheUserId() async {
     final sharedPrefs = await SharedPreferences.getInstance();
-    final String userType = sharedPrefs.getString(SharedPrefKeys.USER_ID);
-    return userType;
+    return sharedPrefs.getString(SharedPrefKeys.USER_ID);
   }
 
   static setTheUserId(String userId) async {
     final sharedPrefs = await SharedPreferences.getInstance();
-    sharedPrefs.setString(SharedPrefKeys.USER_ID, userId);
+    await sharedPrefs.setString(SharedPrefKeys.USER_ID, userId);
+  }
+
+  static setUsername(String username) async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    await sharedPrefs.setString(SharedPrefKeys.USERNAME, username);
   }
 
   static Future<String> getUsername() async {
     final sharedPrefs = await SharedPreferences.getInstance();
     return sharedPrefs.getString(SharedPrefKeys.USERNAME);
+  }
+
+  static setLastPollYear(DateTime date) async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    await sharedPrefs.setString(
+        SharedPrefKeys.LAST_POLL_TAKEN_YEAR, date.toIso8601String());
+  }
+
+  static Future<DateTime> getLastPollYear() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    // set epoch as default
+    final DateTime defaultDate = DateTime.fromMillisecondsSinceEpoch(0);
+    final String lastVotedDate =
+        sharedPrefs.getString(SharedPrefKeys.LAST_POLL_TAKEN_YEAR);
+    if (lastVotedDate == null || lastVotedDate.trim().isEmpty)
+      return defaultDate;
+    else {
+      final DateTime dateTime = DateTime.tryParse(lastVotedDate);
+      if (dateTime == null)
+        return defaultDate;
+      else
+        return dateTime;
+    }
   }
 }

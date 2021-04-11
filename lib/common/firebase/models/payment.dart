@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class Payment extends Equatable {
   final String paymentId;
-  final String userId;
+  final DocumentReference user;
   final PaymentAccountType paymentAccountType;
   final DateTime paymentDate;
   final int paymentAmount;
@@ -14,7 +14,7 @@ class Payment extends Equatable {
 
   Payment(
       {@required this.paymentId,
-      @required this.userId,
+      @required this.user,
       @required this.paymentAccountType,
       @required this.paymentDate,
       @required this.paymentAmount,
@@ -24,7 +24,7 @@ class Payment extends Equatable {
     final Map<String, dynamic> documentData = documentSnapshot.data();
     return Payment(
         paymentId: documentSnapshot.id,
-        userId: documentData['userId'],
+        user: documentData['userId'],
         paymentAccountType: PaymentAccountTypeExtensions.fromString(
             documentData['accountType']),
         paymentDate: getDateTimeOrNull(documentData['date']),
@@ -34,7 +34,7 @@ class Payment extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'userId': this.userId,
+      'userId': this.user,
       'accountType': this.paymentAccountType.toStringValue(),
       'date': Timestamp.fromDate(this.paymentDate),
       'amount': this.paymentAmount,
@@ -45,7 +45,7 @@ class Payment extends Equatable {
   @override
   List<Object> get props => [
         this.paymentId,
-        this.userId,
+        this.user,
         this.paymentAccountType,
         this.paymentDate,
         this.paymentAmount,

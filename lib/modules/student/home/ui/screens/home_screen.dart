@@ -3,6 +3,7 @@ import 'package:DigiMess/common/extensions/list_extensions.dart';
 import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/firebase/models/notice.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
+import 'package:DigiMess/modules/student/annual_poll/ui/widgets/annual_poll_card.dart';
 import 'package:DigiMess/modules/student/home/bloc/home_bloc.dart';
 import 'package:DigiMess/modules/student/home/bloc/home_events.dart';
 import 'package:DigiMess/modules/student/home/bloc/home_states.dart';
@@ -80,7 +81,8 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                       latestNotice: latestNotice,
                       noticesCallback: widget.noticesCallback),
                 ),
-                Visibility(visible: !hasPaidFees, child: HomePaymentCard())
+                Visibility(visible: !hasPaidFees, child: HomePaymentCard()),
+                StudentAnnualPollCard()
               ],
             ));
           } else {

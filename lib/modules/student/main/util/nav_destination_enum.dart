@@ -15,4 +15,5 @@ extension StudentNavDestinationExtensions on StudentNavDestinations {
   String toStringValue() {
     return this.toString().split('.').last;
   }
+
 }

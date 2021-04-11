@@ -33,6 +33,7 @@ University Android mini project.
  - [Dots indicator](https://pub.dev/packages/dots_indicator)
  - [pin_code_fields](https://pub.dev/packages/pin_code_fields)
  - [flutter_multi_formatter](https://pub.dev/packages/flutter_multi_formatter)
+ - [fluttertoast](https://pub.dev/packages/fluttertoast)
 
 ## Architecture
 ![](./docs/architecture.png)

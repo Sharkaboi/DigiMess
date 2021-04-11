@@ -1,3 +1,4 @@
+import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/modules/auth/login/ui/screens/login_screen.dart';
 import 'package:DigiMess/modules/auth/register/ui/screens/register_screen.dart';
@@ -6,12 +7,17 @@ import 'package:DigiMess/modules/splash/bloc/splash_bloc.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
 import 'package:DigiMess/modules/splash/data/splash_repository.dart';
 import 'package:DigiMess/modules/splash/ui/screens/splash_screen.dart';
+import 'package:DigiMess/modules/staff/main/ui/screens/main_screen.dart';
+import 'package:DigiMess/modules/student/annual_poll/bloc/annual_poll_bloc.dart';
+import 'package:DigiMess/modules/student/annual_poll/bloc/annual_poll_states.dart';
+import 'package:DigiMess/modules/student/annual_poll/data/annual_poll_repository.dart';
+import 'package:DigiMess/modules/student/annual_poll/ui/screens/annual_poll_screen.dart';
 import 'package:DigiMess/modules/student/main/ui/screens/main_screen.dart';
 import 'package:DigiMess/modules/student/payment_dummy/ui/screens/card_details_screen.dart';
+import 'package:DigiMess/modules/student/payment_dummy/ui/screens/dummy_payments_screen.dart';
 import 'package:DigiMess/modules/student/payment_dummy/ui/screens/otp_screen.dart';
 import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payment_fail_screen.dart';
 import 'package:DigiMess/modules/student/payment_dummy/ui/screens/payment_success_screen.dart';
-import 'package:DigiMess/modules/student/payment_dummy/ui/screens/dummy_payments_screen.dart';
 import 'package:DigiMess/modules/student/payment_dummy/util/dummy_payment_args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -87,6 +93,23 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: PaymentFailScreen());
+      case Routes.ANNUAL_POLL_SCREEN:
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            settings: settings,
+            child: BlocProvider(
+                create: (_) => StudentAnnualPollBloc(
+                    StudentAnnualPollIdle(),
+                    StudentAnnualPollRepository(
+                        FirebaseClient.getMenuCollectionReference())),
+                child: StudentAnnualPollScreen(
+                    onVoteCallback: settings.arguments)));
+      case Routes.MAIN_SCREEN_STAFF:
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: StaffMainScreen());
       default:
         return null;
     }

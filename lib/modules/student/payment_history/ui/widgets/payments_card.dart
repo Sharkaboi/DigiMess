@@ -47,8 +47,12 @@ class PaymentsCard extends StatelessWidget {
                   ],
                 ),
                 Container(
+                    margin: EdgeInsets.only(left: 25),
+                    child: Text(getDate(), style: DMTypo.bold12MutedTextStyle)),
+                Container(
                     margin: EdgeInsets.only(top: 30, left: 25),
-                    child: Text(getDate(), style: DMTypo.bold12MutedTextStyle))
+                    child: Text(payment.description,
+                        style: DMTypo.bold12BlackTextStyle))
               ],
             ),
           ),

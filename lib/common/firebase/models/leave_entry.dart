@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 class LeaveEntry extends Equatable {
   final String leaveEntryId;
-  final String userId;
+  final DocumentReference user;
   final DateTime startDate;
   final DateTime endDate;
   final DateTime applyDate;
 
   LeaveEntry(
       {@required this.leaveEntryId,
-      @required this.userId,
+      @required this.user,
       @required this.startDate,
       @required this.endDate,
       @required this.applyDate});
@@ -21,7 +21,7 @@ class LeaveEntry extends Equatable {
     final Map<String, dynamic> documentData = documentSnapshot.data();
     return LeaveEntry(
         leaveEntryId: documentSnapshot.id,
-        userId: documentData['userId'],
+        user: documentData['userId'],
         startDate: getDateTimeOrNull(documentData['startDate']),
         endDate: getDateTimeOrNull(documentData['endDate']),
         applyDate: getDateTimeOrNull(documentData['applyDate']));
@@ -29,7 +29,7 @@ class LeaveEntry extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'userId': this.userId,
+      'userId': this.user,
       'startDate': Timestamp.fromDate(this.startDate),
       'endDate': Timestamp.fromDate(this.endDate),
       'applyDate': Timestamp.fromDate(this.applyDate)
@@ -40,7 +40,7 @@ class LeaveEntry extends Equatable {
   List<Object> get props => [
         this.leaveEntryId,
         this.startDate,
-        this.userId,
+        this.user,
         this.endDate,
         this.applyDate
       ];

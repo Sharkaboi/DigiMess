@@ -137,7 +137,8 @@ class _StudentComplaintsScreenState extends State<StudentComplaintsScreen> {
                             textStyle: DMTypo.bold18WhiteTextStyle,
                             onPressed: () {
                               final String complaint = _controller.text;
-                              if (complaint.isEmpty) {
+                              if (complaint
+                                  .trim().isEmpty) {
                                 DMSnackBar.show(
                                     context, "Enter your complaint");
                               } else if (selectedCategories.isEmpty) {

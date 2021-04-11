@@ -31,7 +31,7 @@ class MessCardScrollView extends StatelessWidget {
                 right: 0,
                 child: SvgPicture.asset("assets/icons/corner_icon_bottom.svg"),
               ),
-              child
+              Center(child: child)
             ],
           ),
         ),
