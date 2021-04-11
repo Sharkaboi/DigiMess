@@ -65,6 +65,16 @@ class DMTheme {
               color: isDarkTheme ? DMColors.white : DMColors.black),
           button: TextStyle(fontFamily: FONT_NAME),
         ),
+        tabBarTheme: TabBarTheme(
+            labelStyle: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: DMColors.white,
+                fontFamily: FONT_NAME),
+            unselectedLabelStyle: TextStyle(
+                fontSize: 14,
+                color: DMColors.accentBlue,
+                fontFamily: FONT_NAME)),
         textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(DMColors.white),

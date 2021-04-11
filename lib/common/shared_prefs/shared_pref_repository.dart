@@ -40,23 +40,23 @@ class SharedPrefRepository {
   static setLastPollYear(DateTime date) async {
     final sharedPrefs = await SharedPreferences.getInstance();
     await sharedPrefs.setString(
-        SharedPrefKeys.LAST_POLL_TAKEN_YEAR, date.year.toString());
+        SharedPrefKeys.LAST_POLL_TAKEN_YEAR, date.toIso8601String());
   }
 
   static Future<DateTime> getLastPollYear() async {
     final sharedPrefs = await SharedPreferences.getInstance();
     // set epoch as default
     final DateTime defaultDate = DateTime.fromMillisecondsSinceEpoch(0);
-    final String lastVotedYear =
+    final String lastVotedDate =
         sharedPrefs.getString(SharedPrefKeys.LAST_POLL_TAKEN_YEAR);
-    if (lastVotedYear == null || lastVotedYear.trim().isEmpty)
+    if (lastVotedDate == null || lastVotedDate.trim().isEmpty)
       return defaultDate;
     else {
-      final int year = int.tryParse(lastVotedYear);
-      if (year == null)
+      final DateTime dateTime = DateTime.tryParse(lastVotedDate);
+      if (dateTime == null)
         return defaultDate;
       else
-        return DateTime(year);
+        return dateTime;
     }
   }
 }

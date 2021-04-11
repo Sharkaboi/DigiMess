@@ -7,6 +7,7 @@ import 'package:DigiMess/modules/splash/bloc/splash_bloc.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
 import 'package:DigiMess/modules/splash/data/splash_repository.dart';
 import 'package:DigiMess/modules/splash/ui/screens/splash_screen.dart';
+import 'package:DigiMess/modules/staff/main/ui/screens/main_screen.dart';
 import 'package:DigiMess/modules/student/annual_poll/bloc/annual_poll_bloc.dart';
 import 'package:DigiMess/modules/student/annual_poll/bloc/annual_poll_states.dart';
 import 'package:DigiMess/modules/student/annual_poll/data/annual_poll_repository.dart';
@@ -104,6 +105,11 @@ class AppRouter {
                         FirebaseClient.getMenuCollectionReference())),
                 child: StudentAnnualPollScreen(
                     onVoteCallback: settings.arguments)));
+      case Routes.MAIN_SCREEN_STAFF:
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: StaffMainScreen());
       default:
         return null;
     }

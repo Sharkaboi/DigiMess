@@ -24,9 +24,8 @@ class _StudentAnnualPollCardState extends State<StudentAnnualPollCard> {
     final DateTime lastVotedYear = await SharedPrefRepository.getLastPollYear();
     final DateTime now = DateTime.now();
     setState(() {
-      //fixme : revert back to month == 12 after testing.
       showPollCard =
-          now.month != 12 && now.difference(lastVotedYear).inDays.abs() > 31;
+          now.month == 12 && now.difference(lastVotedYear).inDays.abs() > 31;
     });
   }
 
@@ -35,7 +34,8 @@ class _StudentAnnualPollCardState extends State<StudentAnnualPollCard> {
     return Visibility(
       visible: showPollCard,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20).copyWith(top: 0),
+        margin:
+            EdgeInsets.symmetric(horizontal: 20, vertical: 20).copyWith(top: 0),
         padding: EdgeInsets.all(20),
         width: double.infinity,
         decoration: BoxDecoration(boxShadow: [
@@ -61,8 +61,7 @@ class _StudentAnnualPollCardState extends State<StudentAnnualPollCard> {
                     text: "Vote here",
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                     onPressed: () async {
-                      Navigator.pushNamed(
-                          context, Routes.ANNUAL_POLL_SCREEN,
+                      Navigator.pushNamed(context, Routes.ANNUAL_POLL_SCREEN,
                           arguments: onVoteCallback);
                     },
                     textStyle: DMTypo.bold18WhiteTextStyle),

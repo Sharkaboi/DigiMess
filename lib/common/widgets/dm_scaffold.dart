@@ -39,6 +39,7 @@ class DMScaffold extends StatelessWidget {
   final VoidCallback appBarBackCallback;
   final List<Widget> actionMenu;
   final TextStyle appBarTitleTextStyle;
+  final TabBar tabBar;
   DMBloc _dmBloc;
 
   final void Function(bool) onDrawerChanged;
@@ -75,6 +76,7 @@ class DMScaffold extends StatelessWidget {
     this.onDrawerChanged,
     this.onEndDrawerChanged,
     this.restorationId,
+    this.tabBar,
   });
 
   @override
@@ -122,6 +124,20 @@ class DMScaffold extends StatelessWidget {
                             () => Navigator.of(context).pop(),
                       ),
                 actions: actionMenu,
+                bottom: tabBar != null
+                    ? PreferredSize(
+                        preferredSize: tabBar.preferredSize,
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: DMColors.primaryBlue,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: DMColors.black.withOpacity(0.25),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 4))
+                                ]),
+                            child: tabBar))
+                    : null,
               )
             : null,
         body: SafeArea(
