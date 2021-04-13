@@ -1,6 +1,6 @@
 import 'package:DigiMess/common/constants/dm_details.dart';
-import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/modules/student/about/ui/about_dialog.dart';
 import 'package:DigiMess/modules/student/complaints/bloc/complaints_bloc.dart';
@@ -70,7 +70,8 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
               StudentHomeRepository(
                   FirebaseClient.getMenuCollectionReference(),
                   FirebaseClient.getNoticesCollectionReference(),
-                  FirebaseClient.getPaymentsCollectionReference())),
+                  FirebaseClient.getPaymentsCollectionReference(),
+                  FirebaseClient.getAbsenteesCollectionReference())),
           child: StudentHomeScreen(
             noticesCallback: noticesCallback,
           ));

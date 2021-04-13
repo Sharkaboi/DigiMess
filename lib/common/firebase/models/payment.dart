@@ -54,4 +54,20 @@ class Payment extends Equatable {
         this.paymentAmount,
         this.description
       ];
+
+  Payment copyWith(
+      {String paymentId,
+      DocumentReference user,
+      PaymentAccountType paymentAccountType,
+      DateTime paymentDate,
+      int paymentAmount,
+      String description}) {
+    return Payment(
+        paymentId: paymentId ?? this.paymentId,
+        user: user ?? this.user,
+        paymentAccountType: paymentAccountType ?? this.paymentAccountType,
+        paymentDate: paymentDate ?? this.paymentDate,
+        paymentAmount: paymentAmount ?? this.paymentAmount,
+        description: description ?? this.description);
+  }
 }

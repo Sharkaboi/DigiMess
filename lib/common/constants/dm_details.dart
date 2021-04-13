@@ -1,13 +1,13 @@
 class DMDetails {
   DMDetails._();
 
-  static const appName = "DigiMess";
-  static const appVersion = "1.0.0";
-  static const description =
+  static const String appName = "DigiMess";
+  static const String appVersion = "1.0.0";
+  static const String description =
       "Welcome to DigiMess.\nAn app to help organizations manage "
       "their food mess, mainly colleges.";
 
-  static const contributors = [
+  static const List<String> contributors = [
     "Rahul R S",
     "S Atul Krishnan",
     "Sangeeth Raj P S",
@@ -15,5 +15,9 @@ class DMDetails {
     "Ashwin Cherukat"
   ];
 
-  static const githubLink = "https://github.com/Sharkaboi/DigiMess";
+  static const String githubLink = "https://github.com/Sharkaboi/DigiMess";
+
+  static const int dailyMessPrice = 100;
+  static const int dailyFinePrice = 10;
+  static const int constantMessPrice = 300;
 }

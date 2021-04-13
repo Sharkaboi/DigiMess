@@ -80,6 +80,37 @@ extension DateExtensions on DateTime {
   String getDifferenceInDays(DateTime other) {
     return "${this.difference(other).inDays.abs()} days";
   }
+
+  bool isSameMonthAs(DateTime other) {
+    return this.month == other.month && this.year == other.year;
+  }
+
+  bool isLastMonthOf(DateTime other) {
+    final cleanedDateTime1 = DateTime(this.year, this.month);
+    final cleanedDateTime2 = DateTime(other.year, other.month);
+    return cleanedDateTime1.difference(cleanedDateTime2).inDays.abs() <= 31;
+  }
+
+  DateTime copyWith(
+      {int year,
+      int month,
+      int day,
+      int hour,
+      int minute,
+      int second,
+      int millisecond,
+      int microsecond}) {
+    return DateTime(
+      year ?? this.year,
+      month ?? this.month,
+      day ?? this.day,
+      hour ?? this.hour,
+      minute ?? this.minute,
+      second ?? this.second,
+      millisecond ?? this.millisecond,
+      microsecond ?? this.microsecond,
+    );
+  }
 }
 
 DateTime getDateTimeOrNull(timestamp) {

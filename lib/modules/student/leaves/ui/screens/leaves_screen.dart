@@ -1,5 +1,6 @@
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
+import 'package:DigiMess/common/extensions/date_extensions.dart';
 import 'package:DigiMess/common/firebase/models/leave_entry.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/student/leaves/bloc/leaves_bloc.dart';
@@ -40,7 +41,11 @@ class _StudentLeavesScreenState extends State<StudentLeavesScreen> {
               final DateTime now = DateTime.now();
               _isLeaveOngoing = leavesList.isNotEmpty &&
                   ((leavesList.first.startDate.compareTo(now) <= 0 &&
-                          leavesList.first.endDate.compareTo(now) >= 0) ||
+                          leavesList.first.endDate
+                                  .copyWith(
+                                      day: leavesList.first.endDate.day + 1)
+                                  .compareTo(now) >=
+                              0) ||
                       leavesList.first.startDate.isAfter(now));
             });
           } else if (state is StudentLeaveSuccess) {

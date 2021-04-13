@@ -22,10 +22,17 @@ class StudentHomeBloc extends Bloc<StudentHomeEvents, StudentHomeStates> {
           final DMTaskState paymentResult =
               await _homeRepository.getPaymentStatus();
           if (paymentResult.isTaskSuccess) {
-            yield StudentHomeFetchSuccess(
-                hasPaidFees: paymentResult.taskResultData,
-                latestNotice: noticeResult.taskResultData,
-                listOfTodaysMeals: menuResult.taskResultData);
+            final DMTaskState leaveCountResult = await _homeRepository
+                .getLeaveCount(paymentResult.taskResultData);
+            if (leaveCountResult.isTaskSuccess) {
+              yield StudentHomeFetchSuccess(
+                  paymentStatus: paymentResult.taskResultData,
+                  latestNotice: noticeResult.taskResultData,
+                  listOfTodaysMeals: menuResult.taskResultData,
+                  leaveCount: leaveCountResult.taskResultData);
+            } else {
+              yield StudentHomeError(leaveCountResult.error);
+            }
           } else {
             yield StudentHomeError(paymentResult.error);
           }
@@ -34,6 +41,14 @@ class StudentHomeBloc extends Bloc<StudentHomeEvents, StudentHomeStates> {
         }
       } else {
         yield StudentHomeError(menuResult.error);
+      }
+    } else if (event is MakePayment) {
+      final DMTaskState paymentResult =
+          await _homeRepository.makePayment(event.payment);
+      if (paymentResult.isTaskSuccess) {
+        yield StudentHomePaymentSuccess();
+      } else {
+        yield StudentHomeError(paymentResult.error);
       }
     }
   }
