@@ -1,7 +1,8 @@
-import 'package:DigiMess/common/extensions/list_extensions.dart';
-import 'package:DigiMess/common/firebase/models/notice.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
+import 'package:DigiMess/common/extensions/date_extensions.dart';
+import 'package:DigiMess/common/extensions/list_extensions.dart';
+import 'package:DigiMess/common/firebase/models/notice.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/student/notices/bloc/notices_bloc.dart';
 import 'package:DigiMess/modules/student/notices/bloc/notices_events.dart';
@@ -39,9 +40,8 @@ class _StudentNoticesScreenState extends State<StudentNoticesScreen> {
             final DateTime now = DateTime.now();
             setState(() {
               noticesList = state.listOfNotices;
-              final ListResult result = noticesList.splitWhere((element) =>
-                  element.date.month == now.month &&
-                  element.date.year == now.year);
+              final ListResult result = noticesList
+                  .splitWhere((element) => element.date.isSameMonthAs(now));
               recentNoticesList = result.matched;
               oldNoticesList = result.unmatched;
             });
