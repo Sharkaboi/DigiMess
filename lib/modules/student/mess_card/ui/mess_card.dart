@@ -1,6 +1,6 @@
 import 'package:DigiMess/common/firebase/firebase_client.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/student/mess_card/bloc/mess_card_bloc.dart';
 import 'package:DigiMess/modules/student/mess_card/bloc/mess_card_events.dart';

@@ -1,7 +1,7 @@
-import 'package:DigiMess/common/constants/vote_entry.dart';
-import 'package:DigiMess/common/errors/error_wrapper.dart';
+import 'package:DigiMess/common/constants/enums/vote_entry.dart';
 import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/shared_prefs/shared_pref_repository.dart';
+import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:DigiMess/common/util/task_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

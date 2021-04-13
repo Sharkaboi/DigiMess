@@ -1,8 +1,8 @@
 import 'dart:math';
 
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/router/routes.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';

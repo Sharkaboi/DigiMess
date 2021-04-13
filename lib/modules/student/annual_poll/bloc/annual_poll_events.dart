@@ -1,4 +1,4 @@
-import 'package:DigiMess/common/constants/vote_entry.dart';
+import 'package:DigiMess/common/constants/enums/vote_entry.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class StudentAnnualPollEvents extends Equatable {

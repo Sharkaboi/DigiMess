@@ -1,5 +1,5 @@
-import 'package:DigiMess/common/constants/branch_types.dart';
-import 'package:DigiMess/common/constants/user_types.dart';
+import 'package:DigiMess/common/constants/enums/branch_types.dart';
+import 'package:DigiMess/common/constants/enums/user_types.dart';
 import 'package:DigiMess/common/extensions/date_extensions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -39,13 +39,16 @@ class User extends Equatable {
 
   factory User.fromDocument(DocumentSnapshot documentSnapshot) {
     final Map<String, dynamic> documentData = documentSnapshot.data();
+    if (documentData == null) {
+      return null;
+    }
     return User(
         userId: documentSnapshot.id,
         username: documentData['username'],
         hashedPassword: documentData['hashedPassword'],
         accountType: UserTypeExtensions.fromString(documentData['type']),
         isEnrolled: documentData['isEnrolled'],
-        cautionDepositAmount: documentData['cautionDepositAmount'],
+        cautionDepositAmount: documentData['cautionDepositAmount'] ?? 0,
         name: documentData['details']['name'],
         yearOfAdmission:
             getDateTimeOrNull(documentData['details']['yearOfAdmission']),

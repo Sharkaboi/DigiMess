@@ -1,6 +1,6 @@
-import 'package:DigiMess/common/constants/complaint_category.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
+import 'package:DigiMess/common/constants/enums/complaint_category.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/student/complaints/bloc/complaints_bloc.dart';
@@ -137,8 +137,7 @@ class _StudentComplaintsScreenState extends State<StudentComplaintsScreen> {
                             textStyle: DMTypo.bold18WhiteTextStyle,
                             onPressed: () {
                               final String complaint = _controller.text;
-                              if (complaint
-                                  .trim().isEmpty) {
+                              if (complaint.trim().isEmpty) {
                                 DMSnackBar.show(
                                     context, "Enter your complaint");
                               } else if (selectedCategories.isEmpty) {

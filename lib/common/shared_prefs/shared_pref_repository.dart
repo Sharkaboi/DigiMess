@@ -1,5 +1,6 @@
-import 'package:DigiMess/common/constants/user_types.dart';
+import 'package:DigiMess/common/constants/enums/user_types.dart';
 import 'package:DigiMess/common/shared_prefs/shared_pref_keys.dart';
+import 'package:DigiMess/common/util/app_status.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefRepository {
@@ -11,7 +12,7 @@ class SharedPrefRepository {
     return UserTypeExtensions.fromString(userType);
   }
 
-  static setUserType(UserType userType) async {
+  static Future<void> setUserType(UserType userType) async {
     final sharedPrefs = await SharedPreferences.getInstance();
     await sharedPrefs.setString(
         SharedPrefKeys.USER_TYPE, userType.toStringValue());
@@ -22,12 +23,12 @@ class SharedPrefRepository {
     return sharedPrefs.getString(SharedPrefKeys.USER_ID);
   }
 
-  static setTheUserId(String userId) async {
+  static Future<void> setTheUserId(String userId) async {
     final sharedPrefs = await SharedPreferences.getInstance();
     await sharedPrefs.setString(SharedPrefKeys.USER_ID, userId);
   }
 
-  static setUsername(String username) async {
+  static Future<void> setUsername(String username) async {
     final sharedPrefs = await SharedPreferences.getInstance();
     await sharedPrefs.setString(SharedPrefKeys.USERNAME, username);
   }
@@ -37,7 +38,19 @@ class SharedPrefRepository {
     return sharedPrefs.getString(SharedPrefKeys.USERNAME);
   }
 
-  static setLastPollYear(DateTime date) async {
+  static Future<AppStatus> getAppClientStatus() async {
+    final UserType userType = await getUserType();
+    final String userId = await getTheUserId();
+    final String username = await getUsername();
+    return AppStatus(userType: userType, userId: userId, username: username);
+  }
+
+  static Future<void> logOutUser() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    await sharedPrefs.clear();
+  }
+
+  static Future<void> setLastPollYear(DateTime date) async {
     final sharedPrefs = await SharedPreferences.getInstance();
     await sharedPrefs.setString(
         SharedPrefKeys.LAST_POLL_TAKEN_YEAR, date.toIso8601String());

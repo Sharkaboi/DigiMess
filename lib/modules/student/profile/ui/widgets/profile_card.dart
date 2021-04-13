@@ -1,7 +1,7 @@
-import 'package:DigiMess/common/constants/branch_types.dart';
+import 'package:DigiMess/common/constants/enums/branch_types.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/firebase/models/user.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';

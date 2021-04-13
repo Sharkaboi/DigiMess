@@ -1,7 +1,7 @@
-import 'package:DigiMess/common/constants/user_types.dart';
+import 'package:DigiMess/common/constants/enums/user_types.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/router/routes.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_bloc.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_events.dart';
@@ -18,17 +18,27 @@ class SplashScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is SplashError) {
             DMSnackBar.show(context, state.error.message);
-          } else if (state is UserLoginStatus) {
-            switch (state.userType) {
-              case UserType.STUDENT:
-                Navigator.popAndPushNamed(context, Routes.MAIN_SCREEN_STUDENT);
-                break;
-              case UserType.GUEST:
-                Navigator.popAndPushNamed(context, Routes.AUTH_SCREEN);
-                break;
-              default:
-                Navigator.popAndPushNamed(context, Routes.MAIN_SCREEN_STAFF);
+          } else if (state is SplashSuccess) {
+            if (state.appStatus.userType == UserType.GUEST ||
+                state.appStatus.username == null ||
+                state.appStatus.userId == null ||
+                !state.appStatus.isEnabledInFirebase) {
+              BlocProvider.of<SplashBloc>(context).add(LogOutUserSplash());
+            } else {
+              switch (state.appStatus.userType) {
+                case UserType.STUDENT:
+                  Navigator.popAndPushNamed(
+                      context, Routes.MAIN_SCREEN_STUDENT);
+                  break;
+                case UserType.STAFF:
+                  Navigator.popAndPushNamed(context, Routes.MAIN_SCREEN_STAFF);
+                  break;
+                default:
+                  break;
+              }
             }
+          } else if (state is UserLoggedOutSplash) {
+            Navigator.popAndPushNamed(context, Routes.AUTH_SCREEN);
           }
         },
         builder: (context, state) {

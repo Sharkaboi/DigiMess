@@ -2,6 +2,8 @@ import 'package:DigiMess/common/extensions/date_extensions.dart';
 import 'package:DigiMess/common/extensions/list_extensions.dart';
 import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/firebase/models/notice.dart';
+import 'package:DigiMess/common/firebase/models/payment.dart';
+import 'package:DigiMess/common/util/payment_status.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/student/annual_poll/ui/widgets/annual_poll_card.dart';
 import 'package:DigiMess/modules/student/home/bloc/home_bloc.dart';
@@ -28,7 +30,8 @@ class StudentHomeScreen extends StatefulWidget {
 class _StudentHomeScreenState extends State<StudentHomeScreen> {
   List<MenuItem> listOfTodaysMeals;
   Notice latestNotice;
-  bool hasPaidFees;
+  PaymentStatus paymentStatus;
+  int lastMonthLeaveCount = 0;
   bool _isLoading = false;
   StudentHomeBloc _homeBloc;
 
@@ -46,9 +49,14 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
             DMSnackBar.show(context, state.errors.message);
           } else if (state is StudentHomeFetchSuccess) {
             setState(() {
-              hasPaidFees = state.hasPaidFees;
+              paymentStatus = state.paymentStatus;
               listOfTodaysMeals = state.listOfTodaysMeals;
               latestNotice = state.latestNotice.takeFirstOrNull();
+              lastMonthLeaveCount = state.leaveCount;
+            });
+          } else if (state is StudentHomePaymentSuccess) {
+            setState(() {
+              paymentStatus = state.paymentStatus;
             });
           }
         },
@@ -57,7 +65,8 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
           if (state is StudentHomeIdle) {
             _homeBloc.add(FetchStudentHomeDetails());
             return Container();
-          } else if (state is StudentHomeFetchSuccess) {
+          } else if (state is StudentHomeFetchSuccess ||
+              state is StudentHomePaymentSuccess) {
             return HomeScrollView(
                 child: Column(
               children: [
@@ -81,7 +90,11 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                       latestNotice: latestNotice,
                       noticesCallback: widget.noticesCallback),
                 ),
-                Visibility(visible: !hasPaidFees, child: HomePaymentCard()),
+                HomePaymentCard(
+                  paymentStatus: paymentStatus,
+                  lastMonthLeaveCount: lastMonthLeaveCount,
+                  onPaymentSuccessCallback: onPaymentSuccessCallback,
+                ),
                 StudentAnnualPollCard()
               ],
             ));
@@ -91,5 +104,9 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         },
       ),
     );
+  }
+
+  onPaymentSuccessCallback(Payment payment) {
+    _homeBloc.add(MakePayment(payment));
   }
 }

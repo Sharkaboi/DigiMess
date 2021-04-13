@@ -1,6 +1,6 @@
 import 'package:DigiMess/common/firebase/models/payment.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/student/payment_history/bloc/payments_bloc.dart';
 import 'package:DigiMess/modules/student/payment_history/bloc/payments_events.dart';

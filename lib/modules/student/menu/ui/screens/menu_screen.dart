@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/firebase/models/menu_item.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_filter_menu.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/student/menu/bloc/menu_bloc.dart';

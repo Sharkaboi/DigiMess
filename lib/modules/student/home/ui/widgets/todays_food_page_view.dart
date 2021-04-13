@@ -1,6 +1,5 @@
-import 'package:DigiMess/common/extensions/date_extensions.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/firebase/models/menu_item.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
 import 'package:DigiMess/modules/student/home/ui/widgets/todays_food_item.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';

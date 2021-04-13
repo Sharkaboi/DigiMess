@@ -1,10 +1,10 @@
 import 'package:DigiMess/common/bloc/dm_bloc.dart';
 import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/bloc/dm_states.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/extensions/string_extensions.dart';
 import 'package:DigiMess/common/router/routes.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/common/widgets/no_network_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
-class DMScaffold extends StatelessWidget {
+class DMScaffold extends StatefulWidget {
   final body;
   final floatingActionButton;
   final floatingActionButtonLocation;
@@ -40,8 +40,6 @@ class DMScaffold extends StatelessWidget {
   final List<Widget> actionMenu;
   final TextStyle appBarTitleTextStyle;
   final TabBar tabBar;
-  DMBloc _dmBloc;
-
   final void Function(bool) onDrawerChanged;
   final void Function(bool) onEndDrawerChanged;
   final String restorationId;
@@ -77,56 +75,68 @@ class DMScaffold extends StatelessWidget {
     this.onEndDrawerChanged,
     this.restorationId,
     this.tabBar,
-  });
+  })  : assert(primary != null),
+        assert(extendBody != null),
+        assert(extendBodyBehindAppBar != null),
+        assert(drawerDragStartBehavior != null),
+        super(key: key);
+
+  @override
+  _DMScaffoldState createState() => _DMScaffoldState();
+}
+
+class _DMScaffoldState extends State<DMScaffold> {
+  DMBloc _dmBloc;
 
   @override
   Widget build(BuildContext context) {
     _dmBloc = BlocProvider.of<DMBloc>(context);
     return Scaffold(
-        key: key,
-        floatingActionButton: floatingActionButton,
-        floatingActionButtonLocation: floatingActionButtonLocation,
-        floatingActionButtonAnimator: floatingActionButtonAnimator,
-        persistentFooterButtons: persistentFooterButtons,
-        drawer: drawer,
-        endDrawer: endDrawer,
-        bottomNavigationBar: bottomNavigationBar,
-        bottomSheet: bottomSheet,
-        backgroundColor: backgroundColor,
-        onDrawerChanged: onDrawerChanged,
-        onEndDrawerChanged: onEndDrawerChanged,
-        restorationId: restorationId,
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-        primary: primary,
-        drawerDragStartBehavior: drawerDragStartBehavior,
-        extendBody: extendBody,
-        extendBodyBehindAppBar: extendBodyBehindAppBar,
-        drawerEdgeDragWidth: drawerEdgeDragWidth,
-        drawerEnableOpenDragGesture: drawerEnableOpenDragGesture,
-        endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture,
-        drawerScrimColor: drawerScrimColor,
-        appBar: isAppBarRequired
+        key: widget.key,
+        floatingActionButton: widget.floatingActionButton,
+        floatingActionButtonLocation: widget.floatingActionButtonLocation,
+        floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+        persistentFooterButtons: widget.persistentFooterButtons,
+        drawer: widget.drawer,
+        endDrawer: widget.endDrawer,
+        bottomNavigationBar: widget.bottomNavigationBar,
+        bottomSheet: widget.bottomSheet,
+        backgroundColor: widget.backgroundColor,
+        onDrawerChanged: widget.onDrawerChanged,
+        onEndDrawerChanged: widget.onEndDrawerChanged,
+        restorationId: widget.restorationId,
+        resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+        primary: widget.primary,
+        drawerDragStartBehavior: widget.drawerDragStartBehavior,
+        extendBody: widget.extendBody,
+        extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
+        drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
+        drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
+        endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
+        drawerScrimColor: widget.drawerScrimColor,
+        appBar: widget.isAppBarRequired
             ? AppBar(
-                centerTitle: isCenterAppBarTitle,
+                centerTitle: widget.isCenterAppBarTitle,
                 brightness: Brightness.dark,
                 title: Text(
-                  appBarTitleText.capitalizeFirst(),
-                  style: appBarTitleTextStyle ?? DMTypo.bold16WhiteTextStyle,
+                  widget.appBarTitleText.capitalizeFirst(),
+                  style: widget.appBarTitleTextStyle ??
+                      DMTypo.bold16WhiteTextStyle,
                 ),
-                leading: drawer != null
+                leading: widget.drawer != null
                     ? null
                     : IconButton(
                         icon: Icon(
                           Icons.arrow_back_ios,
                           color: DMColors.white,
                         ),
-                        onPressed: appBarBackCallback ??
+                        onPressed: widget.appBarBackCallback ??
                             () => Navigator.of(context).pop(),
                       ),
-                actions: actionMenu,
-                bottom: tabBar != null
+                actions: widget.actionMenu,
+                bottom: widget.tabBar != null
                     ? PreferredSize(
-                        preferredSize: tabBar.preferredSize,
+                        preferredSize: widget.tabBar.preferredSize,
                         child: Container(
                             decoration: BoxDecoration(
                                 color: DMColors.primaryBlue,
@@ -136,35 +146,32 @@ class DMScaffold extends StatelessWidget {
                                       blurRadius: 4,
                                       offset: Offset(0, 4))
                                 ]),
-                            child: tabBar))
+                            child: widget.tabBar))
                     : null,
               )
             : null,
         body: SafeArea(
-            left: true,
-            top: true,
-            bottom: false,
-            right: true,
             child: BlocConsumer<DMBloc, DMStates>(listener: (context, state) {
-              if (state is UserLoggedOut) {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    Routes.AUTH_SCREEN, (route) => false);
-              } else if (state is DMErrorState) {
-                DMSnackBar.show(context, state.errorMessage);
-              }
-            }, builder: (context, state) {
-              if (state is DMIdleState) {
-                _dmBloc.add(InitNetworkStateListener());
-                return KeyboardAvoider(child: Container());
-              } else if (state is NoNetworkState) {
-                return KeyboardAvoider(child: NoNetworkScreen());
-              } else if (state is NetworkConnectedState) {
-                _dmBloc.add(CheckDMStatus());
-                return KeyboardAvoider(child: body);
-              } else {
-                // for UserLoggedOut, UserLoggedIn, DMErrorState.
-                return KeyboardAvoider(child: body);
-              }
-            })));
+          if (state is UserLoggedOut) {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil(Routes.AUTH_SCREEN, (route) => false);
+          } else if (state is NetworkConnectedState) {
+            _dmBloc.add(CheckDMStatus());
+          } else if (state is DMErrorState) {
+            DMSnackBar.show(context, state.errorMessage);
+          }
+        }, builder: (context, state) {
+          if (state is DMIdleState) {
+            _dmBloc.add(InitNetworkStateListener());
+            return KeyboardAvoider(child: Container());
+          } else if (state is NoNetworkState) {
+            return KeyboardAvoider(child: NoNetworkScreen());
+          } else if (state is NetworkConnectedState) {
+            return KeyboardAvoider(child: Container());
+          } else {
+            // for UserLoggedOut, UserLoggedIn, DMErrorState.
+            return KeyboardAvoider(child: widget.body);
+          }
+        })));
   }
 }
