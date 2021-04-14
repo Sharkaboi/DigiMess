@@ -5,12 +5,16 @@ import 'package:DigiMess/common/util/app_status.dart';
 import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:DigiMess/common/util/task_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 
 class SplashRepository {
   Future<DMTaskState> initApp() async {
     try {
       await Firebase.initializeApp();
+      if (FirebaseAuth.instance.currentUser == null) {
+        await FirebaseAuth.instance.signInAnonymously();
+      }
       final AppStatus appStatus =
           await SharedPrefRepository.getAppClientStatus();
       final CollectionReference _usersClient =
