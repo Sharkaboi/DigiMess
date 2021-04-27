@@ -46,6 +46,7 @@ dependencies:
   # Firebase dependencies
   firebase_core: ^1.0.1
   cloud_firestore: ^1.0.1
+  firebase_auth: ^1.0.1
   # crypto functions
   crypto: ^3.0.0
   # charts library
@@ -56,6 +57,14 @@ dependencies:
   flutter_local_notifications: ^4.0.1+2
   # share intent library
   share: ^2.0.1
+  # dots indicator for pageview
+  dots_indicator: ^2.0.0
+  # otp text field
+  pin_code_fields: ^7.0.0
+  # text formatter
+  flutter_multi_formatter: ^2.0.1
+  # Toasts
+  fluttertoast: ^8.0.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -100,8 +109,25 @@ flutter:
     - assets/icons/notices.svg
     - assets/icons/payments.svg
     - assets/icons/profile.svg
-    - assets/icons/settings.svg
     - assets/icons/share.svg
+    - assets/icons/home_bg.svg
+    - assets/icons/food_icon.svg
+    - assets/icons/moon_icon.svg
+    - assets/icons/veg_icon.svg
+    - assets/icons/non_veg_icon.svg
+    - assets/icons/mess_card_icon.svg
+    - assets/icons/card.svg
+    - assets/icons/mail.svg
+    - assets/icons/failed.svg
+    - assets/icons/check.svg
+    - assets/icons/notice_alarm.svg
+    - assets/icons/profile_circle.svg
+    - assets/icons/corner_icon_top.svg
+    - assets/icons/corner_icon_bottom.svg
+    - assets/icons/log_out.svg
+    - assets/icons/poll.svg
+    - assets/icons/students.svg
+    - assets/icons/todays_food.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -115,14 +141,18 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-   - family: Comfortaa
-     fonts:
-       - asset: assets/fonts/Comfortaa-Bold.ttf
-       - asset: assets/fonts/Comfortaa-Light.ttf
-       - asset: assets/fonts/Comfortaa-Medium.ttf
-       - asset: assets/fonts/Comfortaa-Regular.ttf
-       - asset: assets/fonts/Comfortaa-SemiBold.ttf
-       - asset: assets/fonts/Comfortaa-VariableFont_wght.ttf
+    - family: Comfortaa
+      fonts:
+        - asset: assets/fonts/Comfortaa-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Comfortaa-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Comfortaa-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Comfortaa-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Comfortaa-Bold.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -12,6 +12,9 @@ class Notice extends Equatable {
 
   factory Notice.fromDocument(QueryDocumentSnapshot documentSnapshot) {
     final Map<String, dynamic> documentData = documentSnapshot.data();
+    if (documentData == null) {
+      return null;
+    }
     return Notice(
         noticeId: documentSnapshot.id,
         title: documentData['title'],

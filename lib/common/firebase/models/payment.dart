@@ -1,4 +1,4 @@
-import 'package:DigiMess/common/constants/payment_account_type.dart';
+import 'package:DigiMess/common/constants/enums/payment_account_type.dart';
 import 'package:DigiMess/common/extensions/date_extensions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class Payment extends Equatable {
   final String paymentId;
-  final String userId;
+  final DocumentReference user;
   final PaymentAccountType paymentAccountType;
   final DateTime paymentDate;
   final int paymentAmount;
@@ -14,7 +14,7 @@ class Payment extends Equatable {
 
   Payment(
       {@required this.paymentId,
-      @required this.userId,
+      @required this.user,
       @required this.paymentAccountType,
       @required this.paymentDate,
       @required this.paymentAmount,
@@ -22,9 +22,12 @@ class Payment extends Equatable {
 
   factory Payment.fromDocument(QueryDocumentSnapshot documentSnapshot) {
     final Map<String, dynamic> documentData = documentSnapshot.data();
+    if (documentData == null) {
+      return null;
+    }
     return Payment(
         paymentId: documentSnapshot.id,
-        userId: documentData['userId'],
+        user: documentData['userId'],
         paymentAccountType: PaymentAccountTypeExtensions.fromString(
             documentData['accountType']),
         paymentDate: getDateTimeOrNull(documentData['date']),
@@ -34,7 +37,7 @@ class Payment extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'userId': this.userId,
+      'userId': this.user,
       'accountType': this.paymentAccountType.toStringValue(),
       'date': Timestamp.fromDate(this.paymentDate),
       'amount': this.paymentAmount,
@@ -45,10 +48,26 @@ class Payment extends Equatable {
   @override
   List<Object> get props => [
         this.paymentId,
-        this.userId,
+        this.user,
         this.paymentAccountType,
         this.paymentDate,
         this.paymentAmount,
         this.description
       ];
+
+  Payment copyWith(
+      {String paymentId,
+      DocumentReference user,
+      PaymentAccountType paymentAccountType,
+      DateTime paymentDate,
+      int paymentAmount,
+      String description}) {
+    return Payment(
+        paymentId: paymentId ?? this.paymentId,
+        user: user ?? this.user,
+        paymentAccountType: paymentAccountType ?? this.paymentAccountType,
+        paymentDate: paymentDate ?? this.paymentDate,
+        paymentAmount: paymentAmount ?? this.paymentAmount,
+        description: description ?? this.description);
+  }
 }

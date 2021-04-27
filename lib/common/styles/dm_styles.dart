@@ -1,3 +1,0 @@
-class DMStyles {
-  DMStyles._();
-}

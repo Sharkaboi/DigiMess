@@ -35,11 +35,14 @@
     - friday : *(Boolean)*
     - saturday : *(Boolean)*
   - isEnabled : *(Boolean)*
-  - count : *(Number)*
-  
+  - annualPoll : *(Map)*
+    - forBreakFast : *(Number)*
+    - forLunch : *(Number)*
+    - forDinner : *(Number)*
+
 ### **Payments**
 - paymentId : *(String)*
-  - userId : *(String)*
+  - userId : *(Document Reference)*
   - amount : *(Number)*
   - date : *(Timestamp)*
   - accountType : *(String ENUM)*
@@ -48,7 +51,8 @@
 ### **Complaints**
 - complaintId : *(String)*
   - complaint : *(String)*
-  - userId : *(String)*
+  - category : *(Array<String>)*
+  - userId : *(Document Reference)*
   - date : *(Timestamp)*
 
 ### **Notices**
@@ -60,5 +64,5 @@
 - leaveEntryId : *(String)*
   - startDate : *(Timestamp)*
   - endDate : *(Timestamp)*
-  - userId : *(String)*
+  - userId : *(Document Reference)*
   - applyDate : *(Timestamp)*

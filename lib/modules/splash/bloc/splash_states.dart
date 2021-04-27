@@ -1,5 +1,5 @@
-import 'package:DigiMess/common/errors/error_wrapper.dart';
-import 'package:DigiMess/common/constants/user_types.dart';
+import 'package:DigiMess/common/util/app_status.dart';
+import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SplashState extends Equatable {
@@ -11,13 +11,18 @@ class SplashLoading extends SplashState {
   List<Object> get props => [];
 }
 
-class UserLoginStatus extends SplashState {
-  final UserType userType;
-
-  UserLoginStatus(this.userType);
-
+class UserLoggedOutSplash extends SplashState {
   @override
   List<Object> get props => [];
+}
+
+class SplashSuccess extends SplashState {
+  final AppStatus appStatus;
+
+  SplashSuccess(this.appStatus);
+
+  @override
+  List<Object> get props => [appStatus];
 }
 
 class SplashError extends SplashState {

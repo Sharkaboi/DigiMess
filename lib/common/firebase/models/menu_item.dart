@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +8,9 @@ class MenuItem extends Equatable {
   final String name;
   final bool isEnabled;
   final String imageUrl;
-  final int count;
   final _MenuItemIsAvailable itemIsAvailable;
   final _DaysAvailable daysAvailable;
+  final _AnnualPollVotes annualPollVotes;
 
   MenuItem(
       {@required this.itemId,
@@ -18,7 +19,7 @@ class MenuItem extends Equatable {
       @required this.isEnabled,
       @required this.imageUrl,
       @required this.itemIsAvailable,
-      @required this.count,
+      @required this.annualPollVotes,
       @required this.daysAvailable});
 
   @override
@@ -29,9 +30,37 @@ class MenuItem extends Equatable {
         this.isEnabled,
         this.imageUrl,
         this.itemIsAvailable,
-        this.count,
+        this.annualPollVotes,
         this.daysAvailable
       ];
+
+  factory MenuItem.fromQueryDocumentSnapshot(QueryDocumentSnapshot doc) {
+    final Map<String, dynamic> data = doc.data();
+    if (data == null) {
+      return null;
+    }
+    return MenuItem(
+        itemId: doc.id,
+        name: data['name'],
+        isVeg: data['isVeg'],
+        isEnabled: data['isEnabled'],
+        imageUrl: data['imageUrl'],
+        itemIsAvailable: _MenuItemIsAvailable.fromMap(data['isAvailable']),
+        annualPollVotes: _AnnualPollVotes.fromMap(data['annualPoll']),
+        daysAvailable: _DaysAvailable.fromMap(data['daysAvailable']));
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': this.name,
+      'isVeg': this.isVeg,
+      'isEnabled': this.isEnabled,
+      'imageUrl': this.imageUrl,
+      'isAvailable': this.itemIsAvailable.toMap(),
+      'annualPoll': this.annualPollVotes.toMap(),
+      'daysAvailable': this.daysAvailable.toMap(),
+    };
+  }
 }
 
 class _MenuItemIsAvailable extends Equatable {
@@ -45,6 +74,10 @@ class _MenuItemIsAvailable extends Equatable {
       @required this.isDinner});
 
   factory _MenuItemIsAvailable.fromMap(Map<String, dynamic> mapField) {
+    if (mapField == null) {
+      return _MenuItemIsAvailable(
+          isBreakfast: false, isLunch: false, isDinner: false);
+    }
     return _MenuItemIsAvailable(
         isBreakfast: mapField['breakfast'],
         isDinner: mapField['dinner'],
@@ -83,6 +116,16 @@ class _DaysAvailable extends Equatable {
   });
 
   factory _DaysAvailable.fromMap(Map<String, dynamic> mapField) {
+    if (mapField == null) {
+      return _DaysAvailable(
+          monday: false,
+          tuesday: false,
+          wednesday: false,
+          thursday: false,
+          friday: false,
+          saturday: false,
+          sunday: false);
+    }
     return _DaysAvailable(
         monday: mapField['monday'],
         tuesday: mapField['tuesday'],
@@ -115,4 +158,36 @@ class _DaysAvailable extends Equatable {
         this.saturday,
         this.sunday
       ];
+}
+
+class _AnnualPollVotes extends Equatable {
+  final int forBreakFast;
+  final int forLunch;
+  final int forDinner;
+
+  _AnnualPollVotes(
+      {@required this.forBreakFast,
+      @required this.forLunch,
+      @required this.forDinner});
+
+  factory _AnnualPollVotes.fromMap(Map<String, dynamic> mapField) {
+    if (mapField == null) {
+      return _AnnualPollVotes(forBreakFast: 0, forDinner: 0, forLunch: 0);
+    }
+    return _AnnualPollVotes(
+        forBreakFast: mapField['forBreakFast'],
+        forLunch: mapField['forLunch'],
+        forDinner: mapField['forDinner']);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'forBreakFast': this.forBreakFast,
+      'forLunch': this.forLunch,
+      'forDinner': this.forDinner
+    };
+  }
+
+  @override
+  List<Object> get props => [this.forDinner, this.forLunch, this.forBreakFast];
 }

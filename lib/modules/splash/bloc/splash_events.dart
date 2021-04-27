@@ -8,3 +8,7 @@ class InitApp extends SplashEvent {
   @override
   List<Object> get props => [];
 }
+class LogOutUserSplash extends SplashEvent {
+  @override
+  List<Object> get props => [];
+}
