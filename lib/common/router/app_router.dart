@@ -1,4 +1,6 @@
+import 'package:DigiMess/common/constants/user_types.dart';
 import 'package:DigiMess/common/router/routes.dart';
+import 'package:DigiMess/modules/auth/login/ui/screens/login_chooser.dart';
 import 'package:DigiMess/modules/auth/login/ui/screens/login_screen.dart';
 import 'package:DigiMess/modules/auth/register/ui/screens/register_screen.dart';
 import 'package:DigiMess/modules/auth/ui/screens/auth_screen.dart';
@@ -16,7 +18,7 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return PageTransition(
-          type: PageTransitionType.fade,
+            type: PageTransitionType.fade,
             child: BlocProvider(
                 create: (context) =>
                     SplashBloc(SplashIdle(), SplashRepository()),
@@ -24,19 +26,30 @@ class AppRouter {
       case Routes.AUTH_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
             child: AuthScreen());
-      case Routes.LOGIN_SCREEN:
+      case Routes.LOGIN_Chooser:
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  LoginScreen());
+            duration: Duration(milliseconds: 500),
+            child: LoginChooser());
+      case Routes.LOGIN_SCREEN:
+        final UserType userType = settings.arguments;
+        return PageTransition(
+          type: PageTransitionType.fade,
+          duration: Duration(milliseconds: 500),
+          child: Login(userType:userType),
+        );
       case Routes.REGISTER_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  RegisterScreen());
+            duration: Duration(milliseconds: 500),
+            child: RegisterScreen());
       case Routes.MAIN_SCREEN_STUDENT:
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  StudentMainScreen());
+            duration: Duration(milliseconds: 500),
+            child: StudentMainScreen());
       default:
         return null;
     }
