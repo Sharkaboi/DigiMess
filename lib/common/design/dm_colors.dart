@@ -17,4 +17,5 @@ class DMColors {
   static const Color yellow = Color.fromRGBO(234, 238, 50, 1);
   static const Color green = Color.fromRGBO(47, 171, 44, 1);
   static const Color red = Color.fromRGBO(244, 9, 9, 1);
+  static const Color textFieldMutedBg = Color.fromRGBO(230, 232, 239, 1);
 }

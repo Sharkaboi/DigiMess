@@ -19,6 +19,7 @@ class DMTheme {
             selectionHandleColor: DMColors.primaryBlue,
             selectionColor: DMColors.primaryBlue.withOpacity(0.3)),
         backgroundColor: isDarkTheme ? DMColors.black : DMColors.white,
+        scaffoldBackgroundColor: DMColors.lightBlue,
         indicatorColor: DMColors.primaryBlue.withOpacity(0.3),
         buttonColor: DMColors.primaryBlue,
         hintColor: DMColors.grey.withOpacity(0.3),

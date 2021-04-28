@@ -128,6 +128,9 @@ flutter:
     - assets/icons/poll.svg
     - assets/icons/students.svg
     - assets/icons/todays_food.svg
+    - assets/icons/username_icon.svg
+    - assets/icons/password_icon.svg
+    - assets/icons/calendar.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -141,6 +144,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: Alef
+      fonts:
+          - asset: assets/fonts/Alef-Bold.ttf
+            weight: 700
     - family: Comfortaa
       fonts:
         - asset: assets/fonts/Comfortaa-Light.ttf

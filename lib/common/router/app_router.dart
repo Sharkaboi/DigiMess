@@ -43,7 +43,7 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: AuthScreen());
-      case Routes.LOGIN_Chooser:
+      case Routes.LOGIN_CHOOSER_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),

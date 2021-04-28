@@ -1,196 +1,201 @@
-
 import 'package:DigiMess/common/constants/enums/user_types.dart';
-import 'package:DigiMess/common/constants/user_types.dart';
+import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/router/routes.dart';
-import 'package:DigiMess/common/styles/dm_colors.dart';
-import 'package:DigiMess/common/styles/dm_typography.dart';
+import 'package:DigiMess/common/shared_prefs/shared_pref_repository.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
-import 'package:DigiMess/common/widgets/dm_scaffold.dart';
-import 'package:DigiMess/modules/auth/ui/widgets/background.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-class Login extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   final UserType userType;
-  const Login({this.userType});
+
+  const LoginScreen({this.userType});
+
   @override
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   String _password;
   bool _obscureText = true;
+
+  TextEditingController _passController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+
   // Toggles the password show status
   void _togglePasswordStatus() {
     setState(() {
       _obscureText = !_obscureText;
     });
   }
+
   @override
   Widget build(BuildContext context) {
-
-    return DMScaffold(
-      resizeToAvoidBottomInset:false,
+    return SafeArea(
+      child: Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 10.0),
-                child: Text('Sign In',
-                    style: DMTypo.bold24BlackTextStyle
-                )
-            ),
+                margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10)
+                    .copyWith(top: 0),
+                child: Text('SIGN IN', style: DMTypo.bold24BlackTextStyle)),
             Form(
               key: _formKey,
-              child: Container(
-                  padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children:<Widget>[
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                    child: TextFormField(
+              child: Column(children: [
+                Container(
+                  margin: const EdgeInsets.all(20).copyWith(bottom: 0),
+                  child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: _usernameController,
+                    decoration: InputDecoration(
+                      hintText: 'Username',
+                      fillColor: DMColors.textFieldMutedBg,
+                      filled: true,
+                      prefixIcon: Container(
+                        margin: const EdgeInsets.only(left: 20, right: 10),
+                        child:
+                            SvgPicture.asset("assets/icons/username_icon.svg"),
+                      ),
+                      prefixIconConstraints: BoxConstraints(maxWidth: 54),
+                      hintStyle: DMTypo.bold18MutedBlueTextStyle,
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(color: DMColors.mutedBlue)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(color: Colors.transparent)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(color: DMColors.mutedBlue)),
+                    ),
+                    maxLines: 1,
+                    validator: (value) {
+                      if (value.length < 8) {
+                        return 'Invalid username';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(20),
+                  child: TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _passController,
                       decoration: InputDecoration(
-                        hintText: 'username',
-                        fillColor: Color.fromRGBO(230,232,239,1),
+                        hintText: 'Password',
+                        fillColor: DMColors.textFieldMutedBg,
                         filled: true,
-                        prefixIcon: Icon(Icons.person),
-                        contentPadding: new EdgeInsets.only(top: 10.0,bottom: 10.0),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                          borderSide: BorderSide(
-                            color: DMColors.primaryBlue
-                          )
-                        ),
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(color: DMColors.mutedBlue)),
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
-                                color: DMColors.white
-                            )
-                        ),
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(color: Colors.transparent)),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
-                                color: DMColors.primaryBlue
-                            )
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(color: DMColors.mutedBlue)),
+                        prefixIcon: Container(
+                          margin: const EdgeInsets.only(left: 20, right: 10),
+                          child: SvgPicture.asset(
+                              "assets/icons/password_icon.svg"),
+                        ),
+                        prefixIconConstraints: BoxConstraints(maxWidth: 54),
+                        hintStyle: DMTypo.bold18MutedBlueTextStyle,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: _togglePasswordStatus,
+                          color: DMColors.mutedBlue,
                         ),
                       ),
                       maxLines: 1,
-                      validator: (value){
-                        if(value.length<8) {
-                          return 'Invalid username';
-                        }
-                        else{
+                      validator: (value) {
+                        if (value.length < 8) {
+                          return 'A password is min 8 characters';
+                        } else {
                           return null;
+                        }
+                      },
+                      obscureText: _obscureText),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 60,
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Hero(
+                    tag: 'signUp-Staff',
+                    child: DMPillButton(
+                      text: "Sign In",
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          final username = _usernameController.text;
+                          final password = _passController.text;
+                          if (widget.userType == UserType.STUDENT) {
+                            SharedPrefRepository.setUserType(UserType.STUDENT);
+                            SharedPrefRepository.setUsername("20418076");
+                            SharedPrefRepository.setTheUserId(
+                                "QXe986cVzOQUgQgC2ETo");
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                Routes.MAIN_SCREEN_STUDENT, (route) => false);
+                          } else {
+                            SharedPrefRepository.setUserType(UserType.STAFF);
+                            SharedPrefRepository.setUsername("20418076");
+                            SharedPrefRepository.setTheUserId(
+                                "QXe986cVzOQUgQgC2ETo");
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                Routes.MAIN_SCREEN_STAFF, (route) => false);
+                          }
                         }
                       },
                     ),
                   ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        decoration: InputDecoration(
-                          hintText: 'password',
-                          fillColor: Color.fromRGBO(230,232,239,1),
-                          filled: true,
-                          contentPadding: new EdgeInsets.only(top: 10.0,bottom: 10.0),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                              borderSide: BorderSide(
-                                  color: DMColors.primaryBlue
-                              )
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                              borderSide: BorderSide(
-                                  color: DMColors.white
-                              )
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                              borderSide: BorderSide(
-                                  color: DMColors.primaryBlue
-                              )
-                          ),
-                          prefixIcon: Icon(Icons.lock),
-                          suffixIcon:  IconButton(
-                            icon:Icon(_obscureText ? Icons.visibility:Icons.visibility_off,),
-                            onPressed: _togglePasswordStatus,
-                            color: DMColors.mutedBlue,
-                          ),
-                        ),
-                        maxLines: 1,
-                        validator: (value){
-                          if(value.length<8) {
-                            return 'min 8 characters';
-                          }
-                          else{
-                            return null;
-                          }
-                        },
-                        obscureText: _obscureText,
-                        onChanged: (val){
-                          setState(() {
-                            _password = val.trim();
-                          });
-                        },
-                      ),
-
-                    ),
-                    Container(
-                      width: 200,
-                      height: 60,
-                      padding: const EdgeInsets.all(5.0),
-                      child: Hero(
-                          tag: 'signIn-Student',
-                        child: DarkButton(
-                          text: "Sign In",
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 20.0),
-                      child: Column(
-                        children: [
-                          Container(
-                            child: Text("Don't have an account?",
-                            style: DMTypo.bold18BlackTextStyle,
-                            ),
-                          ),
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  child: Text("click here to",
-                                    style: DMTypo.bold16BlackTextStyle,
-                                  ),
-                                ),
-                                Container(
-                                  child: GestureDetector(
-                                    onTap: (){
-                                      Navigator.pushNamed(context, Routes.AUTH_SCREEN);
-                                    },
-                                    child: Text(" sign up",
-                                      style: DMTypo.bold16AccentBlueTextStyle,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                ]
                 ),
-              ),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Don't have an account?",
+                        style: DMTypo.bold24BlackTextStyle,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Click here to",
+                              style: DMTypo.bold18BlackTextStyle,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, Routes.REGISTER_SCREEN);
+                              },
+                              child: Text(
+                                " sign up",
+                                style: DMTypo.bold18AccentBlueTextStyle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ]),
             )
           ],
         ),
+      ),
     );
   }
 }
