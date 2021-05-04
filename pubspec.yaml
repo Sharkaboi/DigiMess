@@ -125,7 +125,6 @@ flutter:
     - assets/icons/log_out.svg
     - assets/icons/poll.svg
     - assets/icons/students.svg
-    - assets/icons/todays_food.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

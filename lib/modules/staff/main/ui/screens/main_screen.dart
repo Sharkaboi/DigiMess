@@ -35,11 +35,7 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
       return Container();
     } else if (currentScreen == StaffNavDestinations.MENU) {
       return Container();
-    } else if (currentScreen == StaffNavDestinations.TODAYS_FOOD) {
-      return Container();
     } else if (currentScreen == StaffNavDestinations.NOTICES) {
-      return Container();
-    } else if (currentScreen == StaffNavDestinations.PAYMENTS) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.LEAVES) {
       return Container();
