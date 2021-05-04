@@ -4,7 +4,6 @@ import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
-import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -59,83 +58,85 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DMScaffold(
-      isAppBarRequired: false,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 120),
-                child: SvgPicture.asset('assets/icons/mail.svg',
-                    height: 160, width: 160),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                child: Text("Verification", style: DMTypo.bold30BlackTextStyle),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                child: Text("You will receive an OTP via SMS",
-                    style: DMTypo.bold18MutedTextStyle),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                child: Container(
-                  width: 200,
-                  child: PinCodeTextField(
-                    keyboardType: TextInputType.number,
-                    appContext: context,
-                    controller: _controller,
-                    autoDismissKeyboard: true,
-                    onChanged: (_) {},
-                    textStyle: DMTypo.bold24BlackTextStyle,
-                    length: 4,
-                    showCursor: false,
-                    animationType: AnimationType.none,
-                    pinTheme: PinTheme(
-                      inactiveColor: DMColors.black,
-                      selectedColor: DMColors.black,
-                      activeColor: DMColors.primaryBlue,
-                    ),
-                  ),
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 120),
+                  child: SvgPicture.asset('assets/icons/mail.svg',
+                      height: 160, width: 160),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: 70,
-                child: Hero(
-                  tag: "proceedBtn",
-                  child: DMPillButton(
-                    text: "Verify",
-                    onPressed: verifyOtp,
-                  ),
+                Container(
+                  margin: EdgeInsets.only(top: 30),
+                  child:
+                      Text("Verification", style: DMTypo.bold30BlackTextStyle),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 20.0, bottom: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Didn't receive an OTP ?",
-                      style: DMTypo.bold14MutedTextStyle,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: InkWell(
-                        child: Text(
-                          "Send again",
-                          style: DMTypo.bold14PrimaryBlueTextStyle,
-                        ),
-                        onTap: () => {_showNotification()},
+                Container(
+                  margin: EdgeInsets.only(top: 30),
+                  child: Text("You will receive an OTP via SMS",
+                      style: DMTypo.bold18MutedTextStyle),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 30),
+                  child: Container(
+                    width: 200,
+                    child: PinCodeTextField(
+                      keyboardType: TextInputType.number,
+                      appContext: context,
+                      controller: _controller,
+                      autoDismissKeyboard: true,
+                      onChanged: (_) {},
+                      textStyle: DMTypo.bold24BlackTextStyle,
+                      length: 4,
+                      showCursor: false,
+                      animationType: AnimationType.none,
+                      pinTheme: PinTheme(
+                        inactiveColor: DMColors.black,
+                        selectedColor: DMColors.black,
+                        activeColor: DMColors.primaryBlue,
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                Container(
+                  margin: EdgeInsets.only(top: 30),
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: 70,
+                  child: Hero(
+                    tag: "proceedBtn",
+                    child: DMPillButton(
+                      text: "Verify",
+                      onPressed: verifyOtp,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20.0, bottom: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Didn't receive an OTP ?",
+                        style: DMTypo.bold14MutedTextStyle,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 10),
+                        child: InkWell(
+                          child: Text(
+                            "Send again",
+                            style: DMTypo.bold14PrimaryBlueTextStyle,
+                          ),
+                          onTap: () => {_showNotification()},
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

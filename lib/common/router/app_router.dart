@@ -1,5 +1,7 @@
+import 'package:DigiMess/common/constants/enums/user_types.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/router/routes.dart';
+import 'package:DigiMess/modules/auth/login/ui/screens/login_chooser.dart';
 import 'package:DigiMess/modules/auth/login/ui/screens/login_screen.dart';
 import 'package:DigiMess/modules/auth/register/ui/screens/register_screen.dart';
 import 'package:DigiMess/modules/auth/ui/screens/auth_screen.dart';
@@ -41,11 +43,17 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: AuthScreen());
-      case Routes.LOGIN_SCREEN:
+      case Routes.LOGIN_CHOOSER_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: LoginScreen());
+            child: LoginChooser());
+      case Routes.LOGIN_SCREEN:
+        final UserType userType = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: LoginScreen(userType:userType));
       case Routes.REGISTER_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,

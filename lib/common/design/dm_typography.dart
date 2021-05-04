@@ -1,4 +1,5 @@
 import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/design/dm_theme.dart';
 import 'package:flutter/material.dart';
 
 class DMTypo {
@@ -160,6 +161,32 @@ class DMTypo {
   static const TextStyle normal12MutedTextStyle =
       TextStyle(fontSize: 12, color: DMColors.grey);
 
+  static const TextStyle bold30MutedBlueTextStyle = TextStyle(
+      fontSize: 30, fontWeight: FontWeight.bold, color: DMColors.mutedBlue);
+  static const TextStyle bold24MutedBlueTextStyle = TextStyle(
+      fontSize: 24, fontWeight: FontWeight.bold, color: DMColors.mutedBlue);
+  static const TextStyle bold18MutedBlueTextStyle = TextStyle(
+      fontSize: 18, fontWeight: FontWeight.bold, color: DMColors.mutedBlue);
+  static const TextStyle bold16MutedBlueTextStyle = TextStyle(
+      fontSize: 16, fontWeight: FontWeight.bold, color: DMColors.mutedBlue);
+  static const TextStyle bold14MutedBlueTextStyle = TextStyle(
+      fontSize: 14, fontWeight: FontWeight.bold, color: DMColors.mutedBlue);
+  static const TextStyle bold12MutedBlueTextStyle = TextStyle(
+      fontSize: 12, fontWeight: FontWeight.bold, color: DMColors.mutedBlue);
+
+  static const TextStyle normal30MutedBlueTextStyle =
+      TextStyle(fontSize: 30, color: DMColors.mutedBlue);
+  static const TextStyle normal24MutedBlueTextStyle =
+      TextStyle(fontSize: 24, color: DMColors.mutedBlue);
+  static const TextStyle normal18MutedBlueTextStyle =
+      TextStyle(fontSize: 18, color: DMColors.mutedBlue);
+  static const TextStyle normal16MutedBlueTextStyle =
+      TextStyle(fontSize: 16, color: DMColors.mutedBlue);
+  static const TextStyle normal14MutedBlueTextStyle =
+      TextStyle(fontSize: 14, color: DMColors.mutedBlue);
+  static const TextStyle normal12MutedBlueTextStyle =
+      TextStyle(fontSize: 12, color: DMColors.mutedBlue);
+
   static const TextStyle bold48BlackTextStyle = TextStyle(
       fontSize: 48, fontWeight: FontWeight.bold, color: DMColors.black);
 
@@ -214,4 +241,11 @@ class DMTypo {
       TextStyle(fontSize: 14, color: DMColors.red);
   static const TextStyle normal12RedTextStyle =
       TextStyle(fontSize: 12, color: DMColors.red);
+
+  static const TextStyle alefBold36DarkBlueTextStyle = TextStyle(
+      fontSize: 36,
+      fontWeight: FontWeight.bold,
+      color: DMColors.darkBlue,
+      fontFamily: 'Alef',
+      fontFamilyFallback: [DMTheme.FONT_NAME]);
 }

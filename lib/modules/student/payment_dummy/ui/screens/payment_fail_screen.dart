@@ -8,36 +8,37 @@ import 'package:flutter_svg/flutter_svg.dart';
 class PaymentFailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: DMScaffold(
-        isAppBarRequired: false,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset('assets/icons/failed.svg',
-                  color: DMColors.primaryBlue, height: 200, width: 160),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-                child: Text(
-                  "Payment Failed! ☹",
-                  style: DMTypo.bold24PrimaryBlueTextStyle,
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: 70,
-                child: Hero(
-                  tag: "proceedBtn",
-                  child: DMPillButton(
-                    text: "Try Again",
-                    onPressed: () => navigateBackToDummyPayment(context),
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SvgPicture.asset('assets/icons/failed.svg',
+                    color: DMColors.primaryBlue, height: 200, width: 160),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                  child: Text(
+                    "Payment Failed! ☹",
+                    style: DMTypo.bold24PrimaryBlueTextStyle,
                   ),
                 ),
-              ),
-            ],
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: 70,
+                  child: Hero(
+                    tag: "proceedBtn",
+                    child: DMPillButton(
+                      text: "Try Again",
+                      onPressed: () => navigateBackToDummyPayment(context),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
