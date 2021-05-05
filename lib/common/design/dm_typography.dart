@@ -109,6 +109,8 @@ class DMTypo {
   static const TextStyle normal12AccentBlueTextStyle =
       TextStyle(fontSize: 12, color: DMColors.accentBlue);
 
+  static const TextStyle bold36WhiteTextStyle = TextStyle(
+      fontSize: 36, fontWeight: FontWeight.bold, color: DMColors.white);
   static const TextStyle bold30WhiteTextStyle = TextStyle(
       fontSize: 30, fontWeight: FontWeight.bold, color: DMColors.white);
   static const TextStyle bold24WhiteTextStyle = TextStyle(

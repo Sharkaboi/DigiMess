@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PaymentSuccessScreen extends StatefulWidget {
-  final VoidCallback paymentSuccessCallback;
+  final AsyncCallback paymentSuccessCallback;
 
-  const PaymentSuccessScreen({Key key, this.paymentSuccessCallback})
-      : super(key: key);
+  const PaymentSuccessScreen({Key key, this.paymentSuccessCallback}) : super(key: key);
 
   @override
   _PaymentSuccessScreenState createState() => _PaymentSuccessScreenState();
@@ -18,13 +18,13 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 3), () async {
       int i = 4;
       while (i > 0 && Navigator.canPop(context)) {
         i--;
         Navigator.pop(context);
       }
-      widget.paymentSuccessCallback();
+      await widget.paymentSuccessCallback();
     });
   }
 

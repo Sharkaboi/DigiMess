@@ -1,6 +1,11 @@
 import 'package:DigiMess/common/bloc/dm_bloc.dart';
 import 'package:DigiMess/common/bloc/dm_events.dart';
+import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
+import 'package:DigiMess/modules/staff/home/bloc/home_bloc.dart';
+import 'package:DigiMess/modules/staff/home/bloc/home_states.dart';
+import 'package:DigiMess/modules/staff/home/data/home_repository.dart';
+import 'package:DigiMess/modules/staff/home/ui/screens/home_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/widgets/staff_nav_drawer.dart';
 import 'package:DigiMess/modules/staff/main/util/staff_nav_destinations.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +35,17 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
 
   Widget getCurrentScreen() {
     if (currentScreen == StaffNavDestinations.HOME) {
-      return Container();
+      return BlocProvider(
+          create: (_) => StaffHomeBloc(
+              StaffHomeIdle(),
+              StaffHomeRepository(
+                  FirebaseClient.getMenuCollectionReference(),
+                  FirebaseClient.getNoticesCollectionReference(),
+                  FirebaseClient.getAbsenteesCollectionReference(),
+                  FirebaseClient.getUsersCollectionReference())),
+          child: StaffHomeScreen(
+            noticesCallback: noticesCallback,
+          ));
     } else if (currentScreen == StaffNavDestinations.STUDENTS) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.MENU) {
@@ -50,6 +65,12 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     } else {
       return Container();
     }
+  }
+
+  void noticesCallback() {
+    setState(() {
+      currentScreen = StaffNavDestinations.NOTICES;
+    });
   }
 
   itemOnClick(StaffNavDestinations destination) {

@@ -90,7 +90,6 @@ class _DMScaffoldState extends State<DMScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    _dmBloc = BlocProvider.of<DMBloc>(context);
     return Scaffold(
         key: widget.key,
         floatingActionButton: widget.floatingActionButton,
@@ -120,8 +119,7 @@ class _DMScaffoldState extends State<DMScaffold> {
                 brightness: Brightness.dark,
                 title: Text(
                   widget.appBarTitleText.capitalizeFirst(),
-                  style: widget.appBarTitleTextStyle ??
-                      DMTypo.bold16WhiteTextStyle,
+                  style: widget.appBarTitleTextStyle ?? DMTypo.bold16WhiteTextStyle,
                 ),
                 leading: widget.drawer != null
                     ? null
@@ -130,38 +128,37 @@ class _DMScaffoldState extends State<DMScaffold> {
                           Icons.arrow_back_ios,
                           color: DMColors.white,
                         ),
-                        onPressed: widget.appBarBackCallback ??
-                            () => Navigator.of(context).pop(),
+                        onPressed: widget.appBarBackCallback ?? () => Navigator.of(context).pop(),
                       ),
                 actions: widget.actionMenu,
                 bottom: widget.tabBar != null
                     ? PreferredSize(
                         preferredSize: widget.tabBar.preferredSize,
                         child: Container(
-                            decoration: BoxDecoration(
-                                color: DMColors.primaryBlue,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: DMColors.black.withOpacity(0.25),
-                                      blurRadius: 4,
-                                      offset: Offset(0, 4))
-                                ]),
+                            decoration: BoxDecoration(color: DMColors.primaryBlue, boxShadow: [
+                              BoxShadow(
+                                  color: DMColors.black.withOpacity(0.25),
+                                  blurRadius: 4,
+                                  offset: Offset(0, 4))
+                            ]),
                             child: widget.tabBar))
                     : null,
               )
             : null,
         body: SafeArea(
             child: BlocConsumer<DMBloc, DMStates>(listener: (context, state) {
-          if (state is UserLoggedOut) {
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil(Routes.AUTH_SCREEN, (route) => false);
-          } else if (state is NetworkConnectedState) {
+          if (state is NetworkConnectedState) {
             _dmBloc.add(CheckDMStatus());
           } else if (state is DMErrorState) {
             DMSnackBar.show(context, state.errorMessage);
           }
         }, builder: (context, state) {
-          if (state is DMIdleState) {
+          _dmBloc = BlocProvider.of<DMBloc>(context);
+          if (state is UserLoggedOut) {
+            Future.microtask(() => Navigator.of(context)
+                .pushNamedAndRemoveUntil(Routes.AUTH_SCREEN, (route) => false));
+            return KeyboardAvoider(child: Container());
+          } else if (state is DMIdleState) {
             _dmBloc.add(InitNetworkStateListener());
             return KeyboardAvoider(child: Container());
           } else if (state is NoNetworkState) {

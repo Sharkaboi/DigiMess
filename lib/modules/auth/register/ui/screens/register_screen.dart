@@ -41,16 +41,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             children: [
               Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20)
-                      .copyWith(top: 50),
+                  margin: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 50),
                   child: Text('SIGN UP', style: DMTypo.bold24BlackTextStyle)),
               Form(
                 key: _formKey,
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   child: Column(children: [
-                    SignUpTextFormField(
-                        controller: _nameController, labelText: 'Name'),
+                    SignUpTextFormField(controller: _nameController, labelText: 'Name'),
                     SignUpTextFormField(
                       controller: _admissionController,
                       labelText: 'Admission Number',
@@ -69,8 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         showError: showError,
                         validator: (date) {
                           if (date != null &&
-                              date.difference(DateTime.now()).inDays.abs() >
-                                  365 * 17) {
+                              date.difference(DateTime.now()).inDays.abs() > 365 * 17) {
                             return null;
                           } else {
                             return "Must be 17 or older to enter";
@@ -153,6 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SignUpTextFormField(
                       controller: _confirmPassController,
                       labelText: 'Confirm Password',
+                      obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       validator: (String value) {
                         if (value.isEmpty) {
@@ -165,8 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 40)
-                          .copyWith(top: 20),
+                      margin: EdgeInsets.symmetric(horizontal: 40).copyWith(top: 20),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,17 +184,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: Row(
                                 children: [
                                   isVeg == true
-                                      ? Icon(Icons.circle,
-                                          color: DMColors.primaryBlue)
-                                      : Icon(Icons.panorama_fish_eye,
-                                          color: DMColors.grey),
+                                      ? Icon(Icons.circle, color: DMColors.primaryBlue)
+                                      : Icon(Icons.panorama_fish_eye, color: DMColors.grey),
                                   Container(
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 5),
+                                      margin: EdgeInsets.symmetric(horizontal: 5),
                                       child: Text('Veg',
                                           style: isVeg == true
-                                              ? DMTypo
-                                                  .bold16PrimaryBlueTextStyle
+                                              ? DMTypo.bold16PrimaryBlueTextStyle
                                               : DMTypo.bold16MutedTextStyle))
                                 ],
                               ),
@@ -215,17 +208,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: Row(
                                 children: [
                                   isVeg == false
-                                      ? Icon(Icons.circle,
-                                          color: DMColors.primaryBlue)
-                                      : Icon(Icons.panorama_fish_eye,
-                                          color: DMColors.grey),
+                                      ? Icon(Icons.circle, color: DMColors.primaryBlue)
+                                      : Icon(Icons.panorama_fish_eye, color: DMColors.grey),
                                   Container(
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 5),
+                                      margin: EdgeInsets.symmetric(horizontal: 5),
                                       child: Text('Non Veg',
                                           style: isVeg == false
-                                              ? DMTypo
-                                                  .bold16PrimaryBlueTextStyle
+                                              ? DMTypo.bold16PrimaryBlueTextStyle
                                               : DMTypo.bold16MutedTextStyle))
                                 ],
                               ),
@@ -248,7 +237,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         tag: 'signUp-Staff',
                         child: DMPillButton(
                           text: "Sign up",
-                          onPressed: () {
+                          onPressed: () async {
                             setState(() {
                               showError = true;
                             });
@@ -256,20 +245,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 _dateOfBirth != null &&
                                 _yearOfCompletion != null &&
                                 _yearOfAdmission != null) {
-                              Navigator.pushNamed(
-                                  context, Routes.DUMMY_PAYMENT_SCREEN,
-                                  arguments: DummyPaymentArguments(
-                                      "Caution deposit", 3000, () {
-                                    SharedPrefRepository.setUserType(
-                                        UserType.STUDENT);
-                                    SharedPrefRepository.setUsername(
-                                        "20418076");
-                                    SharedPrefRepository.setTheUserId(
-                                        "QXe986cVzOQUgQgC2ETo");
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                            Routes.MAIN_SCREEN_STUDENT,
-                                            (route) => false);
+                              Navigator.pushNamed(context, Routes.DUMMY_PAYMENT_SCREEN,
+                                  arguments: DummyPaymentArguments("Caution deposit", 3000, () async {
+                                    await SharedPrefRepository.setUserType(UserType.STUDENT);
+                                    await SharedPrefRepository.setUsername("20418076");
+                                    await SharedPrefRepository.setTheUserId("QXe986cVzOQUgQgC2ETo");
+                                    Navigator.of(context).pushNamedAndRemoveUntil(
+                                        Routes.MAIN_SCREEN_STUDENT, (route) => false);
                                   }));
                             }
                           },
