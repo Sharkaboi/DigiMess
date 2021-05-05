@@ -5,13 +5,14 @@ import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends StatefulWidget {
-  final VoidCallback paymentSuccessCallback;
+  final AsyncCallback paymentSuccessCallback;
 
   const OtpScreen({Key key, this.paymentSuccessCallback}) : super(key: key);
 

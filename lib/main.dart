@@ -21,13 +21,10 @@ class DigiMess extends StatelessWidget {
         statusBarColor: DMColors.darkBlue,
         statusBarIconBrightness: Brightness.light));
 
-    return BlocProvider<DMBloc>(
-      create: (_) => DMBloc(DMIdleState()),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: DMTheme.themeData(context: context),
-        onGenerateRoute: AppRouter.onGenerateRoute,
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: DMTheme.themeData(context: context),
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 }

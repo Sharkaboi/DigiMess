@@ -39,8 +39,7 @@ class _LoginState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-                margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10)
-                    .copyWith(top: 0),
+                margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10).copyWith(top: 0),
                 child: Text('SIGN IN', style: DMTypo.bold24BlackTextStyle)),
             Form(
               key: _formKey,
@@ -56,8 +55,7 @@ class _LoginState extends State<LoginScreen> {
                       filled: true,
                       prefixIcon: Container(
                         margin: const EdgeInsets.only(left: 20, right: 10),
-                        child:
-                            SvgPicture.asset("assets/icons/username_icon.svg"),
+                        child: SvgPicture.asset("assets/icons/username_icon.svg"),
                       ),
                       prefixIconConstraints: BoxConstraints(maxWidth: 54),
                       hintStyle: DMTypo.bold18MutedBlueTextStyle,
@@ -101,16 +99,13 @@ class _LoginState extends State<LoginScreen> {
                             borderSide: BorderSide(color: DMColors.mutedBlue)),
                         prefixIcon: Container(
                           margin: const EdgeInsets.only(left: 20, right: 10),
-                          child: SvgPicture.asset(
-                              "assets/icons/password_icon.svg"),
+                          child: SvgPicture.asset("assets/icons/password_icon.svg"),
                         ),
                         prefixIconConstraints: BoxConstraints(maxWidth: 54),
                         hintStyle: DMTypo.bold18MutedBlueTextStyle,
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                            _obscureText ? Icons.visibility : Icons.visibility_off,
                           ),
                           onPressed: _togglePasswordStatus,
                           color: DMColors.mutedBlue,
@@ -134,22 +129,20 @@ class _LoginState extends State<LoginScreen> {
                     tag: 'signUp-Staff',
                     child: DMPillButton(
                       text: "Sign In",
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           final username = _usernameController.text;
                           final password = _passController.text;
                           if (widget.userType == UserType.STUDENT) {
-                            SharedPrefRepository.setUserType(UserType.STUDENT);
-                            SharedPrefRepository.setUsername("20418076");
-                            SharedPrefRepository.setTheUserId(
-                                "QXe986cVzOQUgQgC2ETo");
-                            Navigator.of(context).pushNamedAndRemoveUntil(
+                            await SharedPrefRepository.setUserType(UserType.STUDENT);
+                            await SharedPrefRepository.setUsername("20418076");
+                            await SharedPrefRepository.setTheUserId("QXe986cVzOQUgQgC2ETo");
+                            await Navigator.of(context).pushNamedAndRemoveUntil(
                                 Routes.MAIN_SCREEN_STUDENT, (route) => false);
                           } else {
-                            SharedPrefRepository.setUserType(UserType.STAFF);
-                            SharedPrefRepository.setUsername("20418076");
-                            SharedPrefRepository.setTheUserId(
-                                "QXe986cVzOQUgQgC2ETo");
+                            await SharedPrefRepository.setUserType(UserType.STAFF);
+                            await SharedPrefRepository.setUsername("20418076");
+                            await SharedPrefRepository.setTheUserId("QXe986cVzOQUgQgC2ETo");
                             Navigator.of(context).pushNamedAndRemoveUntil(
                                 Routes.MAIN_SCREEN_STAFF, (route) => false);
                           }
@@ -177,8 +170,7 @@ class _LoginState extends State<LoginScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(
-                                    context, Routes.REGISTER_SCREEN);
+                                Navigator.pushNamed(context, Routes.REGISTER_SCREEN);
                               },
                               child: Text(
                                 " sign up",

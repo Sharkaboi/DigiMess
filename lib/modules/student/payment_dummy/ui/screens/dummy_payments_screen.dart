@@ -3,12 +3,13 @@ import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/extensions/int_extensions.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DummyPaymentsScreen extends StatelessWidget {
   final String message;
   final int paymentAmount;
-  final VoidCallback paymentSuccessCallback;
+  final AsyncCallback paymentSuccessCallback;
 
   const DummyPaymentsScreen(
       {Key key, this.paymentAmount, this.message, this.paymentSuccessCallback})

@@ -2,6 +2,7 @@ import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_multi_formatter/formatters/credit_card_expiration_input_
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CardDetailsScreen extends StatelessWidget {
-  final VoidCallback paymentSuccessCallback;
+  final AsyncCallback paymentSuccessCallback;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   CardDetailsScreen({Key key, this.paymentSuccessCallback}) : super(key: key);
@@ -82,14 +83,11 @@ class CardDetailsScreen extends StatelessWidget {
                           hintText: "0000 0000 0000 0000",
                           isDense: true,
                           border: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: DMColors.primaryBlue, width: 2)),
+                              borderSide: BorderSide(color: DMColors.primaryBlue, width: 2)),
                           enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: DMColors.primaryBlue, width: 2)),
+                              borderSide: BorderSide(color: DMColors.primaryBlue, width: 2)),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: DMColors.primaryBlue, width: 2)),
+                              borderSide: BorderSide(color: DMColors.primaryBlue, width: 2)),
                           counterText: "",
                         ),
                         keyboardType: TextInputType.number,
@@ -126,22 +124,18 @@ class CardDetailsScreen extends StatelessWidget {
                                 style: DMTypo.bold18BlackTextStyle,
                               ),
                               TextFormField(
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
                                 decoration: InputDecoration(
                                   isDense: true,
                                   border: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: DMColors.primaryBlue,
-                                          width: 2)),
+                                      borderSide:
+                                          BorderSide(color: DMColors.primaryBlue, width: 2)),
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: DMColors.primaryBlue,
-                                          width: 2)),
+                                      borderSide:
+                                          BorderSide(color: DMColors.primaryBlue, width: 2)),
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: DMColors.primaryBlue,
-                                          width: 2)),
+                                      borderSide:
+                                          BorderSide(color: DMColors.primaryBlue, width: 2)),
                                   counterText: "",
                                   hintText: "MM/YY",
                                   hintStyle: DMTypo.bold18MutedTextStyle,
@@ -154,9 +148,7 @@ class CardDetailsScreen extends StatelessWidget {
                                   final bool match = regex.hasMatch(value);
                                   return match ? null : "Invalid format";
                                 },
-                                inputFormatters: [
-                                  CreditCardExpirationDateFormatter()
-                                ],
+                                inputFormatters: [CreditCardExpirationDateFormatter()],
                                 style: DMTypo.bold18BlackTextStyle,
                               ),
                             ],
@@ -179,17 +171,14 @@ class CardDetailsScreen extends StatelessWidget {
                                   decoration: InputDecoration(
                                     isDense: true,
                                     border: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: DMColors.primaryBlue,
-                                            width: 2)),
+                                        borderSide:
+                                            BorderSide(color: DMColors.primaryBlue, width: 2)),
                                     enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: DMColors.primaryBlue,
-                                            width: 2)),
+                                        borderSide:
+                                            BorderSide(color: DMColors.primaryBlue, width: 2)),
                                     focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: DMColors.primaryBlue,
-                                            width: 2)),
+                                        borderSide:
+                                            BorderSide(color: DMColors.primaryBlue, width: 2)),
                                     counterText: "",
                                     hintText: "XXX",
                                     hintStyle: DMTypo.bold18MutedTextStyle,
@@ -197,11 +186,9 @@ class CardDetailsScreen extends StatelessWidget {
                                   keyboardType: TextInputType.number,
                                   maxLength: 3,
                                   maxLines: 1,
-                                  validator: (value) =>
-                                      value.length == 3 ? null : "Invalid cvv",
+                                  validator: (value) => value.length == 3 ? null : "Invalid cvv",
                                   obscureText: true,
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
+                                  autovalidateMode: AutovalidateMode.onUserInteraction,
                                   style: DMTypo.bold18BlackTextStyle,
                                 ),
                               ],
@@ -225,14 +212,11 @@ class CardDetailsScreen extends StatelessWidget {
                       decoration: InputDecoration(
                         isDense: true,
                         border: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: DMColors.primaryBlue, width: 2)),
+                            borderSide: BorderSide(color: DMColors.primaryBlue, width: 2)),
                         enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: DMColors.primaryBlue, width: 2)),
+                            borderSide: BorderSide(color: DMColors.primaryBlue, width: 2)),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: DMColors.primaryBlue, width: 2)),
+                            borderSide: BorderSide(color: DMColors.primaryBlue, width: 2)),
                         counterText: "",
                         hintText: "John Doe",
                         hintStyle: DMTypo.bold18MutedTextStyle,
@@ -240,8 +224,7 @@ class CardDetailsScreen extends StatelessWidget {
                       keyboardType: TextInputType.name,
                       maxLength: 20,
                       maxLines: 1,
-                      validator: (value) =>
-                          value.isNotEmpty ? null : "Enter a name",
+                      validator: (value) => value.isNotEmpty ? null : "Enter a name",
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       style: DMTypo.bold18BlackTextStyle,
                     ),
@@ -254,8 +237,7 @@ class CardDetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 50, horizontal: 20),
+                            margin: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                             width: MediaQuery.of(context).size.width * 0.8,
                             height: 70,
                             child: Hero(
@@ -264,8 +246,7 @@ class CardDetailsScreen extends StatelessWidget {
                                   text: "Proceed",
                                   onPressed: () {
                                     if (_key.currentState.validate()) {
-                                      Navigator.pushNamed(
-                                          context, Routes.PAYMENT_OTP_SCREEN,
+                                      Navigator.pushNamed(context, Routes.PAYMENT_OTP_SCREEN,
                                           arguments: paymentSuccessCallback);
                                     }
                                   }),

@@ -16,7 +16,7 @@ class SignUpTextFormField extends StatefulWidget {
       {Key key,
       this.controller,
       this.labelText = "",
-      this.obscureText = false,
+      this.obscureText,
       this.validator,
       this.onChanged,
       this.keyboardType,
@@ -30,6 +30,13 @@ class SignUpTextFormField extends StatefulWidget {
 
 class _SignUpTextFormFieldState extends State<SignUpTextFormField> {
   bool isValid = false;
+  bool isTextObscure;
+
+  @override
+  void initState() {
+    super.initState();
+    isTextObscure = widget.obscureText;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +62,7 @@ class _SignUpTextFormFieldState extends State<SignUpTextFormField> {
         margin: EdgeInsets.symmetric(horizontal: 20).copyWith(top: 20),
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          style: isValid
-              ? DMTypo.bold16PrimaryBlueTextStyle
-              : DMTypo.bold16BlackTextStyle,
+          style: isValid ? DMTypo.bold16PrimaryBlueTextStyle : DMTypo.bold16BlackTextStyle,
           keyboardType: widget.keyboardType ?? TextInputType.text,
           decoration: InputDecoration(
             labelText: widget.labelText,
@@ -80,8 +85,19 @@ class _SignUpTextFormFieldState extends State<SignUpTextFormField> {
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide(color: DMColors.primaryBlue)),
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: DMColors.primaryBlue)),
+            border: UnderlineInputBorder(borderSide: BorderSide(color: DMColors.primaryBlue)),
+            suffixIcon: widget.obscureText == null
+                ? null
+                : IconButton(
+                    icon: Icon(
+                      isTextObscure ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isTextObscure = !isTextObscure;
+                      });
+                    },
+                    color: DMColors.mutedBlue),
           ),
           maxLines: 1,
           maxLength: widget.maxLength,
@@ -95,7 +111,7 @@ class _SignUpTextFormFieldState extends State<SignUpTextFormField> {
                 }
               },
           onChanged: widget.onChanged ?? (_) {},
-          obscureText: widget.obscureText,
+          obscureText: isTextObscure ?? false,
         ),
       ),
     );

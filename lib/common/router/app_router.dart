@@ -1,3 +1,5 @@
+import 'package:DigiMess/common/bloc/dm_bloc.dart';
+import 'package:DigiMess/common/bloc/dm_states.dart';
 import 'package:DigiMess/common/constants/enums/user_types.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/router/routes.dart';
@@ -35,8 +37,7 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(
-                create: (context) =>
-                    SplashBloc(SplashIdle(), SplashRepository()),
+                create: (context) => SplashBloc(SplashIdle(), SplashRepository()),
                 child: SplashScreen()));
       case Routes.AUTH_SCREEN:
         return PageTransition(
@@ -53,7 +54,7 @@ class AppRouter {
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: LoginScreen(userType:userType));
+            child: LoginScreen(userType: userType));
       case Routes.REGISTER_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
@@ -63,7 +64,7 @@ class AppRouter {
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: StudentMainScreen());
+            child: BlocProvider(create: (_) => DMBloc(DMIdleState()), child: StudentMainScreen()));
       case Routes.DUMMY_PAYMENT_SCREEN:
         final DummyPaymentArguments args = settings.arguments;
         return PageTransition(
@@ -109,17 +110,14 @@ class AppRouter {
             duration: Duration(milliseconds: 500),
             settings: settings,
             child: BlocProvider(
-                create: (_) => StudentAnnualPollBloc(
-                    StudentAnnualPollIdle(),
-                    StudentAnnualPollRepository(
-                        FirebaseClient.getMenuCollectionReference())),
-                child: StudentAnnualPollScreen(
-                    onVoteCallback: settings.arguments)));
+                create: (_) => StudentAnnualPollBloc(StudentAnnualPollIdle(),
+                    StudentAnnualPollRepository(FirebaseClient.getMenuCollectionReference())),
+                child: StudentAnnualPollScreen(onVoteCallback: settings.arguments)));
       case Routes.MAIN_SCREEN_STAFF:
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: StaffMainScreen());
+            child: BlocProvider(create: (_) => DMBloc(DMIdleState()), child: StaffMainScreen()));
       default:
         return null;
     }
