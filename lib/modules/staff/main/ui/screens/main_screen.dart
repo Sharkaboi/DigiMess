@@ -1,6 +1,7 @@
 import 'package:DigiMess/common/bloc/dm_bloc.dart';
 import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
+import 'package:DigiMess/common/widgets/dm_dialogs.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/modules/staff/home/bloc/home_bloc.dart';
 import 'package:DigiMess/modules/staff/home/bloc/home_states.dart';
@@ -88,8 +89,11 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     return currentScreen.toStringValue();
   }
 
-  void showLogOutAlertDialog() {
-    BlocProvider.of<DMBloc>(context).add(LogOutUser());
+  void showLogOutAlertDialog() async {
+    final bool choice = await DMAlertDialog.show(context, "Logout of Digimess?");
+    if (choice) {
+      BlocProvider.of<DMBloc>(context).add(LogOutUser());
+    }
   }
 
   FloatingActionButton getFab() {
