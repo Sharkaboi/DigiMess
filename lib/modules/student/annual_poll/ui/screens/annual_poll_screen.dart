@@ -1,10 +1,9 @@
-
 import 'package:DigiMess/common/constants/enums/vote_entry.dart';
-import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
+import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
-import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
+import 'package:DigiMess/common/widgets/internet_check_scaffold.dart';
 import 'package:DigiMess/modules/student/annual_poll/bloc/annual_poll_bloc.dart';
 import 'package:DigiMess/modules/student/annual_poll/bloc/annual_poll_events.dart';
 import 'package:DigiMess/modules/student/annual_poll/bloc/annual_poll_states.dart';
@@ -17,12 +16,10 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 class StudentAnnualPollScreen extends StatefulWidget {
   final VoidCallback onVoteCallback;
 
-  const StudentAnnualPollScreen({Key key, this.onVoteCallback})
-      : super(key: key);
+  const StudentAnnualPollScreen({Key key, this.onVoteCallback}) : super(key: key);
 
   @override
-  _StudentAnnualPollScreenState createState() =>
-      _StudentAnnualPollScreenState();
+  _StudentAnnualPollScreenState createState() => _StudentAnnualPollScreenState();
 }
 
 class _StudentAnnualPollScreenState extends State<StudentAnnualPollScreen>
@@ -41,7 +38,7 @@ class _StudentAnnualPollScreenState extends State<StudentAnnualPollScreen>
 
   @override
   Widget build(BuildContext context) {
-    return DMScaffold(
+    return InternetCheckScaffold(
         isAppBarRequired: true,
         appBarTitleText: "Poll",
         tabBar: TabBar(
@@ -74,6 +71,7 @@ class _StudentAnnualPollScreenState extends State<StudentAnnualPollScreen>
               }
             },
             builder: (context, state) {
+              print(state);
               _bloc = BlocProvider.of<StudentAnnualPollBloc>(context);
               if (state is StudentAnnualPollIdle) {
                 _bloc.add(GetAllMenuItems());
@@ -89,14 +87,12 @@ class _StudentAnnualPollScreenState extends State<StudentAnnualPollScreen>
                             padding: EdgeInsets.symmetric(vertical: 20),
                             itemCount: _listOfFoodItems.length,
                             itemBuilder: (context, index) {
-                              final isChosen = listOfSelectedVotes.contains(
-                                  VoteEntry(_listOfFoodItems[index].itemId,
-                                      MenuItemTiming.BREAKFAST));
+                              final isChosen = listOfSelectedVotes.contains(VoteEntry(
+                                  _listOfFoodItems[index].itemId, MenuItemTiming.BREAKFAST));
                               return PollItemCard(
                                 item: _listOfFoodItems[index],
                                 onClick: (id) {
-                                  onItemClick(
-                                      id, isChosen, MenuItemTiming.BREAKFAST);
+                                  onItemClick(id, isChosen, MenuItemTiming.BREAKFAST);
                                 },
                                 isChosen: isChosen,
                               );
@@ -106,13 +102,11 @@ class _StudentAnnualPollScreenState extends State<StudentAnnualPollScreen>
                             itemCount: _listOfFoodItems.length,
                             itemBuilder: (context, index) {
                               final isChosen = listOfSelectedVotes.contains(
-                                  VoteEntry(_listOfFoodItems[index].itemId,
-                                      MenuItemTiming.LUNCH));
+                                  VoteEntry(_listOfFoodItems[index].itemId, MenuItemTiming.LUNCH));
                               return PollItemCard(
                                 item: _listOfFoodItems[index],
                                 onClick: (id) {
-                                  onItemClick(
-                                      id, isChosen, MenuItemTiming.LUNCH);
+                                  onItemClick(id, isChosen, MenuItemTiming.LUNCH);
                                 },
                                 isChosen: isChosen,
                               );
@@ -122,13 +116,11 @@ class _StudentAnnualPollScreenState extends State<StudentAnnualPollScreen>
                             itemCount: _listOfFoodItems.length,
                             itemBuilder: (context, index) {
                               final isChosen = listOfSelectedVotes.contains(
-                                  VoteEntry(_listOfFoodItems[index].itemId,
-                                      MenuItemTiming.DINNER));
+                                  VoteEntry(_listOfFoodItems[index].itemId, MenuItemTiming.DINNER));
                               return PollItemCard(
                                 item: _listOfFoodItems[index],
                                 onClick: (id) {
-                                  onItemClick(
-                                      id, isChosen, MenuItemTiming.DINNER);
+                                  onItemClick(id, isChosen, MenuItemTiming.DINNER);
                                 },
                                 isChosen: isChosen,
                               );
@@ -137,8 +129,7 @@ class _StudentAnnualPollScreenState extends State<StudentAnnualPollScreen>
                     ),
                     Container(
                       width: double.infinity,
-                      decoration:
-                          BoxDecoration(color: DMColors.white, boxShadow: [
+                      decoration: BoxDecoration(color: DMColors.white, boxShadow: [
                         BoxShadow(
                             color: DMColors.black.withOpacity(0.1),
                             blurRadius: 4,
@@ -150,17 +141,14 @@ class _StudentAnnualPollScreenState extends State<StudentAnnualPollScreen>
                           child: DMPillButton(
                             text: "Confirm vote",
                             isEnabled: listOfSelectedVotes.length == 21,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 20),
+                            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                             onPressed: () {
                               print(listOfSelectedVotes);
-                              _bloc
-                                  .add(PlaceVote(listOfSelectedVotes.toList()));
+                              _bloc.add(PlaceVote(listOfSelectedVotes.toList()));
                             },
                             onDisabledPressed: () async {
                               print(listOfSelectedVotes);
-                              await Fluttertoast.showToast(
-                                  msg: "Choose 7 items for each meal");
+                              await Fluttertoast.showToast(msg: "Choose 7 items for each meal");
                             },
                           ),
                         ),
@@ -174,8 +162,7 @@ class _StudentAnnualPollScreenState extends State<StudentAnnualPollScreen>
         ));
   }
 
-  void onItemClick(
-      String itemId, bool isChosen, MenuItemTiming menuItemTiming) {
+  void onItemClick(String itemId, bool isChosen, MenuItemTiming menuItemTiming) {
     setState(() {
       if (isChosen) {
         listOfSelectedVotes.remove(VoteEntry(itemId, menuItemTiming));

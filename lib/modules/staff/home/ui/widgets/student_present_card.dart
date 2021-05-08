@@ -54,16 +54,19 @@ class StudentPresentCard extends StatelessWidget {
                             margin: EdgeInsets.only(left: 5),
                             child: Text("non-veg", style: DMTypo.bold14DarkBlueTextStyle))
                       ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(studentPresentCount.studentsPresentVeg.toString(),
-                            style: DMTypo.bold24PrimaryBlueTextStyle),
-                        Container(
-                            margin: EdgeInsets.only(left: 5),
-                            child: Text("veg", style: DMTypo.bold14PrimaryBlueTextStyle))
-                      ])
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(studentPresentCount.studentsPresentVeg.toString(),
+                              style: DMTypo.bold24PrimaryBlueTextStyle),
+                          Container(
+                              margin: EdgeInsets.only(left: 5),
+                              child: Text("veg", style: DMTypo.bold14PrimaryBlueTextStyle))
+                        ]),
+                  )
                 ],
               ),
             ),
