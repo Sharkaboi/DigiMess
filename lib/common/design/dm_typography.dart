@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class DMTypo {
   DMTypo._();
 
+  static const TextStyle bold36BlackTTextStyle = TextStyle(
+      fontSize: 36, fontWeight: FontWeight.bold, color: DMColors.black);
   static const TextStyle bold30BlackTextStyle = TextStyle(
       fontSize: 30, fontWeight: FontWeight.bold, color: DMColors.black);
   static const TextStyle bold24BlackTextStyle = TextStyle(
