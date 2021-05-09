@@ -70,9 +70,9 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
       return Container();
     } else if (currentScreen == StaffNavDestinations.COMPLAINTS) {
       return BlocProvider(
-          create: (_) => ComplaintsBloc(ComplaintsIdle(),
+          create: (_) => StaffComplaintsBloc(ComplaintsIdle(),
               ComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
-          child: ComplaintsScreen());
+          child: StaffComplaintsScreen());
     } else if (currentScreen == StaffNavDestinations.HELP) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.ABOUT) {

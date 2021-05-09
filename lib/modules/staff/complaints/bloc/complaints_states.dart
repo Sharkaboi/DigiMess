@@ -1,23 +1,23 @@
-import 'package:DigiMess/common/firebase/models/complaint.dart';
 import 'package:DigiMess/common/util/error_wrapper.dart';
+import 'package:DigiMess/modules/staff/complaints/data/util/complaint_wrapper.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class ComplaintsStates extends Equatable {
-  const ComplaintsStates();
+abstract class StaffComplaintsStates extends Equatable {
+  const StaffComplaintsStates();
 }
 
-class ComplaintsIdle extends ComplaintsStates {
+class ComplaintsIdle extends StaffComplaintsStates {
   @override
   List<Object> get props => [];
 }
 
-class ComplaintsLoading extends ComplaintsStates {
+class ComplaintsLoading extends StaffComplaintsStates {
   @override
   List<Object> get props => [];
 }
 
-class ComplaintsSuccess extends ComplaintsStates {
-  final List<Complaint> listOfComplaints;
+class ComplaintsSuccess extends StaffComplaintsStates {
+  final List<ComplaintWrapper> listOfComplaints;
 
   ComplaintsSuccess(this.listOfComplaints);
 
@@ -25,7 +25,7 @@ class ComplaintsSuccess extends ComplaintsStates {
   List<Object> get props => [listOfComplaints];
 }
 
-class ComplaintsError extends ComplaintsStates {
+class ComplaintsError extends StaffComplaintsStates {
   final DMError error;
 
   ComplaintsError(this.error);

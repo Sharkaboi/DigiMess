@@ -1,33 +1,30 @@
-import 'package:DigiMess/common/design/dm_colors.dart';
-import 'package:DigiMess/common/firebase/models/complaint.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
 import 'package:DigiMess/modules/staff/complaints/bloc/complaints_bloc.dart';
 import 'package:DigiMess/modules/staff/complaints/bloc/complaints_events.dart';
 import 'package:DigiMess/modules/staff/complaints/bloc/complaints_states.dart';
+import 'package:DigiMess/modules/staff/complaints/data/util/complaint_wrapper.dart';
 import 'package:DigiMess/modules/staff/complaints/ui/widgets/complaints_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-class ComplaintsScreen extends StatefulWidget {
+class StaffComplaintsScreen extends StatefulWidget {
   @override
-  _ComplaintsScreenState createState() =>
-      _ComplaintsScreenState();
+  _StaffComplaintsScreenState createState() => _StaffComplaintsScreenState();
 }
 
-class _ComplaintsScreenState
-    extends State<ComplaintsScreen> {
+class _StaffComplaintsScreenState extends State<StaffComplaintsScreen> {
   bool _isLoading = false;
-  List<Complaint> listOfComplaints = [];
-  ComplaintsBloc _bloc;
+  List<ComplaintWrapper> listOfComplaints = [];
+  StaffComplaintsBloc _bloc;
 
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
       inAsyncCall: _isLoading,
       dismissible: false,
-      child: BlocConsumer<ComplaintsBloc, ComplaintsStates>(
+      child: BlocConsumer<StaffComplaintsBloc, StaffComplaintsStates>(
         listener: (context, state) {
           setState(() {
             _isLoading = state is ComplaintsLoading;
@@ -42,7 +39,7 @@ class _ComplaintsScreenState
           }
         },
         builder: (context, state) {
-          _bloc = BlocProvider.of<ComplaintsBloc>(context);
+          _bloc = BlocProvider.of<StaffComplaintsBloc>(context);
           if (state is ComplaintsIdle) {
             _bloc.add(GetAllComplaints());
             return Container();
@@ -57,28 +54,18 @@ class _ComplaintsScreenState
   }
 
   Widget getListOrEmptyHint() {
+    print("called");
     if (listOfComplaints == null || listOfComplaints.isEmpty) {
-      return Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Center(
-              child: Text("No Complaints !",
-                  style: DMTypo.bold24MutedTextStyle),
-            ),
-          ),
-        ],
+      return Center(
+        child: Text("No Complaints received yet.",
+            style: DMTypo.bold14MutedTextStyle, textAlign: TextAlign.center),
       );
     } else {
       return ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.only(top: 20),
           itemCount: listOfComplaints.length,
           itemBuilder: (context, index) {
-
-              return ComplaintsCard(complaints: listOfComplaints[index]);
-
+            return ComplaintsCard(complaintWrapper: listOfComplaints[index]);
           });
     }
   }

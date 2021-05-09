@@ -22,7 +22,7 @@ class LeaveCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(getDuration(), style: DMTypo.bold36BlackTTextStyle),
+          Text(getDuration(), style: DMTypo.bold36BlackTextStyle),
           Text(getDayHint(), style: DMTypo.bold18BlackTextStyle),
           Expanded(
             child: Container(
