@@ -13,20 +13,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-class StaffLeavesHistoryScreen extends StatefulWidget {
+class StaffStudentLeavesHistoryScreen extends StatefulWidget {
   final User user;
 
-  const StaffLeavesHistoryScreen({Key key, this.user}) : super(key: key);
+  const StaffStudentLeavesHistoryScreen({Key key, this.user}) : super(key: key);
 
   @override
-  _StaffLeavesHistoryScreenState createState() => _StaffLeavesHistoryScreenState();
+  _StaffStudentLeavesHistoryScreenState createState() => _StaffStudentLeavesHistoryScreenState();
 }
 
-class _StaffLeavesHistoryScreenState extends State<StaffLeavesHistoryScreen> {
+class _StaffStudentLeavesHistoryScreenState extends State<StaffStudentLeavesHistoryScreen> {
   bool _isLoading = false;
   List<LeaveEntry> listOfLeaves = [];
   bool _isLeaveOngoing = false;
-  StaffLeavesBloc _bloc;
+  StaffStudentLeavesBloc _bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _StaffLeavesHistoryScreenState extends State<StaffLeavesHistoryScreen> {
       body: ModalProgressHUD(
         inAsyncCall: _isLoading,
         dismissible: false,
-        child: BlocConsumer<StaffLeavesBloc, StaffLeavesStates>(
+        child: BlocConsumer<StaffStudentLeavesBloc, StaffStudentLeavesStates>(
           listener: (context, state) {
             setState(() {
               _isLoading = state is StaffLeavesLoading;
@@ -59,7 +59,7 @@ class _StaffLeavesHistoryScreenState extends State<StaffLeavesHistoryScreen> {
             }
           },
           builder: (context, state) {
-            _bloc = BlocProvider.of<StaffLeavesBloc>(context);
+            _bloc = BlocProvider.of<StaffStudentLeavesBloc>(context);
             if (state is StaffLeavesIdle) {
               _bloc.add(GetAllLeaves(widget.user.userId));
               return Container();

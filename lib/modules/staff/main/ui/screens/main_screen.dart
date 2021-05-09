@@ -11,6 +11,10 @@ import 'package:DigiMess/modules/staff/home/bloc/home_bloc.dart';
 import 'package:DigiMess/modules/staff/home/bloc/home_states.dart';
 import 'package:DigiMess/modules/staff/home/data/home_repository.dart';
 import 'package:DigiMess/modules/staff/home/ui/screens/home_screen.dart';
+import 'package:DigiMess/modules/staff/leaves/bloc/leaves_bloc.dart';
+import 'package:DigiMess/modules/staff/leaves/bloc/leaves_states.dart';
+import 'package:DigiMess/modules/staff/leaves/data/leaves_repository.dart';
+import 'package:DigiMess/modules/staff/leaves/ui/screens/leaves_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/widgets/staff_nav_drawer.dart';
 import 'package:DigiMess/modules/staff/main/util/staff_nav_destinations.dart';
 import 'package:DigiMess/modules/staff/students/all_students/bloc/all_students_bloc.dart';
@@ -65,7 +69,10 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     } else if (currentScreen == StaffNavDestinations.NOTICES) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.LEAVES) {
-      return Container();
+      return BlocProvider(
+          create: (_) => StaffLeavesBloc(StaffLeavesIdle(),
+              StaffLeavesRepository(FirebaseClient.getAbsenteesCollectionReference())),
+          child: StaffLeavesHistoryScreen());
     } else if (currentScreen == StaffNavDestinations.POLL) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.COMPLAINTS) {

@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-abstract class StaffLeavesEvents extends Equatable {
-  const StaffLeavesEvents();
+abstract class StaffStudentLeavesEvents extends Equatable {
+  const StaffStudentLeavesEvents();
 }
 
-class GetAllLeaves extends StaffLeavesEvents {
+class GetAllLeaves extends StaffStudentLeavesEvents {
   final String userId;
 
   GetAllLeaves(this.userId);

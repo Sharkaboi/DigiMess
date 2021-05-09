@@ -78,7 +78,8 @@ extension DateExtensions on DateTime {
   }
 
   String getDifferenceInDays(DateTime other) {
-    return "${this.difference(other).inDays.abs()} days";
+    final int days = this.difference(other).inDays.abs();
+    return "$days ${days == 1 ? "day" : "days"}";
   }
 
   bool isSameMonthAs(DateTime other) {

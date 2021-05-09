@@ -168,9 +168,9 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(
-                create: (_) => StaffLeavesBloc(StaffLeavesIdle(),
-                    StaffLeavesRepository(FirebaseClient.getAbsenteesCollectionReference())),
-                child: StaffLeavesHistoryScreen(user: user)));
+                create: (_) => StaffStudentLeavesBloc(StaffLeavesIdle(),
+                    StaffStudentLeavesRepository(FirebaseClient.getAbsenteesCollectionReference())),
+                child: StaffStudentLeavesHistoryScreen(user: user)));
       default:
         return null;
     }
