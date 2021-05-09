@@ -2,21 +2,21 @@ import 'package:DigiMess/common/firebase/models/leave_entry.dart';
 import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class StaffLeavesStates extends Equatable {
-  const StaffLeavesStates();
+abstract class StaffStudentLeavesStates extends Equatable {
+  const StaffStudentLeavesStates();
 }
 
-class StaffLeavesIdle extends StaffLeavesStates {
+class StaffLeavesIdle extends StaffStudentLeavesStates {
   @override
   List<Object> get props => [];
 }
 
-class StaffLeavesLoading extends StaffLeavesStates {
+class StaffLeavesLoading extends StaffStudentLeavesStates {
   @override
   List<Object> get props => [];
 }
 
-class StaffLeavesSuccess extends StaffLeavesStates {
+class StaffLeavesSuccess extends StaffStudentLeavesStates {
   final List<LeaveEntry> listOfLeaves;
 
   StaffLeavesSuccess(this.listOfLeaves);
@@ -25,7 +25,7 @@ class StaffLeavesSuccess extends StaffLeavesStates {
   List<Object> get props => [listOfLeaves];
 }
 
-class StaffLeavesError extends StaffLeavesStates {
+class StaffLeavesError extends StaffStudentLeavesStates {
   final DMError error;
 
   StaffLeavesError(this.error);
