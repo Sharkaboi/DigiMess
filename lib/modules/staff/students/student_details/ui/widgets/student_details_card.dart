@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
-class ProfileCard extends StatelessWidget {
+class StudentDetailsCard extends StatelessWidget {
   final User userDetails;
 
-  const ProfileCard({Key key, this.userDetails}) : super(key: key);
+  const StudentDetailsCard({Key key, this.userDetails}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,10 @@ class ProfileCard extends StatelessWidget {
                         style: DMTypo.bold18BlackTextStyle, textAlign: TextAlign.center)),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 50).copyWith(top: 10),
-                  child: Divider(height: 1, color: DMColors.primaryBlue),
+                  child: Divider(
+                    height: 1,
+                    color: DMColors.primaryBlue
+                  ),
                 ),
                 Container(
                     margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20).copyWith(bottom: 0),

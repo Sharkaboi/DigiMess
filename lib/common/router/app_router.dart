@@ -2,6 +2,7 @@ import 'package:DigiMess/common/bloc/dm_bloc.dart';
 import 'package:DigiMess/common/bloc/dm_states.dart';
 import 'package:DigiMess/common/constants/enums/user_types.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
+import 'package:DigiMess/common/firebase/models/user.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/modules/auth/login/ui/screens/login_chooser.dart';
 import 'package:DigiMess/modules/auth/login/ui/screens/login_screen.dart';
@@ -12,6 +13,22 @@ import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
 import 'package:DigiMess/modules/splash/data/splash_repository.dart';
 import 'package:DigiMess/modules/splash/ui/screens/splash_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/screens/main_screen.dart';
+import 'package:DigiMess/modules/staff/students/complaint_history/bloc/complaints_bloc.dart';
+import 'package:DigiMess/modules/staff/students/complaint_history/bloc/complaints_states.dart';
+import 'package:DigiMess/modules/staff/students/complaint_history/data/complaints_repository.dart';
+import 'package:DigiMess/modules/staff/students/complaint_history/ui/screens/complaints_history.dart';
+import 'package:DigiMess/modules/staff/students/leaves_history/bloc/staff_leaves_bloc.dart';
+import 'package:DigiMess/modules/staff/students/leaves_history/bloc/staff_leaves_states.dart';
+import 'package:DigiMess/modules/staff/students/leaves_history/data/staff_leaves_repository.dart';
+import 'package:DigiMess/modules/staff/students/leaves_history/ui/screens/leave_history_screen.dart';
+import 'package:DigiMess/modules/staff/students/payment_history/bloc/payments_bloc.dart';
+import 'package:DigiMess/modules/staff/students/payment_history/bloc/payments_states.dart';
+import 'package:DigiMess/modules/staff/students/payment_history/data/payments_repository.dart';
+import 'package:DigiMess/modules/staff/students/payment_history/ui/screens/payment_history_screen.dart';
+import 'package:DigiMess/modules/staff/students/student_details/bloc/student_details_bloc.dart';
+import 'package:DigiMess/modules/staff/students/student_details/bloc/student_details_states.dart';
+import 'package:DigiMess/modules/staff/students/student_details/data/student_details_repository.dart';
+import 'package:DigiMess/modules/staff/students/student_details/ui/screens/student_details_screen.dart';
 import 'package:DigiMess/modules/student/annual_poll/bloc/annual_poll_bloc.dart';
 import 'package:DigiMess/modules/student/annual_poll/bloc/annual_poll_states.dart';
 import 'package:DigiMess/modules/student/annual_poll/data/annual_poll_repository.dart';
@@ -118,6 +135,42 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(create: (_) => DMBloc(DMIdleState()), child: StaffMainScreen()));
+      case Routes.STUDENT_DETAILS_SCREEN:
+        final User user = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: BlocProvider(
+                create: (_) => StudentDetailsBloc(StudentDetailsIdle(),
+                    StudentDetailsRepository(FirebaseClient.getUsersCollectionReference())),
+                child: StudentDetailsScreen(user: user)));
+      case Routes.STUDENT_PAYMENT_HISTORY_SCREEN:
+        final User user = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: BlocProvider(
+                create: (_) => StaffPaymentsBloc(StaffPaymentsIdle(),
+                    StaffPaymentsRepository(FirebaseClient.getPaymentsCollectionReference())),
+                child: StaffPaymentHistoryScreen(user: user)));
+      case Routes.STUDENT_COMPLAINT_HISTORY_SCREEN:
+        final User user = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: BlocProvider(
+                create: (_) => StaffComplaintsBloc(StaffComplaintsIdle(),
+                    StaffComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
+                child: StaffComplaintsHistoryScreen(user: user)));
+      case Routes.STUDENT_LEAVES_HISTORY_SCREEN:
+        final User user = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: BlocProvider(
+                create: (_) => StaffLeavesBloc(StaffLeavesIdle(),
+                    StaffLeavesRepository(FirebaseClient.getAbsenteesCollectionReference())),
+                child: StaffLeavesHistoryScreen(user: user)));
       default:
         return null;
     }

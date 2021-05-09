@@ -1,5 +1,5 @@
-import 'package:DigiMess/common/bloc/dm_bloc.dart';
-import 'package:DigiMess/common/bloc/dm_states.dart';
+import 'package:DigiMess/common/bloc/internet_bloc.dart';
+import 'package:DigiMess/common/bloc/internet_states.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_theme.dart';
 import 'package:DigiMess/common/router/app_router.dart';
@@ -18,13 +18,14 @@ class DigiMess extends StatelessWidget {
   Widget build(BuildContext context) {
     EquatableConfig.stringify = true;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: DMColors.darkBlue,
-        statusBarIconBrightness: Brightness.light));
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: DMTheme.themeData(context: context),
-      onGenerateRoute: AppRouter.onGenerateRoute,
+        statusBarColor: DMColors.darkBlue, statusBarIconBrightness: Brightness.light));
+    return BlocProvider(
+      create: (_) => InternetBloc(InternetIdleState()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: DMTheme.themeData(context: context),
+        onGenerateRoute: AppRouter.onGenerateRoute,
+      ),
     );
   }
 }
