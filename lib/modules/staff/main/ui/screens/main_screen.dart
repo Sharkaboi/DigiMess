@@ -3,6 +3,10 @@ import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/widgets/dm_dialogs.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
+import 'package:DigiMess/modules/staff/complaints/bloc/complaints_bloc.dart';
+import 'package:DigiMess/modules/staff/complaints/bloc/complaints_states.dart';
+import 'package:DigiMess/modules/staff/complaints/data/complaints_repository.dart';
+import 'package:DigiMess/modules/staff/complaints/ui/screens/complaints_screen.dart';
 import 'package:DigiMess/modules/staff/home/bloc/home_bloc.dart';
 import 'package:DigiMess/modules/staff/home/bloc/home_states.dart';
 import 'package:DigiMess/modules/staff/home/data/home_repository.dart';
@@ -65,7 +69,10 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     } else if (currentScreen == StaffNavDestinations.POLL) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.COMPLAINTS) {
-      return Container();
+      return BlocProvider(
+          create: (_) => StaffComplaintsBloc(ComplaintsIdle(),
+              ComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
+          child: StaffComplaintsScreen());
     } else if (currentScreen == StaffNavDestinations.HELP) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.ABOUT) {
