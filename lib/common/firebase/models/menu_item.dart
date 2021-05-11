@@ -69,14 +69,11 @@ class _MenuItemIsAvailable extends Equatable {
   final bool isDinner;
 
   _MenuItemIsAvailable(
-      {@required this.isBreakfast,
-      @required this.isLunch,
-      @required this.isDinner});
+      {@required this.isBreakfast, @required this.isLunch, @required this.isDinner});
 
   factory _MenuItemIsAvailable.fromMap(Map<String, dynamic> mapField) {
     if (mapField == null) {
-      return _MenuItemIsAvailable(
-          isBreakfast: false, isLunch: false, isDinner: false);
+      return _MenuItemIsAvailable(isBreakfast: false, isLunch: false, isDinner: false);
     }
     return _MenuItemIsAvailable(
         isBreakfast: mapField['breakfast'],
@@ -85,11 +82,7 @@ class _MenuItemIsAvailable extends Equatable {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'breakfast': this.isBreakfast,
-      'dinner': this.isDinner,
-      'lunch': this.isLunch
-    };
+    return {'breakfast': this.isBreakfast, 'dinner': this.isDinner, 'lunch': this.isLunch};
   }
 
   @override
@@ -166,9 +159,7 @@ class _AnnualPollVotes extends Equatable {
   final int forDinner;
 
   _AnnualPollVotes(
-      {@required this.forBreakFast,
-      @required this.forLunch,
-      @required this.forDinner});
+      {@required this.forBreakFast, @required this.forLunch, @required this.forDinner});
 
   factory _AnnualPollVotes.fromMap(Map<String, dynamic> mapField) {
     if (mapField == null) {

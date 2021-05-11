@@ -27,7 +27,6 @@ University Android mini project.
  - [intl](https://pub.dev/packages/intl)
  - [Page Transition](https://pub.dev/packages/page_transition)
  - [crypto](https://pub.dev/packages/crypto)
- - [FL Chart](https://pub.dev/packages/fl_chart)
  - [Flutter local notifications](https://pub.dev/packages/flutter_local_notifications)
  - [share](https://pub.dev/packages/share)
  - [Dots indicator](https://pub.dev/packages/dots_indicator)

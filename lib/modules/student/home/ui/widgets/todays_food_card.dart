@@ -1,7 +1,7 @@
-import 'package:DigiMess/common/extensions/date_extensions.dart';
-import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
+import 'package:DigiMess/common/extensions/date_extensions.dart';
+import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -13,23 +13,18 @@ class TodaysFoodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(20,30,20,20),
+      margin: EdgeInsets.fromLTRB(20, 30, 20, 20),
       width: double.infinity,
       decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-            color: DMColors.black.withOpacity(0.25),
-            offset: Offset(0, 4),
-            blurRadius: 4)
+        BoxShadow(color: DMColors.black.withOpacity(0.25), offset: Offset(0, 4), blurRadius: 4)
       ], color: DMColors.white, borderRadius: BorderRadius.circular(10)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-              margin: EdgeInsets.all(20), child: getMenuIconOrClosedIcon()),
+          Container(margin: EdgeInsets.all(20), child: getMenuIconOrClosedIcon()),
           Expanded(
-            child: Container(
-                margin: EdgeInsets.all(20), child: getTodayMessOrClosedHint()),
+            child: Container(margin: EdgeInsets.all(20), child: getTodayMessOrClosedHint()),
           ),
         ],
       ),
@@ -69,9 +64,13 @@ class TodaysFoodCard extends StatelessWidget {
     String mealsString;
     if (DateExtensions.isBreakfastTime()) {
       final meals = listOfTodaysMeals
-          .where((element) => element.itemIsAvailable.isBreakfast)
-          .take(2)
-          .toList();
+              .where((element) => element.itemIsAvailable.isBreakfast && element.isVeg)
+              .take(1)
+              .toList() +
+          listOfTodaysMeals
+              .where((element) => element.itemIsAvailable.isBreakfast && !element.isVeg)
+              .take(1)
+              .toList();
       meals.forEach((element) {
         if (mealsString == null) {
           mealsString = "• ${element.name}";
@@ -81,9 +80,13 @@ class TodaysFoodCard extends StatelessWidget {
       });
     } else if (DateExtensions.isLunchTime()) {
       final meals = listOfTodaysMeals
-          .where((element) => element.itemIsAvailable.isLunch)
-          .take(2)
-          .toList();
+              .where((element) => element.itemIsAvailable.isLunch && element.isVeg)
+              .take(1)
+              .toList() +
+          listOfTodaysMeals
+              .where((element) => element.itemIsAvailable.isLunch && !element.isVeg)
+              .take(1)
+              .toList();
       meals.forEach((element) {
         if (mealsString == null) {
           mealsString = "• ${element.name}";
@@ -93,9 +96,13 @@ class TodaysFoodCard extends StatelessWidget {
       });
     } else if (DateExtensions.isDinnerTime()) {
       final meals = listOfTodaysMeals
-          .where((element) => element.itemIsAvailable.isDinner)
-          .take(2)
-          .toList();
+              .where((element) => element.itemIsAvailable.isDinner && element.isVeg)
+              .take(1)
+              .toList() +
+          listOfTodaysMeals
+              .where((element) => element.itemIsAvailable.isDinner && !element.isVeg)
+              .take(1)
+              .toList();
       meals.forEach((element) {
         if (mealsString == null) {
           mealsString = "• ${element.name}";
@@ -105,8 +112,7 @@ class TodaysFoodCard extends StatelessWidget {
       });
     }
 
-    return Text(mealsString ?? "Food not marked by mess staff",
-        style: DMTypo.bold12BlackTextStyle);
+    return Text(mealsString ?? "Food not marked by mess staff", style: DMTypo.bold12BlackTextStyle);
   }
 
   getMenuIconOrClosedIcon() {
