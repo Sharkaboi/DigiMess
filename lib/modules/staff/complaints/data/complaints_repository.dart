@@ -5,10 +5,10 @@ import 'package:DigiMess/common/util/task_state.dart';
 import 'package:DigiMess/modules/staff/complaints/data/util/complaint_wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ComplaintsRepository {
+class StaffComplaintsRepository {
   final CollectionReference _complaintsClient;
 
-  ComplaintsRepository(this._complaintsClient);
+  StaffComplaintsRepository(this._complaintsClient);
 
   Future<DMTaskState> getAllComplaints() async {
     try {

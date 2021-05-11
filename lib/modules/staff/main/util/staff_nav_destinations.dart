@@ -4,7 +4,7 @@ enum StaffNavDestinations {
   MENU,
   NOTICES,
   LEAVES,
-  POLL,
+  ANNUAL_POLL,
   COMPLAINTS,
   HELP,
   ABOUT,

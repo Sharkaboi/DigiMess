@@ -53,7 +53,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
     return DMScaffold(
       isAppBarRequired: true,
       appBarTitleText: getTitleFromCurrentScreen(),
-      body: getCurrentScreen(),
+      body: WillPopScope(onWillPop: _willPop, child: getCurrentScreen()),
       floatingActionButton: getFab(),
       drawer: StudentNavDrawer(
         currentScreen: currentScreen,
@@ -158,5 +158,16 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
 
   void openAboutDialog() {
     AboutDialog.show(context);
+  }
+
+  Future<bool> _willPop() async {
+    if (currentScreen != StudentNavDestinations.HOME) {
+      setState(() {
+        currentScreen = StudentNavDestinations.HOME;
+      });
+      return false;
+    } else {
+      return true;
+    }
   }
 }

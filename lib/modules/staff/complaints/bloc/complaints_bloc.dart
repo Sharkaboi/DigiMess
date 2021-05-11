@@ -5,7 +5,7 @@ import 'package:DigiMess/modules/staff/complaints/data/complaints_repository.dar
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StaffComplaintsBloc extends Bloc<StaffComplaintsEvents, StaffComplaintsStates> {
-  final ComplaintsRepository _complaintsRepository;
+  final StaffComplaintsRepository _complaintsRepository;
 
   StaffComplaintsBloc(
       StaffComplaintsStates initialState, this._complaintsRepository)
