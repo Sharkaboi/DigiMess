@@ -54,7 +54,6 @@ class _StaffComplaintsScreenState extends State<StaffComplaintsScreen> {
   }
 
   Widget getListOrEmptyHint() {
-    print("called");
     if (listOfComplaints == null || listOfComplaints.isEmpty) {
       return Center(
         child: Text("No Complaints received yet.",
