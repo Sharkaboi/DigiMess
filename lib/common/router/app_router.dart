@@ -13,6 +13,10 @@ import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
 import 'package:DigiMess/modules/splash/data/splash_repository.dart';
 import 'package:DigiMess/modules/splash/ui/screens/splash_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/screens/main_screen.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_bloc.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_states.dart';
+import 'package:DigiMess/modules/staff/notices/data/notices_repository.dart';
+import 'package:DigiMess/modules/staff/notices/ui/screens/add_notice_screen.dart';
 import 'package:DigiMess/modules/staff/students/complaint_history/bloc/complaints_bloc.dart';
 import 'package:DigiMess/modules/staff/students/complaint_history/bloc/complaints_states.dart';
 import 'package:DigiMess/modules/staff/students/complaint_history/data/complaints_repository.dart';
@@ -171,6 +175,15 @@ class AppRouter {
                 create: (_) => StaffStudentLeavesBloc(StaffLeavesIdle(),
                     StaffStudentLeavesRepository(FirebaseClient.getAbsenteesCollectionReference())),
                 child: StaffStudentLeavesHistoryScreen(user: user)));
+      case Routes.STAFF_ADD_NOTICE_SCREEN:
+        final VoidCallback callback = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: BlocProvider(
+                create: (_) => StaffNoticesBloc(NoticesIdle(),
+                    StaffNoticesRepository(FirebaseClient.getNoticesCollectionReference())),
+                child: StaffAddNoticeScreen(callback:callback)));
       default:
         return null;
     }

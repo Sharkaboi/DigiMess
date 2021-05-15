@@ -21,6 +21,10 @@ import 'package:DigiMess/modules/staff/leaves/data/leaves_repository.dart';
 import 'package:DigiMess/modules/staff/leaves/ui/screens/leaves_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/widgets/staff_nav_drawer.dart';
 import 'package:DigiMess/modules/staff/main/util/staff_nav_destinations.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_bloc.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_states.dart';
+import 'package:DigiMess/modules/staff/notices/data/notices_repository.dart';
+import 'package:DigiMess/modules/staff/notices/ui/screens/notices_screen.dart';
 import 'package:DigiMess/modules/staff/students/all_students/bloc/all_students_bloc.dart';
 import 'package:DigiMess/modules/staff/students/all_students/bloc/all_students_states.dart';
 import 'package:DigiMess/modules/staff/students/all_students/data/all_students_repository.dart';
@@ -71,7 +75,10 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     } else if (currentScreen == StaffNavDestinations.MENU) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.NOTICES) {
-      return Container();
+      return BlocProvider(
+          create: (_) => StaffNoticesBloc(NoticesIdle(),
+              StaffNoticesRepository(FirebaseClient.getNoticesCollectionReference())),
+          child: StaffNoticesScreen());
     } else if (currentScreen == StaffNavDestinations.LEAVES) {
       return BlocProvider(
           create: (_) => StaffLeavesBloc(StaffLeavesIdle(),
