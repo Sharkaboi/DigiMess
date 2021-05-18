@@ -97,9 +97,9 @@ class StaffNavDrawer extends StatelessWidget {
                           text: "Annual Poll",
                           iconAsset: "assets/icons/poll.svg",
                           isItemSelected:
-                              currentScreen == StaffNavDestinations.POLL,
+                              currentScreen == StaffNavDestinations.ANNUAL_POLL,
                           onClick: () =>
-                              itemOnClickCallBack(StaffNavDestinations.POLL),
+                              itemOnClickCallBack(StaffNavDestinations.ANNUAL_POLL),
                         ),
                         NavItem(
                           text: "Complaints",

@@ -39,8 +39,7 @@ class _TodaysFoodPageViewState extends State<TodaysFoodPageView> {
               activeSize: const Size(30.0, 9.0),
               activeColor: DMColors.primaryBlue,
               color: DMColors.accentBlue,
-              activeShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0)),
+              activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
             ),
           )
         ],
@@ -55,37 +54,25 @@ class _TodaysFoodPageViewState extends State<TodaysFoodPageView> {
   }
 
   List<TodaysFoodItem> getPages() {
-    final List<MenuItem> breakfastFood = widget.listOfTodaysMeals
-        .where((element) => element.itemIsAvailable.isBreakfast)
-        .take(2)
-        .toList();
-    final List<MenuItem> lunchFood = widget.listOfTodaysMeals
-        .where((element) => element.itemIsAvailable.isLunch)
-        .take(2)
-        .toList();
-    final List<MenuItem> dinnerFood = widget.listOfTodaysMeals
-        .where((element) => element.itemIsAvailable.isDinner)
-        .take(2)
-        .toList();
+    final List<MenuItem> breakfastFood =
+        widget.listOfTodaysMeals.where((element) => element.itemIsAvailable.isBreakfast).toList();
+    final List<MenuItem> lunchFood =
+        widget.listOfTodaysMeals.where((element) => element.itemIsAvailable.isLunch).toList();
+    final List<MenuItem> dinnerFood =
+        widget.listOfTodaysMeals.where((element) => element.itemIsAvailable.isDinner).toList();
     return [
       TodaysFoodItem(
           title: "Breakfast",
-          vegItem: breakfastFood.firstWhere((element) => element.isVeg,
-              orElse: () => null),
-          nonVegItem: breakfastFood.firstWhere((element) => !element.isVeg,
-              orElse: () => null)),
+          vegItem: breakfastFood.firstWhere((element) => element.isVeg, orElse: () => null),
+          nonVegItem: breakfastFood.firstWhere((element) => !element.isVeg, orElse: () => null)),
       TodaysFoodItem(
           title: "Lunch",
-          vegItem: lunchFood.firstWhere((element) => element.isVeg,
-              orElse: () => null),
-          nonVegItem: lunchFood.firstWhere((element) => !element.isVeg,
-              orElse: () => null)),
+          vegItem: lunchFood.firstWhere((element) => element.isVeg, orElse: () => null),
+          nonVegItem: lunchFood.firstWhere((element) => !element.isVeg, orElse: () => null)),
       TodaysFoodItem(
           title: "Dinner",
-          vegItem: dinnerFood.firstWhere((element) => element.isVeg,
-              orElse: () => null),
-          nonVegItem: dinnerFood.firstWhere((element) => !element.isVeg,
-              orElse: () => null))
+          vegItem: dinnerFood.firstWhere((element) => element.isVeg, orElse: () => null),
+          nonVegItem: dinnerFood.firstWhere((element) => !element.isVeg, orElse: () => null))
     ];
   }
 }

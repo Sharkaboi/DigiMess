@@ -3,6 +3,10 @@ import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/widgets/dm_dialogs.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
+import 'package:DigiMess/modules/staff/annual_poll/bloc/annual_poll_bloc.dart';
+import 'package:DigiMess/modules/staff/annual_poll/bloc/annual_poll_states.dart';
+import 'package:DigiMess/modules/staff/annual_poll/data/annual_poll_repository.dart';
+import 'package:DigiMess/modules/staff/annual_poll/ui/screens/annual_poll.dart';
 import 'package:DigiMess/modules/staff/complaints/bloc/complaints_bloc.dart';
 import 'package:DigiMess/modules/staff/complaints/bloc/complaints_states.dart';
 import 'package:DigiMess/modules/staff/complaints/data/complaints_repository.dart';
@@ -17,6 +21,10 @@ import 'package:DigiMess/modules/staff/leaves/data/leaves_repository.dart';
 import 'package:DigiMess/modules/staff/leaves/ui/screens/leaves_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/widgets/staff_nav_drawer.dart';
 import 'package:DigiMess/modules/staff/main/util/staff_nav_destinations.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_bloc.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_states.dart';
+import 'package:DigiMess/modules/staff/notices/data/notices_repository.dart';
+import 'package:DigiMess/modules/staff/notices/ui/screens/notices_screen.dart';
 import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_bloc.dart';
 import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_states.dart';
 import 'package:DigiMess/modules/staff/menu/menu_screen/data/staff_menu_repository.dart';
@@ -41,7 +49,7 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     return DMScaffold(
       isAppBarRequired: true,
       appBarTitleText: getTitleFromCurrentScreen(),
-      body: getCurrentScreen(),
+      body: WillPopScope(onWillPop: _willPop, child: getCurrentScreen()),
       floatingActionButton: getFab(),
       drawer: StaffNavDrawer(
         currentScreen: currentScreen,
@@ -74,18 +82,24 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
               StaffMenuRepository(FirebaseClient.getMenuCollectionReference())),
           child: StaffMenuScreen());
     } else if (currentScreen == StaffNavDestinations.NOTICES) {
-      return Container();
+      return BlocProvider(
+          create: (_) => StaffNoticesBloc(NoticesIdle(),
+              StaffNoticesRepository(FirebaseClient.getNoticesCollectionReference())),
+          child: StaffNoticesScreen());
     } else if (currentScreen == StaffNavDestinations.LEAVES) {
       return BlocProvider(
           create: (_) => StaffLeavesBloc(StaffLeavesIdle(),
               StaffLeavesRepository(FirebaseClient.getAbsenteesCollectionReference())),
           child: StaffLeavesHistoryScreen());
-    } else if (currentScreen == StaffNavDestinations.POLL) {
-      return Container();
+    } else if (currentScreen == StaffNavDestinations.ANNUAL_POLL) {
+      return BlocProvider(
+          create: (_) => StaffAnnualPollBloc(AnnualPollIdle(),
+              StaffAnnualPollRepository(FirebaseClient.getMenuCollectionReference())),
+          child: StaffAnnualPollScreen());
     } else if (currentScreen == StaffNavDestinations.COMPLAINTS) {
       return BlocProvider(
           create: (_) => StaffComplaintsBloc(ComplaintsIdle(),
-              ComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
+              StaffComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
           child: StaffComplaintsScreen());
     } else if (currentScreen == StaffNavDestinations.HELP) {
       return Container();
@@ -114,7 +128,7 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
   }
 
   String getTitleFromCurrentScreen() {
-    return currentScreen.toStringValue();
+    return currentScreen.toStringValue().replaceAll('_', ' ');
   }
 
   void showLogOutAlertDialog() async {
@@ -126,5 +140,16 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
 
   FloatingActionButton getFab() {
     return null;
+  }
+
+  Future<bool> _willPop() async {
+    if (currentScreen != StaffNavDestinations.HOME) {
+      setState(() {
+        currentScreen = StaffNavDestinations.HOME;
+      });
+      return false;
+    } else {
+      return true;
+    }
   }
 }

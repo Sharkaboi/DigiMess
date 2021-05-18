@@ -1,7 +1,7 @@
 # DigiMess
 <p align="left">
     <a href="https://flutter.dev/docs/development/tools/sdk/releases" alt="Flutter ">
-        <img src="https://img.shields.io/badge/Flutter-2.0.3-blue" /></a>
+        <img src="https://img.shields.io/badge/Flutter-2.0.6-blue" /></a>
     <a href="#" alt="os ">
         <img src="https://img.shields.io/badge/OS-Android-green" /></a>
     <a href="#" alt="minApi ">
@@ -27,7 +27,6 @@ University Android mini project.
  - [intl](https://pub.dev/packages/intl)
  - [Page Transition](https://pub.dev/packages/page_transition)
  - [crypto](https://pub.dev/packages/crypto)
- - [FL Chart](https://pub.dev/packages/fl_chart)
  - [Flutter local notifications](https://pub.dev/packages/flutter_local_notifications)
  - [share](https://pub.dev/packages/share)
  - [Dots indicator](https://pub.dev/packages/dots_indicator)
@@ -42,8 +41,26 @@ University Android mini project.
 [Check out the DB design here](https://github.com/Sharkaboi/DigiMess/blob/main/docs/dbPlan.md)
 
 ## Figma design 
-[Designs](https://www.figma.com/file/oEDut40fET1EG0NyzC9YeV/DigiMess?node-id=7%3A6)  
+[Designs](https://www.figma.com/file/oEDut40fET1EG0NyzC9YeV/DigiMess?node-id=7%3A6)
 [Prototype](https://www.figma.com/proto/oEDut40fET1EG0NyzC9YeV/DigiMess?node-id=7%3A6&scaling=scale-down)
 
 ## Trello board
 [Task scheduling and management](https://trello.com/b/kPyWzqXt/digimess)
+
+## Screenshots
+|      |     |
+|------------|-------------|
+| ![](docs/screenshots/auth.png) | ![](docs/screenshots/chooser.png) |
+ ![](docs/screenshots/signin.png) | ![](docs/screenshots/signup.png) |
+| ![](docs/screenshots/student_home.png) | ![](docs/screenshots/mess_card.png) |
+| ![](docs/screenshots/student_navbar.png) | ![](docs/screenshots/student_menu.png) |
+| ![](docs/screenshots/all_leaves.png) | ![](docs/screenshots/annual_poll.png) |
+| ![](docs/screenshots/complaints.png) | ![](docs/screenshots/datepicker.png) |
+| ![](docs/screenshots/dialog.png) | ![](docs/screenshots/individual_leaves.png) |
+| ![](docs/screenshots/payment_1.png) | ![](docs/screenshots/payment_2.png) |
+| ![](docs/screenshots/payment_3.png) | ![](docs/screenshots/payment_4.png) |
+| ![](docs/screenshots/staff_home.png) | ![](docs/screenshots/staff_navbar.png) |
+| ![](docs/screenshots/student_complaints.png) | ![](docs/screenshots/student_details.png) |
+| ![](docs/screenshots/student_leaves.png) | ![](docs/screenshots/student_menu.png) |
+| ![](docs/screenshots/student_notices.png) | ![](docs/screenshots/student_payments.png) |
+| ![](docs/screenshots/student_profile.png) | ![](docs/screenshots/students.png) |
