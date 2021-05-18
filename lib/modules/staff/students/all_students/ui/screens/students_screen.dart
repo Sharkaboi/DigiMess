@@ -172,7 +172,7 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
     if (currentList.isEmpty) {
       return Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
-        child: Text("No items for the selected search and filter found.",
+        child: Text("No student for the selected search and filter found.",
             style: DMTypo.bold14MutedTextStyle, textAlign: TextAlign.center),
       );
     } else {

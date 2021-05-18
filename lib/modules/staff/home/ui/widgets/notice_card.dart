@@ -28,18 +28,20 @@ class NoticeCard extends StatelessWidget {
               Container(
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Icon(Icons.circle, color: DMColors.yellow, size: 10)),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      child: Text(latestNotice.title, style: DMTypo.bold14BlackTextStyle)),
-                  Container(
-                      margin: EdgeInsets.only(bottom: 10),
-                      child:
-                          Text(latestNotice.date.getTimeAgo(), style: DMTypo.bold12MutedTextStyle)),
-                ],
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        child: Text(latestNotice.title, style: DMTypo.bold14BlackTextStyle)),
+                    Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: Text(latestNotice.date.getTimeAgo(),
+                            style: DMTypo.bold12MutedTextStyle)),
+                  ],
+                ),
               ),
             ],
           )),
