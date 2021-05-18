@@ -8,8 +8,8 @@ class MenuItem extends Equatable {
   final String name;
   final bool isEnabled;
   final String imageUrl;
-  final _MenuItemIsAvailable itemIsAvailable;
-  final _DaysAvailable daysAvailable;
+  final MenuItemIsAvailable itemIsAvailable;
+  final DaysAvailable daysAvailable;
   final _AnnualPollVotes annualPollVotes;
 
   MenuItem(
@@ -45,9 +45,9 @@ class MenuItem extends Equatable {
         isVeg: data['isVeg'],
         isEnabled: data['isEnabled'],
         imageUrl: data['imageUrl'],
-        itemIsAvailable: _MenuItemIsAvailable.fromMap(data['isAvailable']),
+        itemIsAvailable: MenuItemIsAvailable.fromMap(data['isAvailable']),
         annualPollVotes: _AnnualPollVotes.fromMap(data['annualPoll']),
-        daysAvailable: _DaysAvailable.fromMap(data['daysAvailable']));
+        daysAvailable: DaysAvailable.fromMap(data['daysAvailable']));
   }
 
   Map<String, dynamic> toMap() {
@@ -63,33 +63,48 @@ class MenuItem extends Equatable {
   }
 }
 
-class _MenuItemIsAvailable extends Equatable {
+class MenuItemIsAvailable extends Equatable {
   final bool isBreakfast;
   final bool isLunch;
   final bool isDinner;
 
-  _MenuItemIsAvailable(
-      {@required this.isBreakfast, @required this.isLunch, @required this.isDinner});
+  MenuItemIsAvailable(
+      {@required this.isBreakfast,
+      @required this.isLunch,
+      @required this.isDinner});
 
-  factory _MenuItemIsAvailable.fromMap(Map<String, dynamic> mapField) {
+  factory MenuItemIsAvailable.fromMap(Map<String, dynamic> mapField) {
     if (mapField == null) {
-      return _MenuItemIsAvailable(isBreakfast: false, isLunch: false, isDinner: false);
+      return MenuItemIsAvailable(
+          isBreakfast: false, isLunch: false, isDinner: false);
     }
-    return _MenuItemIsAvailable(
+    return MenuItemIsAvailable(
         isBreakfast: mapField['breakfast'],
         isDinner: mapField['dinner'],
         isLunch: mapField['lunch']);
   }
 
   Map<String, dynamic> toMap() {
-    return {'breakfast': this.isBreakfast, 'dinner': this.isDinner, 'lunch': this.isLunch};
+    return {
+      'breakfast': this.isBreakfast,
+      'dinner': this.isDinner,
+      'lunch': this.isLunch
+    };
+  }
+
+  MenuItemIsAvailable copyWith(
+      {bool isBreakfast, bool isLunch, bool isDinner}) {
+    return MenuItemIsAvailable(
+        isBreakfast: isBreakfast ?? this.isBreakfast,
+        isDinner: isDinner ?? this.isDinner,
+        isLunch: isLunch ?? this.isLunch);
   }
 
   @override
   List<Object> get props => [this.isBreakfast, this.isLunch, this.isDinner];
 }
 
-class _DaysAvailable extends Equatable {
+class DaysAvailable extends Equatable {
   final bool monday;
   final bool tuesday;
   final bool wednesday;
@@ -98,7 +113,7 @@ class _DaysAvailable extends Equatable {
   final bool saturday;
   final bool sunday;
 
-  _DaysAvailable({
+  DaysAvailable({
     @required this.monday,
     @required this.tuesday,
     @required this.wednesday,
@@ -108,9 +123,9 @@ class _DaysAvailable extends Equatable {
     @required this.sunday,
   });
 
-  factory _DaysAvailable.fromMap(Map<String, dynamic> mapField) {
+  factory DaysAvailable.fromMap(Map<String, dynamic> mapField) {
     if (mapField == null) {
-      return _DaysAvailable(
+      return DaysAvailable(
           monday: false,
           tuesday: false,
           wednesday: false,
@@ -119,7 +134,7 @@ class _DaysAvailable extends Equatable {
           saturday: false,
           sunday: false);
     }
-    return _DaysAvailable(
+    return DaysAvailable(
         monday: mapField['monday'],
         tuesday: mapField['tuesday'],
         wednesday: mapField['wednesday'],
@@ -141,6 +156,26 @@ class _DaysAvailable extends Equatable {
     };
   }
 
+  DaysAvailable copyWith({
+    monday,
+    tuesday,
+    wednesday,
+    thursday,
+    friday,
+    saturday,
+    sunday,
+  }) {
+    return DaysAvailable(
+      monday: monday ?? this.monday,
+      tuesday: tuesday ?? this.tuesday,
+      wednesday: wednesday ?? this.wednesday,
+      thursday: thursday ?? this.thursday,
+      friday: friday ?? this.friday,
+      saturday: saturday ?? this.saturday,
+      sunday: sunday ?? this.sunday,
+    );
+  }
+
   @override
   List<Object> get props => [
         this.monday,
@@ -159,7 +194,9 @@ class _AnnualPollVotes extends Equatable {
   final int forDinner;
 
   _AnnualPollVotes(
-      {@required this.forBreakFast, @required this.forLunch, @required this.forDinner});
+      {@required this.forBreakFast,
+      @required this.forLunch,
+      @required this.forDinner});
 
   factory _AnnualPollVotes.fromMap(Map<String, dynamic> mapField) {
     if (mapField == null) {
