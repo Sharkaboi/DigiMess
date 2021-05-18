@@ -25,8 +25,6 @@ jobs:
 
       - run: flutter analyze --no-fatal-warnings --no-fatal-infos
 
-      - run: flutter test
-
       - run: flutter build apk
 
       - uses: actions/upload-artifact@v2
