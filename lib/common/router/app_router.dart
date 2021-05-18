@@ -2,6 +2,7 @@ import 'package:DigiMess/common/bloc/dm_bloc.dart';
 import 'package:DigiMess/common/bloc/dm_states.dart';
 import 'package:DigiMess/common/constants/enums/user_types.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
+import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/firebase/models/user.dart';
 import 'package:DigiMess/common/router/routes.dart';
 import 'package:DigiMess/modules/auth/login/ui/screens/login_chooser.dart';
@@ -13,6 +14,11 @@ import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
 import 'package:DigiMess/modules/splash/data/splash_repository.dart';
 import 'package:DigiMess/modules/splash/ui/screens/splash_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/screens/main_screen.dart';
+import 'package:DigiMess/modules/staff/menu/menu_edit/bloc/staff_menu_edit_bloc.dart';
+import 'package:DigiMess/modules/staff/menu/menu_edit/bloc/staff_menu_edit_states.dart';
+import 'package:DigiMess/modules/staff/menu/menu_edit/data/staff_edit_repository.dart';
+import 'package:DigiMess/modules/staff/menu/menu_edit/ui/screens/staff_menu_edit.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/ui/util/staff_menu_edit_arguments.dart';
 import 'package:DigiMess/modules/staff/students/complaint_history/bloc/complaints_bloc.dart';
 import 'package:DigiMess/modules/staff/students/complaint_history/bloc/complaints_states.dart';
 import 'package:DigiMess/modules/staff/students/complaint_history/data/complaints_repository.dart';
@@ -54,7 +60,8 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(
-                create: (context) => SplashBloc(SplashIdle(), SplashRepository()),
+                create: (context) =>
+                    SplashBloc(SplashIdle(), SplashRepository()),
                 child: SplashScreen()));
       case Routes.AUTH_SCREEN:
         return PageTransition(
@@ -81,7 +88,9 @@ class AppRouter {
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: BlocProvider(create: (_) => DMBloc(DMIdleState()), child: StudentMainScreen()));
+            child: BlocProvider(
+                create: (_) => DMBloc(DMIdleState()),
+                child: StudentMainScreen()));
       case Routes.DUMMY_PAYMENT_SCREEN:
         final DummyPaymentArguments args = settings.arguments;
         return PageTransition(
@@ -127,22 +136,29 @@ class AppRouter {
             duration: Duration(milliseconds: 500),
             settings: settings,
             child: BlocProvider(
-                create: (_) => StudentAnnualPollBloc(StudentAnnualPollIdle(),
-                    StudentAnnualPollRepository(FirebaseClient.getMenuCollectionReference())),
-                child: StudentAnnualPollScreen(onVoteCallback: settings.arguments)));
+                create: (_) => StudentAnnualPollBloc(
+                    StudentAnnualPollIdle(),
+                    StudentAnnualPollRepository(
+                        FirebaseClient.getMenuCollectionReference())),
+                child: StudentAnnualPollScreen(
+                    onVoteCallback: settings.arguments)));
       case Routes.MAIN_SCREEN_STAFF:
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: BlocProvider(create: (_) => DMBloc(DMIdleState()), child: StaffMainScreen()));
+            child: BlocProvider(
+                create: (_) => DMBloc(DMIdleState()),
+                child: StaffMainScreen()));
       case Routes.STUDENT_DETAILS_SCREEN:
         final User user = settings.arguments;
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(
-                create: (_) => StudentDetailsBloc(StudentDetailsIdle(),
-                    StudentDetailsRepository(FirebaseClient.getUsersCollectionReference())),
+                create: (_) => StudentDetailsBloc(
+                    StudentDetailsIdle(),
+                    StudentDetailsRepository(
+                        FirebaseClient.getUsersCollectionReference())),
                 child: StudentDetailsScreen(user: user)));
       case Routes.STUDENT_PAYMENT_HISTORY_SCREEN:
         final User user = settings.arguments;
@@ -150,8 +166,10 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(
-                create: (_) => StaffPaymentsBloc(StaffPaymentsIdle(),
-                    StaffPaymentsRepository(FirebaseClient.getPaymentsCollectionReference())),
+                create: (_) => StaffPaymentsBloc(
+                    StaffPaymentsIdle(),
+                    StaffPaymentsRepository(
+                        FirebaseClient.getPaymentsCollectionReference())),
                 child: StaffPaymentHistoryScreen(user: user)));
       case Routes.STUDENT_COMPLAINT_HISTORY_SCREEN:
         final User user = settings.arguments;
@@ -159,8 +177,10 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(
-                create: (_) => StaffComplaintsBloc(StaffComplaintsIdle(),
-                    StaffComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
+                create: (_) => StaffComplaintsBloc(
+                    StaffComplaintsIdle(),
+                    StaffComplaintsRepository(
+                        FirebaseClient.getComplaintsCollectionReference())),
                 child: StaffComplaintsHistoryScreen(user: user)));
       case Routes.STUDENT_LEAVES_HISTORY_SCREEN:
         final User user = settings.arguments;
@@ -168,9 +188,23 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(
-                create: (_) => StaffStudentLeavesBloc(StaffLeavesIdle(),
-                    StaffStudentLeavesRepository(FirebaseClient.getAbsenteesCollectionReference())),
+                create: (_) => StaffStudentLeavesBloc(
+                    StaffLeavesIdle(),
+                    StaffStudentLeavesRepository(
+                        FirebaseClient.getAbsenteesCollectionReference())),
                 child: StaffStudentLeavesHistoryScreen(user: user)));
+      case Routes.STAFF_MENU_EDIT_SCREEN:
+        final StaffMenuEditArguments args = settings.arguments;
+        return PageTransition(
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 500),
+            child: BlocProvider(
+                create: (_) => StaffMenuEditBloc(
+                    StaffMenuEditIdle(),
+                    StaffMenuEditRepository(
+                        FirebaseClient.getMenuCollectionReference())),
+                child: StaffMenuEditScreen(
+                    item: args.item, onSuccess: args.onSuccess)));
       default:
         return null;
     }

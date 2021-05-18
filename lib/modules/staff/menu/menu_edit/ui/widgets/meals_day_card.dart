@@ -1,9 +1,9 @@
+import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-List <String> Days = [];
 class AvailableTime extends StatefulWidget {
   const AvailableTime({Key key}) : super(key: key);
 
@@ -46,38 +46,24 @@ class AvailableDays extends StatefulWidget {
 
 class _AvailableDaysState extends State<AvailableDays> {
   bool checkState = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Align(
-          alignment: Alignment.center,
-          child: Row(
-            children: [
-              Checkbox(value: checkState,
-                onChanged: (bool value){
-                  setState(() {
-                    checkState = value;
-                    if (value == true){
-                      if (Days.contains(widget.availableDays)){
-                      }
-                      else
-                      {
-                        Days.add(widget.availableDays);
-                      }
-                    }
-                    else{
-                      if (Days.contains(widget.availableDays)){
-                        Days.remove(widget.availableDays);
-                      }
-                    }
-                    print(Days);
-                  });
-                },),
-              Text(widget.availableDays,style: DMTypo.normal12BlackTextStyle,),
-            ],
-          ),
+        child: CheckboxListTile(
+          controlAffinity: ListTileControlAffinity.leading,
+          title: Text(widget.availableDays,style: TextStyle(fontSize: 12),),
+          value: checkState,
+          selected: checkState,
+          onChanged: (bool value) {
+            setState(() {
+              checkState = value;
+            });
+          },
+           //  <-- leading Checkbox
         )
     );
+   }
   }
-}
+
 

@@ -4,11 +4,11 @@ import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/widgets/dm_filter_menu.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
-import 'package:DigiMess/modules/staff/menu/bloc/staff-menu-screen-bloc/staff_menu_bloc.dart';
-import 'package:DigiMess/modules/staff/menu/bloc/staff-menu-screen-bloc/staff_menu_events.dart';
-import 'package:DigiMess/modules/staff/menu/bloc/staff-menu-screen-bloc/staff_menu_states.dart';
-import 'package:DigiMess/modules/staff/menu/data/staff-menu-screen-data/util/staff_menu_filter_type.dart';
-import 'package:DigiMess/modules/staff/menu/ui/widgets/staff_menu_card.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_bloc.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_events.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_states.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/data/util/staff_menu_filter_type.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/ui/widgets/staff_menu_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -143,9 +143,9 @@ class _StaffMenuScreenState extends State<StaffMenuScreen> {
         } else {
           currentList = fullList
               .where((element) => element.name
-              .trim()
-              .toLowerCase()
-              .contains(searchQuery.trim().toLowerCase()))
+                  .trim()
+                  .toLowerCase()
+                  .contains(searchQuery.trim().toLowerCase()))
               .toList();
         }
       });
@@ -178,10 +178,17 @@ class _StaffMenuScreenState extends State<StaffMenuScreen> {
         child: ListView.builder(
           itemCount: currentList.length,
           itemBuilder: (_, int index) {
-            return StaffMenuCard(item: currentList[index]);
+            return StaffMenuCard(
+              item: currentList[index],
+              onSuccess: onSuccess,
+            );
           },
         ),
       );
     }
+  }
+
+  void onSuccess() {
+    _bloc.add(FilterMenuItems(menuFilterType: currentFilter));
   }
 }

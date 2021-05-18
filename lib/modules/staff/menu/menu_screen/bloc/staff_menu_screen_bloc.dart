@@ -1,7 +1,7 @@
 import 'package:DigiMess/common/util/task_state.dart';
-import 'package:DigiMess/modules/staff/menu/bloc/staff-menu-screen-bloc/staff_menu_events.dart';
-import 'package:DigiMess/modules/staff/menu/bloc/staff-menu-screen-bloc/staff_menu_states.dart';
-import 'package:DigiMess/modules/staff/menu/data/staff-menu-screen-data/staff_menu_repository.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_events.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_states.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/data/staff_menu_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StaffMenuBloc extends Bloc<StaffMenuEvents, StaffMenuStates> {

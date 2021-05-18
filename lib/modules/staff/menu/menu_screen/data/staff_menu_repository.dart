@@ -1,7 +1,7 @@
 import 'package:DigiMess/common/firebase/models/menu_item.dart';
 import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:DigiMess/common/util/task_state.dart';
-import 'package:DigiMess/modules/staff/menu/data/staff-menu-screen-data/util/staff_menu_filter_type.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/data/util/staff_menu_filter_type.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StaffMenuRepository {
@@ -14,7 +14,7 @@ class StaffMenuRepository {
     try {
       Query query;
       if (menuFilterType == MenuFilterType.BOTH) {
-        query = _menuClient.where("isEnabled", isEqualTo: true);
+        query = _menuClient;
       } else {
         query = _menuClient
             .where("isVeg", isEqualTo: menuFilterType == MenuFilterType.VEG);

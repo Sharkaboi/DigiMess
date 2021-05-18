@@ -17,10 +17,10 @@ import 'package:DigiMess/modules/staff/leaves/data/leaves_repository.dart';
 import 'package:DigiMess/modules/staff/leaves/ui/screens/leaves_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/widgets/staff_nav_drawer.dart';
 import 'package:DigiMess/modules/staff/main/util/staff_nav_destinations.dart';
-import 'package:DigiMess/modules/staff/menu/bloc/staff-menu-screen-bloc/staff_menu_bloc.dart';
-import 'package:DigiMess/modules/staff/menu/bloc/staff-menu-screen-bloc/staff_menu_states.dart';
-import 'package:DigiMess/modules/staff/menu/data/staff-menu-screen-data/staff_menu_repository.dart';
-import 'package:DigiMess/modules/staff/menu/ui/screens/staff_menu_screen.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_bloc.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_states.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/data/staff_menu_repository.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/ui/screens/staff_menu_screen.dart';
 import 'package:DigiMess/modules/staff/students/all_students/bloc/all_students_bloc.dart';
 import 'package:DigiMess/modules/staff/students/all_students/bloc/all_students_states.dart';
 import 'package:DigiMess/modules/staff/students/all_students/data/all_students_repository.dart';
@@ -73,7 +73,6 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
           create: (_) => StaffMenuBloc(StaffMenuIdle(),
               StaffMenuRepository(FirebaseClient.getMenuCollectionReference())),
           child: StaffMenuScreen());
-      // return Container();
     } else if (currentScreen == StaffNavDestinations.NOTICES) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.LEAVES) {

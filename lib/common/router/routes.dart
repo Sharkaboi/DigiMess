@@ -18,4 +18,5 @@ class Routes {
   static const String STUDENT_PAYMENT_HISTORY_SCREEN = "/student_payment_history";
   static const String STUDENT_COMPLAINT_HISTORY_SCREEN = "/student_complaint_history";
   static const String STUDENT_LEAVES_HISTORY_SCREEN = "/student_leaves_history";
+  static const String STAFF_MENU_EDIT_SCREEN = "/staff_menu_edit_screen";
 }

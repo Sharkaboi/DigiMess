@@ -19,6 +19,7 @@ class DMTypo {
     decorationColor: DMColors.grey,
     decorationThickness: 2,
   );
+
   static const TextStyle bold36BlackTextStyle =
       TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: DMColors.black);
   static const TextStyle bold30BlackTextStyle =
