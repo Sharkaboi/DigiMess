@@ -7,31 +7,25 @@ class CheckboxRowWidget extends StatelessWidget {
   final bool value;
   final VoidCallback onClick;
 
-  const CheckboxRowWidget({Key key, this.hint, this.value, this.onClick})
-      : super(key: key);
+  const CheckboxRowWidget({Key key, this.hint, this.value, this.onClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 10, top: 20),
-      child: Align(
-        alignment: Alignment.center,
+      child: InkWell(
+        onTap: onClick,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            InkWell(
-              child: SvgPicture.asset(value
-                  ? "assets/icons/checkbox_check.svg"
-                  : "assets/icons/checkbox_uncheck.svg"),
-              onTap: onClick,
-            ),
             Container(
-              width: 10,
+              margin: EdgeInsets.only(right: 10),
+              child: SvgPicture.asset(
+                  value ? "assets/icons/checkbox_check.svg" : "assets/icons/checkbox_uncheck.svg"),
             ),
             Text(
               hint,
-              style: value
-                  ? DMTypo.bold12AccentBlueTextStyle
-                  : DMTypo.normal12BlackTextStyle,
+              style: value ? DMTypo.bold14PrimaryBlueTextStyle : DMTypo.normal14BlackTextStyle,
             )
           ],
         ),

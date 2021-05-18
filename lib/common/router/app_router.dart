@@ -13,7 +13,15 @@ import 'package:DigiMess/modules/splash/bloc/splash_states.dart';
 import 'package:DigiMess/modules/splash/data/splash_repository.dart';
 import 'package:DigiMess/modules/splash/ui/screens/splash_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/screens/main_screen.dart';
+import 'package:DigiMess/modules/staff/menu/menu_edit/bloc/staff_menu_edit_bloc.dart';
+import 'package:DigiMess/modules/staff/menu/menu_edit/bloc/staff_menu_edit_states.dart';
+import 'package:DigiMess/modules/staff/menu/menu_edit/data/staff_edit_repository.dart';
+import 'package:DigiMess/modules/staff/menu/menu_edit/ui/screens/staff_menu_edit.dart';
+import 'package:DigiMess/modules/staff/menu/menu_screen/ui/util/staff_menu_edit_arguments.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_bloc.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_states.dart';
 import 'package:DigiMess/modules/staff/notices/data/notices_repository.dart';
+import 'package:DigiMess/modules/staff/notices/ui/screens/add_notice_screen.dart';
 import 'package:DigiMess/modules/staff/students/complaint_history/bloc/complaints_bloc.dart';
 import 'package:DigiMess/modules/staff/students/complaint_history/bloc/complaints_states.dart';
 import 'package:DigiMess/modules/staff/students/complaint_history/data/complaints_repository.dart';
@@ -180,19 +188,16 @@ class AppRouter {
             child: BlocProvider(
                 create: (_) => StaffNoticesBloc(NoticesIdle(),
                     StaffNoticesRepository(FirebaseClient.getNoticesCollectionReference())),
-                child: StaffAddNoticeScreen(callback:callback)));
+                child: StaffAddNoticeScreen(callback: callback)));
       case Routes.STAFF_MENU_EDIT_SCREEN:
         final StaffMenuEditArguments args = settings.arguments;
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(
-                create: (_) => StaffMenuEditBloc(
-                    StaffMenuEditIdle(),
-                    StaffMenuEditRepository(
-                        FirebaseClient.getMenuCollectionReference())),
-                child: StaffMenuEditScreen(
-                    item: args.item, onSuccess: args.onSuccess)));
+                create: (_) => StaffMenuEditBloc(StaffMenuEditIdle(),
+                    StaffMenuEditRepository(FirebaseClient.getMenuCollectionReference())),
+                child: StaffMenuEditScreen(item: args.item, onSuccess: args.onSuccess)));
       default:
         return null;
     }

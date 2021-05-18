@@ -1,5 +1,3 @@
-import 'package:DigiMess/common/firebase/models/menu_item.dart';
-import 'package:DigiMess/common/firebase/models/user.dart';
 import 'package:DigiMess/common/util/error_wrapper.dart';
 import 'package:equatable/equatable.dart';
 
