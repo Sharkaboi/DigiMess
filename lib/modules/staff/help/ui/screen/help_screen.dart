@@ -1,14 +1,14 @@
 import 'package:DigiMess/common/constants/app_faqs.dart';
-import 'package:DigiMess/modules/student/help/ui/widget/help_widget.dart';
+import 'package:DigiMess/modules/staff/help/ui/widget/help_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class StudentHelpScreen extends StatefulWidget {
+class StaffHelpScreen extends StatefulWidget {
   @override
-  _StudentHelpScreenState createState() => _StudentHelpScreenState();
+  _StaffHelpScreenState createState() => _StaffHelpScreenState();
 }
 _makingPhoneCall() async {
   const url = 'tel://9876543210';
@@ -18,22 +18,23 @@ _makingPhoneCall() async {
     throw 'Could not launch $url';
   }
 }
-
-class _StudentHelpScreenState extends State<StudentHelpScreen> {
+class _StaffHelpScreenState extends State<StaffHelpScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
           children: [
-            Container(
-              margin: EdgeInsets.only(left: 20, top: 30).copyWith(bottom: 0),
-              child: Text("Help centre", style: DMTypo.bold14BlackTextStyle),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(left: 20, top: 30).copyWith(bottom: 0),
+                child: Text("Help centre", style: DMTypo.bold14BlackTextStyle),
+              ),
             ),
             InkWell(
-              onTap: ()=> _makingPhoneCall(),
+              onTap:() =>_makingPhoneCall(),
               child: Container(
-                margin: EdgeInsets.only(left: 190, top: 25).copyWith(bottom: 0),
+                margin: EdgeInsets.symmetric(horizontal: 30,vertical: 30 ).copyWith(bottom: 0),
                 child: SvgPicture.asset("assets/icons/callbutton.svg",
                     height: 25, color: DMColors.primaryBlue),
               ),
@@ -47,11 +48,11 @@ class _StudentHelpScreenState extends State<StudentHelpScreen> {
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.all(8),
-            itemCount: DMFaqs.studentFAQs.length,
+            itemCount: DMFaqs.staffFAQs.length,
             itemBuilder: (_, index) {
-              return StudentHelpWidget(
-                question: DMFaqs.studentFAQs[index].question,
-                answer: DMFaqs.studentFAQs[index].answer,
+              return StaffHelpWidget(
+                question: DMFaqs.staffFAQs[index].question,
+                answer: DMFaqs.staffFAQs[index].answer,
               );
             },
           ),

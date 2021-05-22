@@ -3,14 +3,17 @@ import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/widgets/dm_dialogs.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
+import 'package:DigiMess/modules/staff/help/ui/screen/help_screen.dart';
 import 'package:DigiMess/modules/staff/home/bloc/home_bloc.dart';
 import 'package:DigiMess/modules/staff/home/bloc/home_states.dart';
 import 'package:DigiMess/modules/staff/home/data/home_repository.dart';
 import 'package:DigiMess/modules/staff/home/ui/screens/home_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/widgets/staff_nav_drawer.dart';
 import 'package:DigiMess/modules/staff/main/util/staff_nav_destinations.dart';
-import 'package:flutter/material.dart';
+import 'package:DigiMess/modules/student/about/ui/about_dialog.dart';
+import 'package:flutter/material.dart'hide AboutDialog;
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class StaffMainScreen extends StatefulWidget {
   @override
@@ -60,7 +63,7 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     } else if (currentScreen == StaffNavDestinations.COMPLAINTS) {
       return Container();
     } else if (currentScreen == StaffNavDestinations.HELP) {
-      return Container();
+      return StaffHelpScreen();
     } else if (currentScreen == StaffNavDestinations.ABOUT) {
       return Container();
     } else {
@@ -78,7 +81,9 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     Navigator.pop(context);
     if (destination == StaffNavDestinations.LOGOUT) {
       showLogOutAlertDialog();
-    } else {
+    } else if(destination == StaffNavDestinations.ABOUT) {
+      openAboutDialog();
+    }else {
       setState(() {
         currentScreen = destination;
       });
@@ -94,6 +99,9 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     if (choice) {
       BlocProvider.of<DMBloc>(context).add(LogOutUser());
     }
+  }
+  void openAboutDialog() async{
+    await AboutDialog.show(context);
   }
 
   FloatingActionButton getFab() {

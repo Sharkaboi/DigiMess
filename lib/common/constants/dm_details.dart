@@ -20,4 +20,5 @@ class DMDetails {
   static const int dailyMessPrice = 100;
   static const int dailyFinePrice = 10;
   static const int constantMessPrice = 300;
+
 }
