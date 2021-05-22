@@ -4,7 +4,7 @@ import 'package:crypto/crypto.dart';
 class PasswordHashManager {
   PasswordHashManager._();
 
-  static const HASH_ALGO = "sha256";
+  static const _HASH_ALGO = "sha256";
 
   static String hashPassword(String unHashedPassword) {
     final List<int> utf8FormattedList = utf8.encode(unHashedPassword);

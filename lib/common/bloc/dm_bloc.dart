@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DMBloc extends Bloc<DMEvents, DMStates> {
   StreamSubscription _internetStateStream;
+  Connectivity connectivity = Connectivity();
 
   DMBloc(DMStates initialState) : super(initialState);
 
@@ -18,8 +19,9 @@ class DMBloc extends Bloc<DMEvents, DMStates> {
   Stream<DMStates> mapEventToState(DMEvents event) async* {
     try {
       if (event is InitNetworkStateListener) {
-        _internetStateStream = Connectivity()
-            .onConnectivityChanged
+        ConnectivityResult result = await connectivity.checkConnectivity();
+        add(OnNetworkStateChanged(result));
+        _internetStateStream = connectivity.onConnectivityChanged
             .listen((ConnectivityResult result) => add(OnNetworkStateChanged(result)));
       } else if (event is OnNetworkStateChanged) {
         if (event.connectivityResult == ConnectivityResult.none) {
