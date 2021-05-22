@@ -1,8 +1,8 @@
 import 'package:DigiMess/common/constants/dm_details.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
+import 'package:DigiMess/common/widgets/dm_dialogs.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
-import 'package:DigiMess/modules/student/about/ui/about_dialog.dart';
 import 'package:DigiMess/modules/student/complaints/bloc/complaints_bloc.dart';
 import 'package:DigiMess/modules/student/complaints/bloc/complaints_states.dart';
 import 'package:DigiMess/modules/student/complaints/data/complaints_repository.dart';
@@ -35,7 +35,7 @@ import 'package:DigiMess/modules/student/profile/bloc/profile_bloc.dart';
 import 'package:DigiMess/modules/student/profile/bloc/profile_states.dart';
 import 'package:DigiMess/modules/student/profile/data/profile_repository.dart';
 import 'package:DigiMess/modules/student/profile/ui/screens/profile_screen.dart';
-import 'package:flutter/material.dart' hide AboutDialog;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share/share.dart';
@@ -156,8 +156,8 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
     StudentMessCard.show(context);
   }
 
-  void openAboutDialog() {
-    AboutDialog.show(context);
+  void openAboutDialog() async {
+    await DMAboutDialog.show(context);
   }
 
   Future<bool> _willPop() async {

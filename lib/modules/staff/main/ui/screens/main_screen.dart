@@ -11,6 +11,7 @@ import 'package:DigiMess/modules/staff/complaints/bloc/complaints_bloc.dart';
 import 'package:DigiMess/modules/staff/complaints/bloc/complaints_states.dart';
 import 'package:DigiMess/modules/staff/complaints/data/complaints_repository.dart';
 import 'package:DigiMess/modules/staff/complaints/ui/screens/complaints_screen.dart';
+import 'package:DigiMess/modules/staff/help/ui/screen/help_screen.dart';
 import 'package:DigiMess/modules/staff/home/bloc/home_bloc.dart';
 import 'package:DigiMess/modules/staff/home/bloc/home_states.dart';
 import 'package:DigiMess/modules/staff/home/data/home_repository.dart';
@@ -21,14 +22,14 @@ import 'package:DigiMess/modules/staff/leaves/data/leaves_repository.dart';
 import 'package:DigiMess/modules/staff/leaves/ui/screens/leaves_screen.dart';
 import 'package:DigiMess/modules/staff/main/ui/widgets/staff_nav_drawer.dart';
 import 'package:DigiMess/modules/staff/main/util/staff_nav_destinations.dart';
-import 'package:DigiMess/modules/staff/notices/bloc/notices_bloc.dart';
-import 'package:DigiMess/modules/staff/notices/bloc/notices_states.dart';
-import 'package:DigiMess/modules/staff/notices/data/notices_repository.dart';
-import 'package:DigiMess/modules/staff/notices/ui/screens/notices_screen.dart';
 import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_bloc.dart';
 import 'package:DigiMess/modules/staff/menu/menu_screen/bloc/staff_menu_screen_states.dart';
 import 'package:DigiMess/modules/staff/menu/menu_screen/data/staff_menu_repository.dart';
 import 'package:DigiMess/modules/staff/menu/menu_screen/ui/screens/staff_menu_screen.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_bloc.dart';
+import 'package:DigiMess/modules/staff/notices/bloc/notices_states.dart';
+import 'package:DigiMess/modules/staff/notices/data/notices_repository.dart';
+import 'package:DigiMess/modules/staff/notices/ui/screens/notices_screen.dart';
 import 'package:DigiMess/modules/staff/students/all_students/bloc/all_students_bloc.dart';
 import 'package:DigiMess/modules/staff/students/all_students/bloc/all_students_states.dart';
 import 'package:DigiMess/modules/staff/students/all_students/data/all_students_repository.dart';
@@ -50,7 +51,6 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
       isAppBarRequired: true,
       appBarTitleText: getTitleFromCurrentScreen(),
       body: WillPopScope(onWillPop: _willPop, child: getCurrentScreen()),
-      floatingActionButton: getFab(),
       drawer: StaffNavDrawer(
         currentScreen: currentScreen,
         itemOnClickCallBack: itemOnClick,
@@ -78,8 +78,8 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
           child: AllStudentsScreen());
     } else if (currentScreen == StaffNavDestinations.MENU) {
       return BlocProvider(
-          create: (_) => StaffMenuBloc(StaffMenuIdle(),
-              StaffMenuRepository(FirebaseClient.getMenuCollectionReference())),
+          create: (_) => StaffMenuBloc(
+              StaffMenuIdle(), StaffMenuRepository(FirebaseClient.getMenuCollectionReference())),
           child: StaffMenuScreen());
     } else if (currentScreen == StaffNavDestinations.NOTICES) {
       return BlocProvider(
@@ -102,9 +102,7 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
               StaffComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
           child: StaffComplaintsScreen());
     } else if (currentScreen == StaffNavDestinations.HELP) {
-      return Container();
-    } else if (currentScreen == StaffNavDestinations.ABOUT) {
-      return Container();
+      return StaffHelpScreen();
     } else {
       return Container();
     }
@@ -120,6 +118,8 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     Navigator.pop(context);
     if (destination == StaffNavDestinations.LOGOUT) {
       showLogOutAlertDialog();
+    } else if (destination == StaffNavDestinations.ABOUT) {
+      openAboutDialog();
     } else {
       setState(() {
         currentScreen = destination;
@@ -138,8 +138,8 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
     }
   }
 
-  FloatingActionButton getFab() {
-    return null;
+  void openAboutDialog() async {
+    await DMAboutDialog.show(context);
   }
 
   Future<bool> _willPop() async {

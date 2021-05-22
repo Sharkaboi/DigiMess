@@ -61,6 +61,8 @@ dependencies:
   flutter_multi_formatter: ^2.0.1
   # Toasts
   fluttertoast: ^8.0.3
+  # Toasts
+  url_launcher: ^6.0.4
 
 dev_dependencies:
   flutter_test:
@@ -124,6 +126,9 @@ flutter:
     - assets/icons/calendar.svg
     - assets/icons/checkbox_check.svg
     - assets/icons/checkbox_uncheck.svg
+    - assets/icons/callbutton.svg
+    - assets/icons/dropdown.svg
+    - assets/icons/dropdownblue.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

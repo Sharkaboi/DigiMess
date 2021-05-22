@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class StudentHelpScreen extends StatelessWidget {
+class StaffHelpScreen extends StatelessWidget {
   _makingPhoneCall() async {
-    const url = 'tel://${DMDetails.staffPhoneNumber}';
+    const url = 'tel://${DMDetails.devPhoneNumber}';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -29,7 +29,7 @@ class StudentHelpScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 20).copyWith(top: 30),
-                child: Text("Help centre", style: DMTypo.bold20BlackTextStyle),
+                child: Text("Developer contact", style: DMTypo.bold20BlackTextStyle),
               ),
             ),
             Container(
@@ -49,11 +49,11 @@ class StudentHelpScreen extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10).copyWith(bottom: 0),
-            itemCount: DMFaqs.studentFAQs.length,
+            itemCount: DMFaqs.staffFAQs.length,
             itemBuilder: (_, index) {
               return HelpWidget(
-                question: DMFaqs.studentFAQs[index].question,
-                answer: DMFaqs.studentFAQs[index].answer,
+                question: DMFaqs.staffFAQs[index].question,
+                answer: DMFaqs.staffFAQs[index].answer,
               );
             },
           ),
