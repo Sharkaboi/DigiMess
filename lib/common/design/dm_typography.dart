@@ -26,6 +26,8 @@ class DMTypo {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: DMColors.black);
   static const TextStyle bold24BlackTextStyle =
       TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: DMColors.black);
+  static const TextStyle bold20BlackTextStyle =
+      TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: DMColors.black);
   static const TextStyle bold18BlackTextStyle =
       TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: DMColors.black);
   static const TextStyle bold16BlackTextStyle =

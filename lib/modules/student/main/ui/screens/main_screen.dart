@@ -1,11 +1,8 @@
-import 'package:DigiMess/common/bloc/dm_bloc.dart';
-import 'package:DigiMess/common/bloc/dm_events.dart';
 import 'package:DigiMess/common/constants/dm_details.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/widgets/dm_dialogs.dart';
 import 'package:DigiMess/common/widgets/dm_scaffold.dart';
-import 'package:DigiMess/modules/student/about/ui/about_dialog.dart';
 import 'package:DigiMess/modules/student/complaints/bloc/complaints_bloc.dart';
 import 'package:DigiMess/modules/student/complaints/bloc/complaints_states.dart';
 import 'package:DigiMess/modules/student/complaints/data/complaints_repository.dart';
@@ -38,7 +35,7 @@ import 'package:DigiMess/modules/student/profile/bloc/profile_bloc.dart';
 import 'package:DigiMess/modules/student/profile/bloc/profile_states.dart';
 import 'package:DigiMess/modules/student/profile/data/profile_repository.dart';
 import 'package:DigiMess/modules/student/profile/ui/screens/profile_screen.dart';
-import 'package:flutter/material.dart' hide AboutDialog;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share/share.dart';
@@ -80,45 +77,33 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
           ));
     } else if (currentScreen == StudentNavDestinations.MENU) {
       return BlocProvider(
-          create: (_) => StudentMenuBloc(
-              StudentMenuIdle(),
-              StudentMenuRepository(
-                  FirebaseClient.getMenuCollectionReference())),
+          create: (_) => StudentMenuBloc(StudentMenuIdle(),
+              StudentMenuRepository(FirebaseClient.getMenuCollectionReference())),
           child: StudentMenuScreen());
     } else if (currentScreen == StudentNavDestinations.COMPLAINTS) {
       return BlocProvider(
-          create: (_) => StudentComplaintsBloc(
-              StudentComplaintsIdle(),
-              StudentComplaintsRepository(
-                  FirebaseClient.getComplaintsCollectionReference())),
+          create: (_) => StudentComplaintsBloc(StudentComplaintsIdle(),
+              StudentComplaintsRepository(FirebaseClient.getComplaintsCollectionReference())),
           child: StudentComplaintsScreen());
     } else if (currentScreen == StudentNavDestinations.PAYMENTS) {
       return BlocProvider(
-          create: (_) => StudentPaymentsBloc(
-              StudentPaymentsIdle(),
-              StudentPaymentsRepository(
-                  FirebaseClient.getPaymentsCollectionReference())),
+          create: (_) => StudentPaymentsBloc(StudentPaymentsIdle(),
+              StudentPaymentsRepository(FirebaseClient.getPaymentsCollectionReference())),
           child: StudentPaymentHistoryScreen());
     } else if (currentScreen == StudentNavDestinations.LEAVES) {
       return BlocProvider(
-          create: (_) => StudentLeaveBloc(
-              StudentLeaveIdle(),
-              StudentLeavesRepository(
-                  FirebaseClient.getAbsenteesCollectionReference())),
+          create: (_) => StudentLeaveBloc(StudentLeaveIdle(),
+              StudentLeavesRepository(FirebaseClient.getAbsenteesCollectionReference())),
           child: StudentLeavesScreen());
     } else if (currentScreen == StudentNavDestinations.NOTICES) {
       return BlocProvider(
-          create: (_) => StudentNoticesBloc(
-              StudentNoticesIdle(),
-              StudentNoticesRepository(
-                  FirebaseClient.getNoticesCollectionReference())),
+          create: (_) => StudentNoticesBloc(StudentNoticesIdle(),
+              StudentNoticesRepository(FirebaseClient.getNoticesCollectionReference())),
           child: StudentNoticesScreen());
     } else if (currentScreen == StudentNavDestinations.PROFILE) {
       return BlocProvider(
-          create: (_) => StudentProfileBloc(
-              StudentProfileIdle(),
-              StudentProfileRepository(
-                  FirebaseClient.getUsersCollectionReference())),
+          create: (_) => StudentProfileBloc(StudentProfileIdle(),
+              StudentProfileRepository(FirebaseClient.getUsersCollectionReference())),
           child: StudentProfileScreen());
     } else if (currentScreen == StudentNavDestinations.HELP) {
       return StudentHelpScreen();
@@ -161,8 +146,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
           onPressed: openMessCard,
           heroTag: "messCard",
           backgroundColor: DMColors.darkBlue,
-          child: SvgPicture.asset("assets/icons/mess_card_icon.svg",
-              color: DMColors.white));
+          child: SvgPicture.asset("assets/icons/mess_card_icon.svg", color: DMColors.white));
     } else {
       return null;
     }
@@ -173,7 +157,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
   }
 
   void openAboutDialog() async {
-    await AboutDialog.show(context);
+    await DMAboutDialog.show(context);
   }
 
   Future<bool> _willPop() async {

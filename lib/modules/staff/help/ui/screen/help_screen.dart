@@ -1,40 +1,41 @@
 import 'package:DigiMess/common/constants/app_faqs.dart';
-import 'package:DigiMess/modules/staff/help/ui/widget/help_widget.dart';
-import 'package:flutter/material.dart';
+import 'package:DigiMess/common/constants/dm_details.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
+import 'package:DigiMess/common/widgets/help_widget.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class StaffHelpScreen extends StatefulWidget {
-  @override
-  _StaffHelpScreenState createState() => _StaffHelpScreenState();
-}
-_makingPhoneCall() async {
-  const url = 'tel://9876543210';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+class StaffHelpScreen extends StatelessWidget {
+  _makingPhoneCall() async {
+    const url = 'tel://${DMDetails.devPhoneNumber}';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch $url');
+    }
   }
-}
-class _StaffHelpScreenState extends State<StaffHelpScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(left: 20, top: 30).copyWith(bottom: 0),
-                child: Text("Help centre", style: DMTypo.bold14BlackTextStyle),
+                margin: EdgeInsets.symmetric(horizontal: 20).copyWith(top: 30),
+                child: Text("Developer contact", style: DMTypo.bold20BlackTextStyle),
               ),
             ),
-            InkWell(
-              onTap:() =>_makingPhoneCall(),
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 30,vertical: 30 ).copyWith(bottom: 0),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30).copyWith(bottom: 0),
+              child: InkWell(
+                onTap: () => _makingPhoneCall(),
                 child: SvgPicture.asset("assets/icons/callbutton.svg",
                     height: 25, color: DMColors.primaryBlue),
               ),
@@ -42,15 +43,15 @@ class _StaffHelpScreenState extends State<StaffHelpScreen> {
           ],
         ),
         Container(
-          margin: EdgeInsets.only(top: 50, right: 280).copyWith(bottom: 0),
-          child: Text("FAQ", style: DMTypo.bold16DarkBlueTextStyle),
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30).copyWith(bottom: 0),
+          child: Text("FAQs", style: DMTypo.bold18DarkBlueTextStyle),
         ),
         Expanded(
           child: ListView.builder(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10).copyWith(bottom: 0),
             itemCount: DMFaqs.staffFAQs.length,
             itemBuilder: (_, index) {
-              return StaffHelpWidget(
+              return HelpWidget(
                 question: DMFaqs.staffFAQs[index].question,
                 answer: DMFaqs.staffFAQs[index].answer,
               );

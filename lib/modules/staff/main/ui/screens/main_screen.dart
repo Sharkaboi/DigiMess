@@ -34,9 +34,7 @@ import 'package:DigiMess/modules/staff/students/all_students/bloc/all_students_b
 import 'package:DigiMess/modules/staff/students/all_students/bloc/all_students_states.dart';
 import 'package:DigiMess/modules/staff/students/all_students/data/all_students_repository.dart';
 import 'package:DigiMess/modules/staff/students/all_students/ui/screens/students_screen.dart';
-import 'package:DigiMess/modules/student/about/ui/about_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' hide AboutDialog;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StaffMainScreen extends StatefulWidget {
@@ -53,7 +51,6 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
       isAppBarRequired: true,
       appBarTitleText: getTitleFromCurrentScreen(),
       body: WillPopScope(onWillPop: _willPop, child: getCurrentScreen()),
-      floatingActionButton: getFab(),
       drawer: StaffNavDrawer(
         currentScreen: currentScreen,
         itemOnClickCallBack: itemOnClick,
@@ -142,11 +139,7 @@ class _StaffMainScreenState extends State<StaffMainScreen> {
   }
 
   void openAboutDialog() async {
-    await AboutDialog.show(context);
-  }
-
-  FloatingActionButton getFab() {
-    return null;
+    await DMAboutDialog.show(context);
   }
 
   Future<bool> _willPop() async {
