@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class DummyPaymentArguments {
   final String message;
   final int paymentAmount;
-  final VoidCallback paymentSuccessCallback;
+  final AsyncCallback paymentSuccessCallback;
 
-  DummyPaymentArguments(
-      this.message, this.paymentAmount, this.paymentSuccessCallback);
+  DummyPaymentArguments(this.message, this.paymentAmount, this.paymentSuccessCallback);
 }

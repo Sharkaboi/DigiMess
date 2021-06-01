@@ -2,11 +2,8 @@ import 'package:DigiMess/common/constants/enums/user_types.dart';
 import 'package:DigiMess/common/design/dm_colors.dart';
 import 'package:DigiMess/common/design/dm_typography.dart';
 import 'package:DigiMess/common/router/routes.dart';
-import 'package:DigiMess/common/shared_prefs/shared_pref_repository.dart';
 import 'package:DigiMess/common/widgets/dm_buttons.dart';
-import 'package:DigiMess/common/widgets/dm_scaffold.dart';
 import 'package:DigiMess/common/widgets/dm_snackbar.dart';
-import 'package:DigiMess/modules/auth/data/auth_repository.dart';
 import 'package:DigiMess/modules/auth/login/bloc/login_bloc.dart';
 import 'package:DigiMess/modules/auth/login/bloc/login_events.dart';
 import 'package:DigiMess/modules/auth/login/bloc/login_states.dart';
@@ -66,9 +63,11 @@ class _LoginState extends State<LoginScreen> {
             DMSnackBar.show(context, state.error.message);
           } else if (state is LoginSuccess) {
             if (widget.userType == UserType.STUDENT) {
-              Navigator.of(context).pushNamedAndRemoveUntil(Routes.MAIN_SCREEN_STUDENT, (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(Routes.MAIN_SCREEN_STUDENT, (route) => false);
             } else {
-              Navigator.of(context).pushNamedAndRemoveUntil(Routes.MAIN_SCREEN_STAFF, (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(Routes.MAIN_SCREEN_STAFF, (route) => false);
             }
           }
         }, builder: (context, state) {
@@ -115,9 +114,15 @@ class _LoginState extends State<LoginScreen> {
           ),
           prefixIconConstraints: BoxConstraints(maxWidth: 54),
           hintStyle: DMTypo.bold18MutedBlueTextStyle,
-          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: DMColors.mutedBlue)),
-          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: Colors.transparent)),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: DMColors.mutedBlue)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: DMColors.mutedBlue)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.transparent)),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: DMColors.mutedBlue)),
         ),
         maxLines: 1,
         validator: (value) {
@@ -141,9 +146,15 @@ class _LoginState extends State<LoginScreen> {
             hintText: 'Password',
             fillColor: DMColors.textFieldMutedBg,
             filled: true,
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: DMColors.mutedBlue)),
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: Colors.transparent)),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: DMColors.mutedBlue)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(color: DMColors.mutedBlue)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(color: Colors.transparent)),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(color: DMColors.mutedBlue)),
             prefixIcon: Container(
               margin: const EdgeInsets.only(left: 20, right: 10),
               child: SvgPicture.asset("assets/icons/password_icon.svg"),
@@ -183,7 +194,8 @@ class _LoginState extends State<LoginScreen> {
             if (_formKey.currentState.validate()) {
               final username = _usernameController.text;
               final password = _passController.text;
-              _bloc.add(LoginButtonClick(username: username, password: password, userType: widget.userType));
+              _bloc.add(LoginButtonClick(
+                  username: username, password: password, userType: widget.userType));
             }
           },
         ),

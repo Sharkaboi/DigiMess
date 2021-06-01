@@ -87,7 +87,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   child: Column(children: [
-                    SignUpTextFormField(controller: _nameController, labelText: 'Name'),
+                    SignUpTextFormField(
+                        controller: _nameController, labelText: 'Name'),
                     SignUpTextFormField(
                       controller: _admissionController,
                       labelText: 'Admission Number',
@@ -204,6 +205,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SignUpTextFormField(
                       controller: _confirmPassController,
                       labelText: 'Confirm Password',
+                      obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       validator: (String value) {
                         if (value.isEmpty) {
@@ -297,7 +299,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               )
             ],
           ),
-        );
+        ));
       }),
     ));
   }

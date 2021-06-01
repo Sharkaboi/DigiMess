@@ -78,28 +78,12 @@ class StaffNavDrawer extends StatelessWidget {
                               itemOnClickCallBack(StaffNavDestinations.MENU),
                         ),
                         NavItem(
-                          text: "Today's Food",
-                          iconAsset: "assets/icons/todays_food.svg",
-                          isItemSelected:
-                              currentScreen == StaffNavDestinations.TODAYS_FOOD,
-                          onClick: () => itemOnClickCallBack(
-                              StaffNavDestinations.TODAYS_FOOD),
-                        ),
-                        NavItem(
                           text: "Notices",
                           iconAsset: "assets/icons/notices.svg",
                           isItemSelected:
                               currentScreen == StaffNavDestinations.NOTICES,
                           onClick: () =>
                               itemOnClickCallBack(StaffNavDestinations.NOTICES),
-                        ),
-                        NavItem(
-                          text: "Payments",
-                          iconAsset: "assets/icons/payments.svg",
-                          isItemSelected:
-                              currentScreen == StaffNavDestinations.PAYMENTS,
-                          onClick: () => itemOnClickCallBack(
-                              StaffNavDestinations.PAYMENTS),
                         ),
                         NavItem(
                           text: "Mess cuts",
@@ -113,9 +97,9 @@ class StaffNavDrawer extends StatelessWidget {
                           text: "Annual Poll",
                           iconAsset: "assets/icons/poll.svg",
                           isItemSelected:
-                              currentScreen == StaffNavDestinations.POLL,
+                              currentScreen == StaffNavDestinations.ANNUAL_POLL,
                           onClick: () =>
-                              itemOnClickCallBack(StaffNavDestinations.POLL),
+                              itemOnClickCallBack(StaffNavDestinations.ANNUAL_POLL),
                         ),
                         NavItem(
                           text: "Complaints",

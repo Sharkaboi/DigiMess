@@ -26,7 +26,7 @@ class Complaint extends Equatable {
         complaintId: documentSnapshot.id,
         user: documentData['userId'],
         date: getDateTimeOrNull(documentData['date']),
-        categories: documentData['category'],
+        categories: List.from(documentData['category']),
         complaint: documentData['complaint']);
   }
 

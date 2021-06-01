@@ -3,8 +3,7 @@ class DMDetails {
 
   static const String appName = "DigiMess";
   static const String appVersion = "1.0.0";
-  static const String description =
-      "Welcome to DigiMess.\nAn app to help organizations manage "
+  static const String description = "Welcome to DigiMess.\nAn app to help organizations manage "
       "their food mess, mainly colleges.";
 
   static const List<String> contributors = [
@@ -16,6 +15,8 @@ class DMDetails {
   ];
 
   static const String githubLink = "https://github.com/Sharkaboi/DigiMess";
+  static const String staffPhoneNumber = "9876543210";
+  static const String devPhoneNumber = "9876543210";
 
   static const int dailyMessPrice = 100;
   static const int dailyFinePrice = 10;
