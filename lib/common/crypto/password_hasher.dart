@@ -12,10 +12,7 @@ class PasswordHashManager {
     return hashedPassword.toString();
   }
 
-  static bool verifyPassword(
-      {String hashedPasswordFromServer, String unHashedPassword}) {
-    final List<int> utf8FormattedList = utf8.encode(unHashedPassword);
-    final String hashedPassword = sha256.convert(utf8FormattedList).toString();
-    return hashedPassword == hashedPasswordFromServer;
+  static bool verifyPassword({String hashedPasswordFromServer, String unHashedPassword}) {
+    return hashPassword(unHashedPassword) == hashedPasswordFromServer;
   }
 }

@@ -4,8 +4,11 @@ import 'package:DigiMess/common/constants/enums/user_types.dart';
 import 'package:DigiMess/common/firebase/firebase_client.dart';
 import 'package:DigiMess/common/firebase/models/user.dart';
 import 'package:DigiMess/common/router/routes.dart';
+import 'package:DigiMess/modules/auth/data/auth_repository.dart';
+import 'package:DigiMess/modules/auth/login/bloc/login_bloc.dart';
 import 'package:DigiMess/modules/auth/login/ui/screens/login_chooser.dart';
 import 'package:DigiMess/modules/auth/login/ui/screens/login_screen.dart';
+import 'package:DigiMess/modules/auth/register/bloc/register_bloc.dart';
 import 'package:DigiMess/modules/auth/register/ui/screens/register_screen.dart';
 import 'package:DigiMess/modules/auth/ui/screens/auth_screen.dart';
 import 'package:DigiMess/modules/splash/bloc/splash_bloc.dart';
@@ -63,7 +66,8 @@ class AppRouter {
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
             child: BlocProvider(
-                create: (context) => SplashBloc(SplashIdle(), SplashRepository()),
+                create: (context) =>
+                    SplashBloc(SplashIdle(), SplashRepository()),
                 child: SplashScreen()));
       case Routes.AUTH_SCREEN:
         return PageTransition(
@@ -80,12 +84,18 @@ class AppRouter {
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: LoginScreen(userType: userType));
+            child: BlocProvider(
+                create: (_) => LoginBloc(
+                    AuthenticationRepository(FirebaseClient.getUsersCollectionReference(), FirebaseClient.getPaymentsCollectionReference())),
+                child: LoginScreen(userType: userType)));
       case Routes.REGISTER_SCREEN:
         return PageTransition(
             type: PageTransitionType.fade,
             duration: Duration(milliseconds: 500),
-            child: RegisterScreen());
+            child: BlocProvider(
+                create: (_) => RegisterBloc(
+                    AuthenticationRepository(FirebaseClient.getUsersCollectionReference(), FirebaseClient.getPaymentsCollectionReference())),
+            child: RegisterScreen()));
       case Routes.MAIN_SCREEN_STUDENT:
         return PageTransition(
             type: PageTransitionType.fade,

@@ -31,7 +31,7 @@ class DMBloc extends Bloc<DMEvents, DMStates> {
         }
       } else if (event is LogOutUser) {
         await SharedPrefRepository.logOutUser();
-        await FirebaseAuth.instance.signOut();
+        // await FirebaseAuth.instance.signOut();
         yield UserLoggedOut();
       } else {
         final AppStatus appStatus = await SharedPrefRepository.getAppClientStatus();
