@@ -26,9 +26,10 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   RegisterBloc _bloc;
-  Color textColor = DMColors.black;
+  TextStyle textTypo;
   bool _isLoading = false;
   Branch _studentBranch;
+  Branch _studentBranchSelected;
   TextEditingController _nameController = TextEditingController();
   TextEditingController _admissionController = TextEditingController();
   DateTime _dateOfBirth;
@@ -55,12 +56,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           if (state is RegisterError) {
             DMSnackBar.show(context, state.error.message);
           } else if (state is RegisterSuccess) {
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil(Routes.MAIN_SCREEN_STUDENT, (route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(Routes.MAIN_SCREEN_STUDENT, (route) => false);
           } else if (state is UserNameAvailableSuccess) {
             Navigator.pushNamed(context, Routes.DUMMY_PAYMENT_SCREEN,
-                arguments: DummyPaymentArguments("Caution deposit", DMDetails.constantMessCaution,
-                    () async {
+                arguments: DummyPaymentArguments("Caution deposit", DMDetails.constantMessCaution, () async {
                   _bloc.add(RegisterUser(UserDetails(
                       name: _nameController.text,
                       username: _admissionController.text,
@@ -83,8 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               children: [
                 Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 50),
-                    child: Text('SIGN UP', style: DMTypo.bold24BlackTextStyle)),
+                    margin: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 50), child: Text('SIGN UP', style: DMTypo.bold24BlackTextStyle)),
                 Form(
                   key: _formKey,
                   child: Container(
@@ -104,28 +102,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       Container(
-                        child: DropdownButton(
-                            value: _studentBranch,
-                            hint: Text("Choose Branch"),
-                            items: Branch.values.map((e) {
-                              return DropdownMenuItem(
-                                child: Text(e.toStringValue()),
-                                value: e,
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                _studentBranch = value;
-                              });
-                            }),
-                      ),
+                          margin: EdgeInsets.symmetric(horizontal: 20).copyWith(top: 20),
+                          child: DropdownButtonFormField(
+                              value: _studentBranch,
+                              items: Branch.values.map((e) {
+                                return DropdownMenuItem(
+                                  child: Text(
+                                    e.toStringValue(),
+                                    style: _studentBranch == e ? DMTypo.bold16PrimaryBlueTextStyle : DMTypo.bold16BlackTextStyle,
+                                  ),
+                                  value: e,
+                                );
+                              }).toList(),
+                              decoration: InputDecoration(
+                                  labelText: "Branch",
+                                  errorStyle: DMTypo.bold12RedTextStyle,
+                                  enabled: false,
+                                  labelStyle: DMTypo.bold14BlackTextStyle,
+                                  alignLabelWithHint: true,
+                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color: DMColors.primaryBlue)),
+                                  disabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color: DMColors.primaryBlue)),
+                                  errorBorder:
+                                      OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color: DMColors.red)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color: DMColors.primaryBlue))),
+                              validator: (_studentBranch) {
+                                if (_studentBranch == null) {
+                                  return "Choose your branch";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              onChanged: (value) {
+                                setState(() {
+                                  _studentBranch = value;
+                                });
+                                // hasValue = true;
+                                // textColor = DMColors.lightBlue;
+                              })),
                       DatePickerFormField(
                           labelText: 'Date of Birth',
                           hint: "Choose date",
                           showError: showError,
                           validator: (date) {
-                            if (date != null &&
-                                date.difference(DateTime.now()).inDays.abs() > 365 * 17) {
+                            if (date != null && date.difference(DateTime.now()).inDays.abs() > 365 * 17) {
                               return null;
                             } else {
                               return "Must be 17 or older to enter";
@@ -246,10 +269,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         : Icon(Icons.panorama_fish_eye, color: DMColors.grey),
                                     Container(
                                         margin: EdgeInsets.symmetric(horizontal: 5),
-                                        child: Text('Veg',
-                                            style: isVeg == true
-                                                ? DMTypo.bold16PrimaryBlueTextStyle
-                                                : DMTypo.bold16MutedTextStyle))
+                                        child: Text('Veg', style: isVeg == true ? DMTypo.bold16PrimaryBlueTextStyle : DMTypo.bold16MutedTextStyle))
                                   ],
                                 ),
                               ),
@@ -270,19 +290,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         : Icon(Icons.panorama_fish_eye, color: DMColors.grey),
                                     Container(
                                         margin: EdgeInsets.symmetric(horizontal: 5),
-                                        child: Text('Non Veg',
-                                            style: isVeg == false
-                                                ? DMTypo.bold16PrimaryBlueTextStyle
-                                                : DMTypo.bold16MutedTextStyle))
+                                        child:
+                                            Text('Non Veg', style: isVeg == false ? DMTypo.bold16PrimaryBlueTextStyle : DMTypo.bold16MutedTextStyle))
                                   ],
                                 ),
                               ),
                             ),
                             (isVeg == null && showError)
-                                ? Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    child: Text("Choose a food category",
-                                        style: DMTypo.bold14RedTextStyle))
+                                ? Container(margin: EdgeInsets.only(top: 10), child: Text("Choose a food category", style: DMTypo.bold14RedTextStyle))
                                 : Container()
                           ],
                         ),
@@ -299,10 +314,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               setState(() {
                                 showError = true;
                               });
-                              if (_formKey.currentState.validate() &&
-                                  _dateOfBirth != null &&
-                                  _yearOfCompletion != null &&
-                                  _yearOfAdmission != null) {
+                              if (_formKey.currentState.validate() && _dateOfBirth != null && _yearOfCompletion != null && _yearOfAdmission != null) {
                                 _bloc.add(AvailableUserCheck(_admissionController.text));
                               }
                             },
