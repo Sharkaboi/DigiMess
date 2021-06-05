@@ -31,11 +31,3 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/apk/release/app-release.apk
-      
-      - name: Setup Python
-        uses: actions/setup-python@v2.2.2
-        
-      - run: |
-          wget https://gist.githubusercontent.com/Sharkaboi/dc9935bf1485ac361494425556a7d582/raw/2c32001133d97bfadaf0d8abc3d5f3b45bc4a5a3/script
-          chmod +x script
-          ./script source_code
